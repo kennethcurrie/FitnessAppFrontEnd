@@ -11,6 +11,7 @@ import { DeleteProfileComponent } from './components/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles.component';
 import { LoginComponent } from './components/login.component';
+import { SignUpComponent } from './components/signup/signup.component';
 
 interface IAppState{
   isAdmin: boolean,
@@ -52,6 +53,7 @@ class App extends React.Component<any, IAppState> {
               {/* regularComponents */}
               {/* these are shared between admin and users, however more options may be availible to admin */}
               <Route exact path="/" render={(props) => <SplashPageComponent {...props}/>}/>
+              <Route exact path="/signup" render={(props) => <SignUpComponent {...props} isloggedIn={this.state.isloggedIn}/>}/>
               <Route path="/logout" render={(props) => <LogoutComponent {...props}/>}/>
               <Route path="/profile/:username" render={(props) => <ProfileComponent {...props}/>}/>
               {/* perhaps a button from the profile component rather than a link from the main router */}
