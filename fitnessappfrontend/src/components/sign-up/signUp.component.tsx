@@ -26,33 +26,35 @@ export class SignUpComponent extends React.Component<ISignUpComponentProps, any>
         //email 
         let result = (
             <>
-                <form>
-                    <table>
-                        <thead>
+                <div id="form-holder">
+                    <form>
+                        <table>
+                            <thead>
 
-                        </thead>
-                        <tbody>
-                            {/* entryStates: empty, invalid, valid */}
-                            <tr>
-                                <td>nickname</td>
-                                <td><input type="text" placeholder="Enter nickname" value={''} /></td>
-                            </tr>
-                            <tr>
-                                <td>email</td>
-                                <td><input type="text" placeholder="Enter password" value={''} /></td>
-                            </tr>
-                            {/* username states: emptyUsername, usernameIsTaken, usernameHasInvalidCharacters, usernameIsValid */}
-                            <tr>
-                                <td>usename</td>
-                                <td><input type="text" placeholder="Enter username" value={''} /></td>
-                            </tr>
-                            <tr>
-                                <td>password</td>
-                                <td><input type="text" placeholder="Enter password" value={''} /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+                            </thead>
+                            <tbody>
+                                {/* entryStates: empty, invalid, valid */}
+                                <tr>
+                                    <td>nickname</td>
+                                    <td><input type="text" placeholder="Enter nickname" value={''} /></td>
+                                </tr>
+                                <tr>
+                                    <td>email</td>
+                                    <td><input type="text" placeholder="Enter password" value={''} /></td>
+                                </tr>
+                                {/* username states: emptyUsername, usernameIsTaken, usernameHasInvalidCharacters, usernameIsValid */}
+                                <tr>
+                                    <td>usename</td>
+                                    <td><input type="text" placeholder="Enter username" value={''} /></td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td><input type="text" placeholder="Enter password" value={''} /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </>
         );
         return result;
