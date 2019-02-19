@@ -34,26 +34,17 @@ class App extends React.Component<any, IAppState> {
       <div id="content-holder"> 
         <BrowserRouter>
           <>{/*browserRouter expect only 1 child element that contains all routes*/}
-            {((this.state.isloggedIn === false) && (window.location.pathname != "/login"))? <Route path="/" component={LoginComponent}/> : <EmptyComponent /> }
             <NavComponent {...this.state}/>
             <Switch>
-              {
-                (this.state.isAdmin)?
-                  <>
-                    {/* adminComponents */}
-                    <Route path="/admin/users" render={(props) => <SplashPageComponent {...props}/>}/>
-                    {/*probably not its own page, this is just routes to profile component with isAdmin set to true */}
-                    {/* perhaps a button from the allUsers component rather than a link from the main router */}
-                    <Route path="/admin/users/edit" render={(props) => <SplashPageComponent {...props}/>}/>
-                  </>
-                :
-                  <EmptyComponent />              
-              }
+              {/* pre-login accessible components */}
+              <Route path="/signup" render={(props) => <SignUpComponent {...props} isloggedIn={this.state.isloggedIn}/>}/>
+              <Route path="/logout" render={(props) => <LogoutComponent {...props}/>}/>
+              {(this.state.isloggedIn === false)? <Route path="/" component={SplashPageComponent}/> : <EmptyComponent /> }
 
               {/* regularComponents */}
               {/* these are shared between admin and users, however more options may be availible to admin */}
               <Route exact path="/" render={(props) => <SplashPageComponent {...props}/>}/>
-              <Route exact path="/signup" render={(props) => <SignUpComponent {...props} isloggedIn={this.state.isloggedIn}/>}/>
+              <Route path="/signup" render={(props) => <SignUpComponent {...props} isloggedIn={this.state.isloggedIn}/>}/>
               <Route path="/logout" render={(props) => <LogoutComponent {...props}/>}/>
               <Route path="/profile/:username" render={(props) => <ProfileComponent {...props}/>}/>
               {/* perhaps a button from the profile component rather than a link from the main router */}
@@ -65,6 +56,19 @@ class App extends React.Component<any, IAppState> {
               <Route path="/profile/rank" render={(props) => <RankProfilesComponent {...props}/>}/>
               {/* maybe this works like facebook where theres a "new post" section in your feed, rather than this being its own page */}
               <Route path="/exercise/submit" render={(props) => <SplashPageComponent {...props}/>}/>
+              
+              {/* adminComponents */}
+              {
+                (this.state.isAdmin)?
+                  <>
+                    <Route path="/admin/users" render={(props) => <SplashPageComponent {...props}/>}/>
+                    {/*probably not its own page, this is just routes to profile component with isAdmin set to true */}
+                    {/* perhaps a button from the allUsers component rather than a link from the main router */}
+                    <Route path="/admin/users/edit" render={(props) => <SplashPageComponent {...props}/>}/>
+                  </>
+                :
+                  <EmptyComponent />              
+              }
             </Switch>  
           </>
         </BrowserRouter>
