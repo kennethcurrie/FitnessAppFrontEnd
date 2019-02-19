@@ -11,7 +11,7 @@ import { DeleteProfileComponent } from './components/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles.component';
 import { LoginComponent } from './components/login.component';
-import { SignUpComponent } from './components/signup/signup.component';
+import { SignUpComponent } from './components/sign-up/signUp.component';
 
 interface IAppState{
   isAdmin: boolean,
