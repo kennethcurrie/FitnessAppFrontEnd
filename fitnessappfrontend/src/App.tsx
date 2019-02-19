@@ -11,17 +11,32 @@ import { DeleteProfileComponent } from './components/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles.component';
 
-class App extends React.Component<any, any> {
+interface IAppState{
+  isAdmin: boolean,
+  isloggedIn: boolean
+}
+
+class App extends React.Component<any, IAppState> {
+
+  constructor(props)
+  {
+    super(props)
+    this.state = {
+      isAdmin: false,
+      isloggedIn: false
+    }
+  }
+
   render() {
     let result = (
       <div id="content-holder"> 
-        {(this.isLoggedIn() === false && window.location.pathname != "/login")? <Redirect to="/login" /> : <EmptyComponent /> }
         <BrowserRouter>
           <>{/*browserRouter expect only 1 child element that contains all routes*/}
+            {(this.state.isloggedIn === false && window.location.pathname != "/login")? <Redirect to="/login" /> : <EmptyComponent /> }
             <NavComponent isAdmin={true}/>
             <Switch>
               {
-                (this.isAdmin())?
+                (this.state.isAdmin)?
                   <>
                     {/* adminComponents */}
                     <Route path="/admin/users" render={(props) => <SplashPageComponent {...props}/>}/>
@@ -55,16 +70,6 @@ class App extends React.Component<any, any> {
     return result;
   }
 
-  isLoggedIn(): boolean
-  {
-    return true;
-    //if not logged in, redirect to login screen
-  }
-
-  isAdmin(): boolean
-  {
-    return true;
-  }
 }
 
 export default App;
