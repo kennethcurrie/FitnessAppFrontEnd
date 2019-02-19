@@ -1,0 +1,40 @@
+
+
+
+#content-holder {
+  background-image: url("./resources/fitness-pattern-blue.jpg");
+  width:100vw;
+  height: 100vh;
+  background-position: 50% 50%;
+}
+
+#no{
+  animation-name: scrolling-background;
+  animation-duration: 9s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  background-repeat: repeat;
+  animation-fill-mode: both;
+}
+
+@keyframes scrolling-background {
+  /* You could think of as "step 1" */
+  0% {
+    background-position: 0em 0em;
+  }
+  25% {
+    background-position:0em 2em;
+  }
+  50% {
+    background-position:2em 2em;
+  }
+  75% {
+    background-position:2em 0em;
+  }
+  /* You could think of as "step 2" */
+  100% {
+    background-position:0em 0em;
+  }
+}
