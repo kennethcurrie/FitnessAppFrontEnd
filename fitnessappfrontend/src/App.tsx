@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { NavComponent } from './components/nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import { EmptyComponent } from './components/empty.component';
 import { SplashPageComponent } from './components/splashPage.component';
 import { LogoutComponent } from './components/logout.component';
@@ -10,6 +10,7 @@ import { EditProfileComponent } from './components/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles.component';
+import { LoginComponent } from './components/login.component';
 
 interface IAppState{
   isAdmin: boolean,
@@ -32,8 +33,8 @@ class App extends React.Component<any, IAppState> {
       <div id="content-holder"> 
         <BrowserRouter>
           <>{/*browserRouter expect only 1 child element that contains all routes*/}
-            {(this.state.isloggedIn === false && window.location.pathname != "/login")? <Redirect to="/login" /> : <EmptyComponent /> }
-            <NavComponent isAdmin={true}/>
+            {((this.state.isloggedIn === false) && (window.location.pathname != "/login"))? <Route path="/" component={LoginComponent}/> : <EmptyComponent /> }
+            <NavComponent {...this.state}/>
             <Switch>
               {
                 (this.state.isAdmin)?
@@ -69,7 +70,6 @@ class App extends React.Component<any, IAppState> {
     );
     return result;
   }
-
 }
 
 export default App;
