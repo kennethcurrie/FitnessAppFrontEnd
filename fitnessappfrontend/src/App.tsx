@@ -36,8 +36,8 @@ class App extends React.Component<any, IAppState> {
         <BrowserRouter>
           <>{/*browserRouter expect only 1 child element that contains all routes*/}
             <NavComponent {...this.state}/>
+            <div id="main">
             <Switch>
-              <div id="main">
                 {/* pre-login accessible components */}
                 {
                   (!this.state.isloggedIn)?
@@ -96,9 +96,9 @@ class App extends React.Component<any, IAppState> {
                 }
 
                 {/* if none of the url paths match, redirect to pageNotFound */}
-                <Route path="/" render={(props) => <PageNotFoundComponent {...props}/>}/>
-              </div>
-            </Switch>  
+                <Route render={(props) => <PageNotFoundComponent {...props}/>}/>
+            </Switch>
+            </div>
           </>
         </BrowserRouter>
       </div>
