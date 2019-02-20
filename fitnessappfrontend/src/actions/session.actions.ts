@@ -5,18 +5,18 @@ export const sessionTypes = {
     LOGOUT: 'LOGOUT'
 };
 
-export const login = (user: ISessionState) => {
-    return {
-        type: sessionTypes.LOGIN,
-        payload: {
-            ...user
-        }
-    };
+export const login = (dispatch) => {
+    try {
+
+    }
+    catch {
+
+    }
 };
 
-export const logout = () => {
-    return {
-        type: sessionTypes.LOGOUT,
-        payload: undefined
-    };
-};
+// export const logout = () => {
+//     return {
+//         type: sessionTypes.LOGOUT,
+//         payload: undefined
+//     };
+// };
