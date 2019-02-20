@@ -42,7 +42,7 @@ class App extends React.Component<any, IAppState> {
                     <>
                       <Route path='/logout' render={(props) => <LogoutComponent {...props}/>}/>
                       {/* these are shared between admin and users, however more options may be availible to admin */}
-                      <Route path='/profile/:username' render={(props) => <ProfileComponent {...props}/>}/>
+                      <Route path='/user/:username' render={(props) => <ProfileComponent {...props}/>}/>
                       {/* perhaps a button from the profile component rather than a link from the main router */}
                       <Route path='/profile/edit' render={(props) => <EditProfileComponent {...props}/>}/>
                       <Route path='/profile/delete'  render={(props) => <DeleteProfileComponent {...props}/>}/>
