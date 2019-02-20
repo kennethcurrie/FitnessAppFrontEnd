@@ -5,7 +5,7 @@ import { NavComponent } from './components/nav.component';
 import { EmptyComponent } from './components/empty.component';
 import { SplashPageComponent } from './components/splashPage.component';
 import { LogoutComponent } from './components/logout.component';
-import { ProfileComponent } from './components/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles.component';
@@ -38,6 +38,11 @@ class App extends React.Component<any, IAppState> {
             <NavComponent {...this.state}/>
             <div id="main">
             <Switch>
+              {/* temporary for testing */}
+              <Route path="/test" render={(props) => <ProfileComponent {...props}/>}/>
+
+
+
                 {/* pre-login accessible components */}
                 {
                   (!this.state.isloggedIn)?
