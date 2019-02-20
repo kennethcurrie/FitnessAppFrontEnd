@@ -12,63 +12,62 @@ import { SearchProfilesComponent } from './components/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles.component';
 import { PageNotFoundComponent } from './components/pageNotFound.component';
 
-interface IAppState{
-  isAdmin: boolean,
-  isloggedIn: boolean
+interface IAppState {
+  isAdmin: boolean;
+  isloggedIn: boolean;
 }
 
 class App extends React.Component<any, IAppState> {
 
-  constructor(props)
-  {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       isAdmin: false,
       isloggedIn: false
-    }
+    };
   }
-  
+
   render() {
-    let result = (
-      <div id="content-holder"> 
+    const result = (
+      <div id='content-holder'>
         <BrowserRouter>
           <>{/*browserRouter expect only 1 child element that contains all routes*/}
             <NavComponent {...this.state}/>
-            <div id="main">
+            <div id='main'>
             <Switch>
-                <Route exact path="/" render={(props) => <SplashPageComponent {...props} />}/>
+                <Route exact path='/' render={(props) => <SplashPageComponent {...props} />}/>
                 {/* regularComponents */}
                 {
-                  (this.state.isloggedIn)?
+                  (this.state.isloggedIn) ?
                     <>
-                      <Route path="/logout" render={(props) => <LogoutComponent {...props}/>}/>
+                      <Route path='/logout' render={(props) => <LogoutComponent {...props}/>}/>
                       {/* these are shared between admin and users, however more options may be availible to admin */}
-                      <Route path="/profile/:username" render={(props) => <ProfileComponent {...props}/>}/>
+                      <Route path='/profile/:username' render={(props) => <ProfileComponent {...props}/>}/>
                       {/* perhaps a button from the profile component rather than a link from the main router */}
-                      <Route path="/profile/edit" render={(props) => <EditProfileComponent {...props}/>}/>
-                      <Route path="/profile/delete"  render={(props) => <DeleteProfileComponent {...props}/>}/>
+                      <Route path='/profile/edit' render={(props) => <EditProfileComponent {...props}/>}/>
+                      <Route path='/profile/delete'  render={(props) => <DeleteProfileComponent {...props}/>}/>
                       {/* also functionality built into the nav, where should logic be located? */}
-                      <Route path="/search" render={(props) => <SearchProfilesComponent {...props}/>}/>
+                      <Route path='/search' render={(props) => <SearchProfilesComponent {...props}/>}/>
                       {/* changed to rank */}
-                      <Route path="/rankings" render={(props) => <RankProfilesComponent {...props}/>}/>
+                      <Route path='/rankings' render={(props) => <RankProfilesComponent {...props}/>}/>
                       {/* maybe this works like facebook where theres a "new post" section in your feed, rather than this being its own page */}
-                      <Route path="/submit" render={(props) => <SplashPageComponent {...props}/>}/>
+                      <Route path='/submit' render={(props) => <SplashPageComponent {...props}/>}/>
                     </>
                   :
-                    null              
+                    undefined
                 }
-                
+
                 {/* adminComponents */}
                 {
-                  (this.state.isloggedIn && this.state.isAdmin)?
+                  (this.state.isloggedIn && this.state.isAdmin) ?
                     <>
-                      <Route path="/admin/users" render={(props) => <SplashPageComponent {...props}/>}/>
+                      <Route path='/admin/users' render={(props) => <SplashPageComponent {...props}/>}/>
                       {/*probably not its own page, this is just routes to profile component with isAdmin set to true */}
                       {/* perhaps a button from the allUsers component rather than a link from the main router */}
-                      <Route path="/admin/users/edit/:username" render={(props) => <SplashPageComponent {...props}/>}/>
+                      <Route path='/admin/users/edit/:username' render={(props) => <SplashPageComponent {...props}/>}/>
                     </>
                   :
-                    null              
+                  undefined
                 }
 
                 {/* if none of the url paths match, redirect to pageNotFound */}

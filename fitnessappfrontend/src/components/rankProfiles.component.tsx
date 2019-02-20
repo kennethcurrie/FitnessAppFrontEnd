@@ -2,6 +2,6 @@ import React, { Component } from 'react';
 
 export class RankProfilesComponent extends React.Component<any, any> {
   render() {
-      return null;
+      return undefined;
   }
 }
