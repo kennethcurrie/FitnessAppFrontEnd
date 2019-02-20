@@ -1,7 +1,7 @@
 import React from 'react';
 import { LoginComponent } from './login.component';
 import { SignUpComponent } from './signUp.component';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './profile/profile.component';
 
 interface ISplashPageComponentProps{
   //props
