@@ -1,11 +1,10 @@
 import React from 'react'
-import './signUp.component.scss'
 import 'bootstrap/dist/css/bootstrap.css';
 import { AxiosResponse } from 'axios';
 import { Link } from 'react-router-dom';
 
 interface ISignUpComponentProps{
-  isloggedIn: boolean
+  //Props here
 }
 export class SignUpComponent extends React.Component<ISignUpComponentProps, any> {
     constructor(props) {
@@ -25,8 +24,8 @@ export class SignUpComponent extends React.Component<ISignUpComponentProps, any>
         //name
         //email 
         let result = (
-            <>
-                <div id="form-holder">
+            <div id="SignUp">
+                <div className="form-holder">
                     <form>
                         <table>
                             <thead>
@@ -55,7 +54,7 @@ export class SignUpComponent extends React.Component<ISignUpComponentProps, any>
                         </table>
                     </form>
                 </div>
-            </>
+            </div>
         );
         return result;
         //if the user is signed in and they submit the sign up form, log them out
