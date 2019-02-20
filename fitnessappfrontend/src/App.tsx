@@ -10,8 +10,6 @@ import { EditProfileComponent } from './components/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles.component';
-import { LoginComponent } from './components/login.component';
-import { SignUpComponent } from './components/signUp.component';
 import { PageNotFoundComponent } from './components/pageNotFound.component';
 
 interface IAppState{
@@ -38,18 +36,7 @@ class App extends React.Component<any, IAppState> {
             <NavComponent {...this.state}/>
             <div id="main">
             <Switch>
-                {/* pre-login accessible components */}
-                {
-                  (!this.state.isloggedIn)?
-                    <>
-                      {/* may rerout to signup, login, or profile */}
-                      {/* <Route exact path="/" render={(props) => <SplashPageComponent {...props}/>}/> */}
-                      <Route exact path="/" render={(props) => <LoginComponent {...props} />}/>
-                      <Route exact path="/" render={(props) => <SignUpComponent {...props} />}/>
-                    </>
-                  :
-                    <EmptyComponent />              
-                }
+                <Route exact path="/" render={(props) => <SplashPageComponent {...props} />}/>
                 
                 {/* regularComponents */}
                 {
