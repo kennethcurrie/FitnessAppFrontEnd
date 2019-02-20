@@ -55,7 +55,7 @@ class App extends React.Component<any, IAppState> {
                       <Route path="/submit" render={(props) => <SplashPageComponent {...props}/>}/>
                     </>
                   :
-                    <EmptyComponent />              
+                    null              
                 }
                 
                 {/* adminComponents */}
@@ -68,17 +68,7 @@ class App extends React.Component<any, IAppState> {
                       <Route path="/admin/users/edit/:username" render={(props) => <SplashPageComponent {...props}/>}/>
                     </>
                   :
-                    <EmptyComponent />              
-                }
-
-                {/* login gatekeeper, catch-all if not logged in */}
-                {
-                  (this.state.isloggedIn === false)?
-                    <>
-                      <Route path="/" component={SplashPageComponent}/>
-                    </> 
-                  : 
-                    <EmptyComponent /> 
+                    null              
                 }
 
                 {/* if none of the url paths match, redirect to pageNotFound */}
