@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 interface INavComponentProps {
   isAdmin: boolean;
-  isloggedIn: boolean;
+  isLoggedIn: boolean;
 }
 export class NavComponent extends React.Component<INavComponentProps, any> {
     constructor(props) {
@@ -23,7 +23,7 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
     getComponent() {
 
       let usersFullNameElement = <></>;
-      if (this.props.isloggedIn) {
+      if (this.props.isLoggedIn) {
           const usersFullNameString = `${'lastname'}, ${'firstName'}`;
           usersFullNameElement = (
               <li className='nav-item'>
@@ -37,7 +37,7 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
                 <Link to='/login' className='nav-link' id='usersFullName'>login</Link>
             </li>
         );
-        if (this.props.isloggedIn) {
+        if (this.props.isLoggedIn) {
             logoutOrLoginElement = (
                 <li className='nav-item'>
                     <Link to='/logout' className='nav-link' href='#'>Log out</Link>
@@ -46,7 +46,7 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
         }
 
         let managerialElement = <></>;
-        if (this.props.isAdmin && this.props.isloggedIn) {
+        if (this.props.isAdmin && this.props.isLoggedIn) {
             managerialElement = (
                 <li className='nav-item dropdown'>
                     <a className='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -62,7 +62,7 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
         }
 
         let userElement = <></>;
-        if (this.props.isloggedIn) {
+        if (this.props.isLoggedIn) {
             userElement = (
                 <>
                     <li className='nav-item'>
