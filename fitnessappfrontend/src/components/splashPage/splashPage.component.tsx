@@ -1,11 +1,11 @@
 import React from 'react';
-import { LoginComponent } from './login.component';
-import { SignUpComponent } from './signUp.component';
-import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from '../login/login.component';
+import { SignUpComponent } from '../signUp/signUp.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 interface ISplashPageComponentProps {
   // props
-  isLoggedIn: boolean
+  isLoggedIn: boolean;
 }
 
 export class SplashPageComponent extends React.Component<ISplashPageComponentProps, any> {

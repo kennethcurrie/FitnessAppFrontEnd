@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import './App.scss';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { NavComponent } from './components/nav.component';
-import { EmptyComponent } from './components/empty.component';
-import { SplashPageComponent } from './components/splashPage.component';
-import { LogoutComponent } from './components/logout.component';
+import { NavComponent } from './components/nav/nav.component';
+import { SplashPageComponent } from './components/splashPage/splashPage.component';
+import { LogoutComponent } from './components/logout/logout.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { EditProfileComponent } from './components/editProfile.component';
-import { DeleteProfileComponent } from './components/deleteProfile.component';
-import { SearchProfilesComponent } from './components/searchProfiles.component';
-import { RankProfilesComponent } from './components/rankProfiles.component';
-import { PageNotFoundComponent } from './components/pageNotFound.component';
+import { EditProfileComponent } from './components/editProfile/editProfile.component';
+import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
+import { SearchProfilesComponent } from './components/searchProfiles/searchProfiles.component';
+import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.component';
+import { PageNotFoundComponent } from './components/pageNotFound/pageNotFound.component';
 
 interface IAppState {
   isAdmin: boolean;

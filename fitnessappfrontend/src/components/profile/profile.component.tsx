@@ -11,10 +11,10 @@ The profile gives an overview of ...
   -*a profile picture
   -*basic info/stats
   -*a short about me (goals)
-  -last 3 excersises
-  -a section to add a new excersise to history
+  -last 3 exercises
+  -a section to add a new exercise to history
   -top 3 friends
-  -show a graph displaying ratios of types of excersise, with lables
+  -show a graph displaying ratios of types of exercise, with lables
 
 */
 export class ProfileComponent extends React.Component<any, any> {

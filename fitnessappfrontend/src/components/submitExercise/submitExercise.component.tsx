@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export class SubmitExcersiseComponent extends React.Component<any, any> {
+export class SubmitExerciseComponent extends React.Component<any, any> {
   render() {
       return undefined;
   }
