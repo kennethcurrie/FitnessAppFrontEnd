@@ -35,7 +35,7 @@ class App extends React.Component<any, IAppState> {
             <NavComponent {...this.state}/>
             <div id='main'>
             <Switch>
-                <Route exact path='/' render={(props) => <SplashPageComponent {...props} />}/>
+                <Route exact path='/' render={(props) => <SplashPageComponent {...props} {...this.state} />}/>
                 {/* regularComponents */}
                 {
                   (this.state.isLoggedIn) ?
