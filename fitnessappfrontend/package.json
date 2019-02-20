@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "chart.js": "^2.7.3",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.7",
     "react": "^16.8.2",
@@ -39,6 +40,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/chart.js": "^2.7.45",
     "@types/enzyme": "^3.1.18",
     "@types/enzyme-adapter-react-16": "^1.0.4",
     "@types/node": "^11.9.4",
