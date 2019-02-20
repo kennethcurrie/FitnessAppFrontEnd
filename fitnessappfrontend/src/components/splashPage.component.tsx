@@ -5,6 +5,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 interface ISplashPageComponentProps {
   // props
+  isLoggedIn: boolean
 }
 
 export class SplashPageComponent extends React.Component<ISplashPageComponentProps, any> {
@@ -19,7 +20,7 @@ export class SplashPageComponent extends React.Component<ISplashPageComponentPro
   }
 
   getComponent() {
-    if (this.state.isloggedIn) {
+    if (this.props.isLoggedIn) {
       return (
         <div id='Splash'>
           <ProfileComponent {...this.props}/>

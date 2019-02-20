@@ -14,7 +14,7 @@ import { PageNotFoundComponent } from './components/pageNotFound.component';
 
 interface IAppState {
   isAdmin: boolean;
-  isloggedIn: boolean;
+  isLoggedIn: boolean;
 }
 
 class App extends React.Component<any, IAppState> {
@@ -23,7 +23,7 @@ class App extends React.Component<any, IAppState> {
     super(props);
     this.state = {
       isAdmin: false,
-      isloggedIn: false
+      isLoggedIn: false
     };
   }
 
@@ -35,10 +35,10 @@ class App extends React.Component<any, IAppState> {
             <NavComponent {...this.state}/>
             <div id='main'>
             <Switch>
-                <Route exact path='/' render={(props) => <SplashPageComponent {...props} />}/>
+                <Route exact path='/' render={(props) => <SplashPageComponent {...props} {...this.state} />}/>
                 {/* regularComponents */}
                 {
-                  (this.state.isloggedIn) ?
+                  (this.state.isLoggedIn) ?
                     <>
                       <Route path='/logout' render={(props) => <LogoutComponent {...props}/>}/>
                       {/* these are shared between admin and users, however more options may be availible to admin */}
@@ -51,7 +51,7 @@ class App extends React.Component<any, IAppState> {
                       {/* changed to rank */}
                       <Route path='/rankings' render={(props) => <RankProfilesComponent {...props}/>}/>
                       {/* maybe this works like facebook where theres a "new post" section in your feed, rather than this being its own page */}
-                      <Route path='/submit' render={(props) => <SplashPageComponent {...props}/>}/>
+                      <Route path='/submit' render={(props) => <SplashPageComponent {...props} {...this.state}/>}/>
                     </>
                   :
                     undefined
@@ -59,12 +59,12 @@ class App extends React.Component<any, IAppState> {
 
                 {/* adminComponents */}
                 {
-                  (this.state.isloggedIn && this.state.isAdmin) ?
+                  (this.state.isLoggedIn && this.state.isAdmin) ?
                     <>
-                      <Route path='/admin/users' render={(props) => <SplashPageComponent {...props}/>}/>
+                      <Route path='/admin/users' render={(props) => <SplashPageComponent {...props} {...this.state}/>}/>
                       {/*probably not its own page, this is just routes to profile component with isAdmin set to true */}
                       {/* perhaps a button from the allUsers component rather than a link from the main router */}
-                      <Route path='/admin/users/edit/:username' render={(props) => <SplashPageComponent {...props}/>}/>
+                      <Route path='/admin/users/edit/:username' render={(props) => <SplashPageComponent {...props} {...this.state}/>}/>
                     </>
                   :
                   undefined
