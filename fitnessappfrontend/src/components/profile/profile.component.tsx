@@ -47,8 +47,8 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
       backgroundColor: {
         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
         stops: [
-            [0, 'rgba(100, 25, 255, .6)'],
-            [1, 'rgba(200, 200, 255, .2)']
+            [0, 'rgba(100, 25, 255, .0)'],
+            [1, 'rgba(200, 200, 255, .0)']
         ]
       }
     },
@@ -124,23 +124,35 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
                 <img id='profile-pic' src={profilePic}/>
               </div>
             </div>
-            <div id='stats-holder'>
-              height: blah <br />
-              age: blah <br />
-              gender: blah <br />
-              weight: blah
+            <div id='stats-full'>
+              <div id='stats-label' className='label'><strong>Stats</strong></div>
+              <div id='stats-holder'>
+                instagram: blah <br />
+                twitter: blah <br />
+                facebook: blah <br />
+                countrymatch: blah
+              </div>
             </div>
           </div>
           <div id='right-side'>
-            <div id='profile-pic-label'><strong>ABOUT ME</strong></div>
-            <div id='about-me-holder'>
-              <p>GOALS</p>
-              <p>{this.longText}</p>
+            <div id='about-me-full'>
+              <div id='about-me-label'><strong>ABOUT ME</strong></div>
+              <div id='about-me-holder'>
+                <p>{this.longText}</p>
+              </div>
             </div>
-            <div id='profile-pic-label'><strong>MY PROGRESS</strong></div>
-            <div id='history-holder'>
-              <div id='history-graph'></div>
+            <div id='history-full'>
+              <div id='history-label'><strong>MY PROGRESS</strong></div>
+              <div id='history-holder'>
+                <div id='history-graph'></div>
+              </div>
             </div>
+          </div>
+          <div id='right-side-under'>
+              <div id='inspirations-label'><strong>Dont show a lable here, this should be an empty box where ppl can search for new "inspirations"(other users)</strong></div>
+              <div id='inspirations-holder'>
+                all my inspirations
+              </div>
           </div>
         </div>
       </>
