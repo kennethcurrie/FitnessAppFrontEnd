@@ -149,7 +149,7 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
             <div id='history-full'>
               <div id='history-label'><strong>MY PROGRESS</strong></div>
               <div id='history-holder'>
-                <div id='history-graph'></div>
+                <div className='bound-img'><div id='history-graph'></div></div>
               </div>
             </div>
             <div id='inspirations-full'>

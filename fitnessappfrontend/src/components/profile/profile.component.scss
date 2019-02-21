@@ -206,7 +206,7 @@
   position: relative;
   display: block;
   max-width: 30rem;
-  width: 70%;
+  width: 80%;
   min-width: 20rem;
   min-height: 30rem;
   margin: 2rem;
@@ -241,10 +241,7 @@
 #all-profile-component #history-full div
 {
   padding: 0;
-}
-#all-profile-component #history-full
-{
-  padding: 0;
+  border-radius: 0;
 }
 
 #all-profile-component div, img
