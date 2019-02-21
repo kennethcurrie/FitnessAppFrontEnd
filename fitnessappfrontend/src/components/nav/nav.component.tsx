@@ -1,5 +1,6 @@
 import React from 'react';
 const logo = require('../../resources/fitness-icon.png');
+import './nav.scss';
 // import logo from '../resources/fitness-pattern-blue.jpg' // relative path to image
 import { AxiosResponse } from 'axios';
 import { Link } from 'react-router-dom';
