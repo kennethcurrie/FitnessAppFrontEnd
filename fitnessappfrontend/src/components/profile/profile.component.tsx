@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import './profile.component.scss';
 const profilePic = require('../../resources/placeholder-profile-pic.jpg');
-const profilePic = require('../../resources/placeholder-profile-pic.jpg');
+const progressPhoto1 = require('../../resources/placeholder-progress-photo-1.jpg');
+const progressPhoto2 = require('../../resources/placeholder-progress-photo-2.jpg');
+const progressPhoto3 = require('../../resources/placeholder-progress-photo-3.jpg');
+const progressPhoto4 = require('../../resources/placeholder-progress-photo-4.jpg');
+const progressPhoto5 = require('../../resources/placeholder-progress-photo-5.jpg');
+const friendPhoto1 = require('../../resources/placeholder-friend-photo-1.jpg');
+const friendPhoto2 = require('../../resources/placeholder-friend-photo-2.jpg');
+const friendPhoto3 = require('../../resources/placeholder-friend-photo-3.jpg');
+const friendPhoto4 = require('../../resources/placeholder-friend-photo-4.jpg');
+const friendPhoto5 = require('../../resources/placeholder-friend-photo-5.jpg');
 import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
@@ -122,7 +131,7 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
               <div id='profile-pic-full'>
                 <div id='nickname-label' className='label'><strong>Nickname</strong></div>
                 <div id='profile-pic-holder'>
-                  <img id='profile-pic' src={profilePic}/>
+                  <img id='profile-pic' className='bound-img' src={profilePic}/>
                 </div>
               </div>
               <div id='stats-full'>
@@ -137,15 +146,6 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
             </div>
           </div>
           <div id='right-side'>
-            <div id='my-goals-full'>
-              <div id='my-goals-label'><strong>MY GOALS</strong></div>
-              <div id='my-goals-holder'>
-                <div className='goal-item'>
-                  <input id='new-goal-input' placeholder='add a new goal' />
-                </div>
-                  {this.goalItems}
-              </div>
-            </div>
             <div id='history-full'>
               <div id='history-label'><strong>MY PROGRESS</strong></div>
               <div id='history-holder'>
@@ -158,13 +158,19 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
                 {this.inspirationSquares}
               </div>
             </div>
+            <div id='my-goals-full'>
+              <div id='my-goals-label'><strong>MY GOALS</strong></div>
+              <div id='my-goals-holder'>
+                <div className='goal-item'>
+                  <input id='new-goal-input' placeholder='add a new goal' />
+                </div>
+                  {this.goalItems}
+              </div>
+            </div>
             <div id='posts-full'>
               <div id='posts-label'><strong>progress photos/videos (maybe doesnt need a label)</strong></div>
               <div id='posts-holder'>
-                <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
-                <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
-                <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
-                <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
+                {this.progressPosts}
               </div>
             </div>
           </div>
@@ -177,12 +183,20 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
   dummyData = [[0, 1], [1, 5], [2, 1], [3, 8], [5, 16], [16, 12], [25, 3], [26, 14], [39, 7], [40, 15]];
   longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
   inspirationSquares = (<>
-    <div className='inspiration-square'></div>
-    <div className='inspiration-square'></div>
-    <div className='inspiration-square'></div>
-    <div className='inspiration-square'></div>
-    <div className='inspiration-square'></div>
-    <div className='inspiration-square'></div>
+    <div className='inspiration-square'><img src={friendPhoto1} /></div>
+    <div className='inspiration-square'><img src={friendPhoto2} /></div>
+    <div className='inspiration-square'><img src={friendPhoto3} /></div>
+    <div className='inspiration-square'><img src={friendPhoto4} /></div>
+    <div className='inspiration-square'><img src={friendPhoto5} /></div>
+  </>);
+  progressPosts = (<>
+    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto1} /></div></div>
+    <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
+    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto2} /></div></div>
+    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto3} /></div></div>
+    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto4} /></div></div>
+    <div className='post-item-container'><div className='post-item-content'>{this.longText}</div></div>
+    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto5} /></div></div>
   </>);
   goalItems = (<>
     <div className='goal-item goal-item-current'>

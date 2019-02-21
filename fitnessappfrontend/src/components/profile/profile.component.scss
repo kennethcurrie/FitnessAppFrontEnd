@@ -36,7 +36,7 @@
   justify-content: space-around;
 }
 
-#profile-pic
+.bound-img
 {
   max-width: 100%;
   max-height: 100%;
@@ -152,9 +152,19 @@
 {
   margin: 0.5rem;
   padding: 0.1rem;
-  min-height: 8rem;
-  min-width: 8rem;
+  height: 8rem;
+  width: 8rem;
   background-color: rgba(100, 25, 255, .3);
+  overflow: hidden;
+  text-align: center;
+  border-radius: 25px;
+}
+.inspiration-square img
+{
+  transform: translate(-14%, -7%);
+  width: 140%;
+  object-fit: cover;
+  object-position: 70% 70%;
 }
 
 #my-goals-holder
@@ -208,8 +218,36 @@
 
 .post-item-content {
   position: absolute;
+  width: 90%;
+  height: 90%;
   top: 1rem;
   left: 1rem;
   bottom: 1rem;
   right: 1rem;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: auto;
+}
+
+#all-profile-component div 
+{
+  box-sizing: border-box;
+  padding: 0.5em;
+}
+
+#all-profile-component #history-full div
+{
+  padding: 0;
+}
+#all-profile-component #history-full
+{
+  padding: 0;
+}
+
+#all-profile-component div, img
+{
+  border-radius: 25px;
 }
