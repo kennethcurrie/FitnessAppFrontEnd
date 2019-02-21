@@ -21,57 +21,40 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
     }
 
     getComponent() {
+        let userElement = <></>;
+        let adminElement = <></>;
+        let logoutElement = <></>;
 
-      let usersFullNameElement = <></>;
-      if (this.props.isLoggedIn) {
-          const usersFullNameString = `${'lastname'}, ${'firstName'}`;
-          usersFullNameElement = (
-              <li className='nav-item'>
-                  <p className='nav-link' id='usersFullName'>{usersFullNameString}</p>
-              </li>
-          );
-      }
-
-        let logoutOrLoginElement = (
-            <li className='nav-item'>
-                <Link to='/login' className='nav-link' id='usersFullName'>login</Link>
-            </li>
-        );
         if (this.props.isLoggedIn) {
-            logoutOrLoginElement = (
+            const usersFullNameString = `${'firstName'} ${'lastname'}`;
+            userElement = (
+                <>
+                    <li className='nav-item'>
+                        <p className='nav-link' id='usersFullName'>{usersFullNameString}</p>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/' className='nav-link'>Home</Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/submit' className='nav-link'>Submit Workout</Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/rankings' className='nav-link'>Top Ranked</Link>
+                    </li>
+                </>
+            );
+            logoutElement = (
                 <li className='nav-item'>
                     <Link to='/logout' className='nav-link' href='#'>Log out</Link>
                 </li>
             );
         }
 
-        let managerialElement = <></>;
-        if (this.props.isAdmin && this.props.isLoggedIn) {
-            managerialElement = (
-                <li className='nav-item dropdown'>
-                    <a className='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                        Manage
-                    </a>
-                    <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
-                        <Link to='/users/manage' className='dropdown-item' href='#'>Modify User Access</Link>
-                        <Link to='/reimbursements/manage' className='dropdown-item' href='#'>edit activities</Link>
-                        <div className='dropdown-divider'></div>
-                    </div>
+        if (this.props.isLoggedIn && this.props.isAdmin ) {
+            adminElement = (
+                <li className='nav-item'>
+                    <Link to='/admin/users' className='nav-link'>User Management</Link>
                 </li>
-            );
-        }
-
-        let userElement = <></>;
-        if (this.props.isLoggedIn) {
-            userElement = (
-                <>
-                    <li className='nav-item'>
-                        <Link to='/users/lastname_firstname' className='nav-link' href='#'>My Profile</Link>
-                    </li>
-                    <li className='nav-item'>
-                        <Link to='/reimbursements/lastname_firstname' className='nav-link' href='#'>My friends</Link>
-                    </li>
-                </>
             );
         }
 
@@ -80,10 +63,9 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
                 <a href='revature.com'><img id='nav-logo' src={logo} /></a>
                 <div id='nav-items'>
                     <ul className='nav justify-content-end'>
-                        {usersFullNameElement}
-                        {managerialElement}
                         {userElement}
-                        {logoutOrLoginElement}
+                        {adminElement}
+                        {logoutElement}
                     </ul>
                 </div>
             </div>
