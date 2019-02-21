@@ -12,6 +12,8 @@
 #main
 {  
   background-color: rgba(0, 0, 0, 0.8);
+  max-width: 70%;
+  min-width: 20rem;
 }
 
 #content-holder
@@ -22,6 +24,10 @@
   overflow: auto;
 }
 
+#profile-pic-full
+{
+  color:white;
+}
 #profile-pic-holder
 {
   height: 20rem;
@@ -34,6 +40,12 @@
 {
   max-width: 100%;
   max-height: 100%;
+}
+
+#sticky
+{
+  position: sticky;
+  top: 1rem;
 }
 
 #history-graph
@@ -54,25 +66,17 @@
   max-width: 65%;
 }
 
-#about-me-full
+#my-goals-full
 {
   margin-top: 1rem;
   background-color: rgba(100, 25, 255, .2);
 }
 
-#right-side-under
-{
-  margin: 0.5rem;
-  margin-top: 1rem;
-  width: 100%;
-  min-height: 7rem;
-  background: linear-gradient(to bottom,  rgba(200, 200, 255, .2), rgba(100, 25, 255, .6));
-}
 
-#about-me-holder
+#my-goals-holder
 {
   overflow: auto;
-  height: 5rem;
+  height: 15rem;
 }
 
 #history-full
@@ -84,7 +88,7 @@
 #history-holder
 {
   margin-top: 1rem;
-  height: 20rem;
+  height: 25rem;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +96,7 @@
 
 #stats-holder
 {  
-  height: 5rem;
+  height: 10rem;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -121,4 +125,91 @@
   background: linear-gradient(to bottom,  rgba(200, 200, 255, .2), rgba(100, 25, 255, .6));
   padding: 0.5rem;
   min-height: 25rem;
+}
+
+#inspirations-full
+{
+  margin-top: 1rem;
+  background: linear-gradient(to bottom,  rgba(200, 200, 255, .2), rgba(100, 25, 255, .6));
+}
+
+#inspirations-label
+{
+  color:white;
+}
+
+#inspirations-holder
+{
+  overflow: auto;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap; 
+  max-height: 20rem; 
+}
+
+.inspiration-square
+{
+  margin: 0.5rem;
+  padding: 0.1rem;
+  min-height: 8rem;
+  min-width: 8rem;
+  background-color: rgba(100, 25, 255, .3);
+}
+
+#my-goals-holder
+{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.goal-item
+{
+  margin: 0.5rem;
+  width: 90%;
+}
+
+#new-goal-input
+{ 
+  width: 100%;
+}
+
+#posts-holder
+{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#posts-full
+{
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  background-color: rgba(100, 25, 255, .2);
+}
+
+.post-item-container
+{
+  position: relative;
+  display: block;
+  max-width: 30rem;
+  width: 70%;
+  min-width: 20rem;
+  min-height: 30rem;
+  margin: 2rem;
+  padding: 1rem;
+  padding-top: 80%;
+  max-height: 30rem;
+  background-color: rgba(100, 25, 255, .3);
+}
+
+.post-item-content {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  bottom: 1rem;
+  right: 1rem;
 }
