@@ -15,6 +15,10 @@ import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
+import { ExcerciseChartComponent } from './excerciseChart/excerciseChart.component';
+import { InspirationsListComponent, IFriendLinkInfo } from './inspirations/inspirations.component';
+import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
+import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
 
 
 
@@ -32,92 +36,6 @@ The profile gives an overview of ...
 */
 
 export class ProfileComponent extends React.Component<any, any> {
-
-
-  componentDidMount() {
-    const hc = this.updateChart(this.dummyData, 'lunges');
-    // push to end of stack so chart is done with its render before trying to reflow it
-    setTimeout(() => hc.reflow(), 0);
-  }
-
-updateChart = (data, workoutType: string, ): Highcharts.Chart => {
-
-  const textStyle = {
-    style: {
-      fontFamily: 'monospace',
-      color: 'rgba(225, 255, 255, 1)'
-    }
-  };
-  return Highcharts.chart( {
-    chart: {
-      renderTo: 'history-graph',
-      zoomType: 'x',
-      ...textStyle,
-      backgroundColor: {
-        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-        stops: [
-            [0, 'rgba(100, 25, 255, .0)'],
-            [1, 'rgba(200, 200, 255, .0)']
-        ]
-      }
-    },
-    title: {
-      text: workoutType + ' History',
-      ...textStyle
-    },
-    subtitle: {
-      text: document.ontouchstart === undefined ?
-          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in',
-      ...textStyle
-    },
-    xAxis: {
-      type: 'datetime',
-      labels: {...textStyle}
-    },
-    yAxis: {
-      title: {
-        text: 'score',
-      ...textStyle,
-      },
-      labels: {...textStyle}
-    },
-    legend: {
-      enabled: false
-    },
-    plotOptions: {
-      area: {
-        fillColor: {
-          linearGradient: {
-            x1: 0,
-            y1: 0,
-            x2: 0,
-            y2: 1
-          },
-          stops: [
-            [0, 'rgba(100, 25, 255, .9)'],
-            [1, 'rgba(127, 255, 212, .6)']
-          ]
-        },
-        marker: {
-          radius: 2
-        },
-        lineWidth: 1,
-        states: {
-          hover: {
-            lineWidth: 1
-          }
-        }
-      }
-    },
-
-    series: [{
-      type: 'area',
-      name: workoutType + ' score',
-      data: data
-    }]
-  });
-}
-
 
 
   render() {
@@ -146,33 +64,10 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
             </div>
           </div>
           <div id='right-side'>
-            <div id='history-full'>
-              <div id='history-label'><strong>MY PROGRESS</strong></div>
-              <div id='history-holder'>
-                <div className='bound-img'><div id='history-graph'></div></div>
-              </div>
-            </div>
-            <div id='inspirations-full'>
-              <div id='inspirations-label'><strong>INSPIRATIONS</strong></div>
-              <div id='inspirations-holder'>
-                {this.inspirationSquares}
-              </div>
-            </div>
-            <div id='my-goals-full'>
-              <div id='my-goals-label'><strong>MY GOALS</strong></div>
-              <div id='my-goals-holder'>
-                <div className='goal-item'>
-                  <input id='new-goal-input' placeholder='add a new goal' />
-                </div>
-                  {this.goalItems}
-              </div>
-            </div>
-            <div id='posts-full'>
-              <div id='posts-label'><strong>progress photos/videos (maybe doesnt need a label)</strong></div>
-              <div id='posts-holder'>
-                {this.progressPosts}
-              </div>
-            </div>
+            <ExcerciseChartComponent workoutType={'lunges'} excerciseData={this.dummyData} />
+            <InspirationsListComponent friendInfo={this.topFriendInfo} />
+            <MyGoalsListComponent goals={this.myGoals} />
+            <PostTimelineComponent posts={this.progressPosts} />
           </div>
         </div>
       </>
@@ -193,65 +88,47 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
     [Date.UTC(2019, 1, 28), 15]
   ];
   longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
-  inspirationSquares = (<>
-    <div className='inspiration-square'><img src={friendPhoto1} /></div>
-    <div className='inspiration-square'><img src={friendPhoto2} /></div>
-    <div className='inspiration-square'><img src={friendPhoto3} /></div>
-    <div className='inspiration-square'><img src={friendPhoto4} /></div>
-    <div className='inspiration-square'><img src={friendPhoto5} /></div>
-  </>);
-  progressPosts = (<>
-    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto1} /></div></div>
-    <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
-    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto2} /></div></div>
-    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto3} /></div></div>
-    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto4} /></div></div>
-    <div className='post-item-container'><div className='post-item-content'>{this.longText}</div></div>
-    <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto5} /></div></div>
-  </>);
-  goalItems = (<>
-    <div className='goal-item goal-item-current'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a current goal</span>
-    </div>
-    <div className='goal-item goal-item-current'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a current goal</span>
-    </div>
-    <div className='goal-item goal-item-current'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a current goal</span>
-    </div>
-    <div className='goal-item goal-item-current'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a current goal</span>
-    </div>
-
-
-    <div className='goal-item goal-item-past'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a past goal</span>
-    </div>
-    <div className='goal-item goal-item-past'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a past goal</span>
-    </div>
-    <div className='goal-item goal-item-past'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a past goal</span>
-    </div>
-    <div className='goal-item goal-item-past'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a past goal</span>
-    </div>
-    <div className='goal-item goal-item-past'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a past goal</span>
-    </div>
-    <div className='goal-item goal-item-past'>
-      <span className='goal-item-label'>GOAL: </span>
-      <span className='goal-item-text'>this is a past goal</span>
-    </div>
-  </>);
+  topFriendInfo: IFriendLinkInfo[] = [
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto2, profileLinkURL: '' },
+    { picURL: friendPhoto3, profileLinkURL: '' },
+    { picURL: friendPhoto4, profileLinkURL: '' },
+    { picURL: friendPhoto5, profileLinkURL: '' }
+  ];
+   progressPosts: IPostItem[] = [
+    { title: undefined, text: 'test post body text', img: progressPhoto1},
+    { title: 'test title', text: undefined, img: progressPhoto2},
+    { title: undefined, text: 'test post body text', img: undefined},
+    { title: undefined, text: undefined, img: progressPhoto3},
+    { title: 'test title', text: undefined, img: undefined},
+    { title: undefined, text: 'test post body text', img: undefined},
+    { title: undefined, text: 'test post body text', img: progressPhoto4},
+    { title: 'testtitle', text: undefined, img: progressPhoto5},
+    { title: undefined, text: undefined, img: undefined},
+   ];
+  // (<>
+  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto1} /></div></div>
+  //   <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
+  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto2} /></div></div>
+  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto3} /></div></div>
+  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto4} /></div></div>
+  //   <div className='post-item-container'><div className='post-item-content'>{this.longText}</div></div>
+  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto5} /></div></div>
+  // </>);
+  myGoals: IGoal[] = [
+    {isCurrentGoal: true, goalText: 'this is a current goal'},
+    {isCurrentGoal: true, goalText: 'this is a current goal'},
+    {isCurrentGoal: true, goalText: 'this is a current goal'},
+    {isCurrentGoal: true, goalText: 'this is a current goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+    {isCurrentGoal: false, goalText: 'this is a past goal'},
+  ];
 
 }
