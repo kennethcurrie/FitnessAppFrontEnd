@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './profile.component.scss';
 const profilePic = require('../../resources/placeholder-profile-pic.jpg');
 const tmpGraphPic = require('../../resources/placeholder-chart.png');
+import $ from 'jquery';
+import * as Highcharts from 'highcharts';
+import * as Exporting from 'highcharts/modules/exporting';
+import * as ExportData from 'highcharts/modules/export-data';
 
 
 
@@ -11,13 +15,83 @@ The profile gives an overview of ...
   -*a profile picture
   -*basic info/stats
   -*a short about me (goals)
-  -last 3 exercises
-  -a section to add a new exercise to history
+  -last 3 excersises
+  -a section to add a new excersise to history
   -top 3 friends
-  -show a graph displaying ratios of types of exercise, with lables
+  -show a graph displaying ratios of types of excersise, with lables
 
 */
+
 export class ProfileComponent extends React.Component<any, any> {
+
+
+  componentDidMount() {
+    const hc = this.updateChart(this.dummyData);
+    // push to end of stack so chart is done with its render before trying to reflow it
+    setInterval(() => hc.reflow(), 0);
+  }
+
+updateChart = (data): Highcharts.Chart => {
+
+  return Highcharts.chart('container', {
+    chart: {
+      zoomType: 'x'
+    },
+    title: {
+      text: 'USD to EUR exchange rate over time'
+    },
+    subtitle: {
+      text: document.ontouchstart === undefined ?
+          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+    },
+    xAxis: {
+      type: 'datetime'
+    },
+    yAxis: {
+      title: {
+        text: 'Exchange rate'
+      }
+    },
+    legend: {
+      enabled: false
+    },
+    plotOptions: {
+      area: {
+        fillColor: {
+          linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 1
+          },
+          stops: [
+            [0, 'blue'],
+            [1, 'white']
+          ]
+        },
+        marker: {
+          radius: 2
+        },
+        lineWidth: 1,
+        states: {
+          hover: {
+            lineWidth: 1
+          }
+        },
+        threshold: undefined
+      }
+    },
+
+    series: [{
+      type: 'area',
+      name: 'USD to EUR',
+      data: data
+    }]
+  });
+}
+
+
+
   render() {
     return(
       <>
@@ -44,7 +118,7 @@ export class ProfileComponent extends React.Component<any, any> {
             </div>
             <div id='profile-pic-label'><strong>MY PROGRESS</strong></div>
             <div id='history-holder'>
-              <img id='tmp-graph-pic' src={tmpGraphPic} />
+              <div id='container' style={{width: '100%', height: '100%'}}></div>
             </div>
           </div>
         </div>
@@ -53,6 +127,6 @@ export class ProfileComponent extends React.Component<any, any> {
   }
 
 
-
+  dummyData = [[0, 1], [1, 5], [2, 1], [3, 8], [5, 16], [16, 12], [25, 3], [26, 14], [39, 7], [40, 15]];
   longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
 }
