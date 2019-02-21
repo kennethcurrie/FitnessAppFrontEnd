@@ -9,7 +9,12 @@
   color: white;
 }
 
-
+#main
+{  
+  background-color: rgba(0, 0, 0, 0.8);
+  max-width: 70%;
+  min-width: 20rem;
+}
 
 #content-holder
 {
@@ -19,23 +24,34 @@
   overflow: auto;
 }
 
+#profile-pic-full
+{
+  color:white;
+}
 #profile-pic-holder
 {
-  height: 15rem;
+  height: 20rem;
   margin-top:1rem;
   display:flex;
   justify-content: space-around;
 }
 
-#profile-pic
+.bound-img
 {
   max-width: 100%;
   max-height: 100%;
 }
-#tmp-graph-pic
+
+#sticky
 {
-  max-width: 100%;
-  max-height: 100%;
+  position: sticky;
+  top: 1rem;
+}
+
+#history-graph
+{
+  width: 100%;
+  height: 100%;
 }
 
 #left-side
@@ -50,16 +66,29 @@
   max-width: 65%;
 }
 
-#about-me-holder
+#my-goals-full
+{
+  margin-top: 1rem;
+  background-color: rgba(100, 25, 255, .2);
+}
+
+
+#my-goals-holder
 {
   overflow: auto;
-  height: 10rem;
+  height: 15rem;
+}
+
+#history-full
+{
+  margin-top: 1rem;
+  background: linear-gradient(to bottom, rgba(100, 25, 255, .6), rgba(200, 200, 255, .2));
 }
 
 #history-holder
 {
   margin-top: 1rem;
-  height: 20rem;
+  height: 25rem;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -73,10 +102,149 @@
   justify-content: center;
 }
 
-#profile-pic-label
-{
+#stats-full
+{  
   margin-top: 1rem;
+  background-color: rgba(100, 25, 255, .2);
+}
+
+.label
+{
   display:flex;
   align-items: center;
   justify-content: center;
+}
+
+#profile-pic-label
+{
+  margin-top: 1rem;
+}
+
+#profile-pic-full
+{
+  background: linear-gradient(to bottom,  rgba(200, 200, 255, .2), rgba(100, 25, 255, .6));
+  padding: 0.5rem;
+  min-height: 25rem;
+}
+
+#inspirations-full
+{
+  margin-top: 1rem;
+  background: linear-gradient(to bottom,  rgba(200, 200, 255, .2), rgba(100, 25, 255, .6));
+}
+
+#inspirations-label
+{
+  color:white;
+}
+
+#inspirations-holder
+{
+  overflow: auto;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap; 
+  max-height: 20rem; 
+}
+
+.inspiration-square
+{
+  margin: 0.5rem;
+  padding: 0.1rem;
+  height: 8rem;
+  width: 8rem;
+  background-color: rgba(100, 25, 255, .3);
+  overflow: hidden;
+  text-align: center;
+  border-radius: 25px;
+}
+.inspiration-square img
+{
+  transform: translate(-14%, -7%);
+  width: 140%;
+  object-fit: cover;
+  object-position: 70% 70%;
+}
+
+#my-goals-holder
+{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.goal-item
+{
+  margin: 0.5rem;
+  width: 90%;
+}
+
+#new-goal-input
+{ 
+  width: 100%;
+}
+
+#posts-holder
+{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+#posts-full
+{
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  background-color: rgba(100, 25, 255, .2);
+}
+
+.post-item-container
+{
+  position: relative;
+  display: block;
+  max-width: 30rem;
+  width: 80%;
+  min-width: 20rem;
+  min-height: 30rem;
+  margin: 2rem;
+  padding: 1rem;
+  padding-top: 80%;
+  max-height: 30rem;
+  background-color: rgba(100, 25, 255, .3);
+}
+
+.post-item-content {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  top: 1rem;
+  left: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: auto;
+}
+
+#all-profile-component div 
+{
+  box-sizing: border-box;
+  padding: 0.5em;
+}
+
+#all-profile-component #history-full div
+{
+  padding: 0;
+  border-radius: 0;
+}
+
+#all-profile-component div, img
+{
+  border-radius: 25px;
 }
