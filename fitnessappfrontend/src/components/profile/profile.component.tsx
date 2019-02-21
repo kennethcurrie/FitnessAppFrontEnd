@@ -28,15 +28,22 @@ export class ProfileComponent extends React.Component<any, any> {
   componentDidMount() {
     const hc = this.updateChart(this.dummyData, 'lunges');
     // push to end of stack so chart is done with its render before trying to reflow it
-    setInterval(() => hc.reflow(), 0);
+    setTimeout(() => hc.reflow(), 0);
   }
 
 updateChart = (data, workoutType: string, ): Highcharts.Chart => {
 
+  const textStyle = {
+    style: {
+      fontFamily: 'monospace',
+      color: 'rgba(225, 255, 255, 1)'
+    }
+  };
   return Highcharts.chart( {
     chart: {
-      renderTo: 'container',
+      renderTo: 'history-graph',
       zoomType: 'x',
+      ...textStyle,
       backgroundColor: {
         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
         stops: [
@@ -46,19 +53,24 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
       }
     },
     title: {
-      text: workoutType + ' History'
+      text: workoutType + ' History',
+      ...textStyle
     },
     subtitle: {
       text: document.ontouchstart === undefined ?
-          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in',
+      ...textStyle
     },
     xAxis: {
-      type: 'datetime'
+      type: 'datetime',
+      labels: {...textStyle}
     },
     yAxis: {
       title: {
-        text: 'score'
-      }
+        text: 'score',
+      ...textStyle,
+      },
+      labels: {...textStyle}
     },
     legend: {
       enabled: false
@@ -106,9 +118,11 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
         <div id='all-profile-component'>
           {/* this is the profile and personal info section */}
           <div id='left-side'>
-            <div id='profile-pic-label'><strong>Nickname</strong></div>
-            <div id='profile-pic-holder'>
-              <img id='profile-pic' src={profilePic}/>
+            <div id='profile-pic-full'>
+              <div id='nickname-label' className='label'><strong>Nickname</strong></div>
+              <div id='profile-pic-holder'>
+                <img id='profile-pic' src={profilePic}/>
+              </div>
             </div>
             <div id='stats-holder'>
               height: blah <br />
@@ -125,7 +139,7 @@ updateChart = (data, workoutType: string, ): Highcharts.Chart => {
             </div>
             <div id='profile-pic-label'><strong>MY PROGRESS</strong></div>
             <div id='history-holder'>
-              <div id='container' style={{width: '100%', height: '100%'}}></div>
+              <div id='history-graph'></div>
             </div>
           </div>
         </div>
