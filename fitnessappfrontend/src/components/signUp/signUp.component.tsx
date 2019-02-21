@@ -4,13 +4,16 @@ import { AxiosResponse } from 'axios';
 import { Link } from 'react-router-dom';
 
 interface ISignUpComponentProps {
-  // Props here
+    // initialize here
 }
 export class SignUpComponent extends React.Component<ISignUpComponentProps, any> {
     constructor(props) {
         super(props);
         this.state = {
-            // initialize here
+            email: '',
+            name: '',
+            username: '',
+            password: ''
         };
     }
 
@@ -19,12 +22,8 @@ export class SignUpComponent extends React.Component<ISignUpComponentProps, any>
     }
 
     getComponent() {
-        // username
-        // password
-        // name
-        // email
         const result = (
-            <div id='SignUp'>
+            <div id='SignUp' className='rounded'>
                 <div className='form-holder'>
                     <form>
                         <table>
@@ -32,23 +31,28 @@ export class SignUpComponent extends React.Component<ISignUpComponentProps, any>
 
                             </thead>
                             <tbody>
-                                {/* entryStates: empty, invalid, valid */}
                                 <tr>
-                                    <td>nickname</td>
-                                    <td><input type='text' placeholder='Enter nickname' value={''} /></td>
+                                    <td>Full Name</td>
+                                    <td><input type='text' placeholder='John Smith' required/></td>
                                 </tr>
                                 <tr>
-                                    <td>email</td>
-                                    <td><input type='text' placeholder='Enter password' value={''} /></td>
+                                    <td>Email Address</td>
+                                    <td><input type='email' placeholder='jsmith@gmail.com' required/></td>
                                 </tr>
                                 {/* username states: emptyUsername, usernameIsTaken, usernameHasInvalidCharacters, usernameIsValid */}
                                 <tr>
-                                    <td>usename</td>
-                                    <td><input type='text' placeholder='Enter username' value={''} /></td>
+                                    <td>Username</td>
+                                    <td><input type='text' placeholder='Username' required/></td>
                                 </tr>
                                 <tr>
                                     <td>password</td>
-                                    <td><input type='text' placeholder='Enter password' value={''} /></td>
+                                    <td><input type='password' placeholder='Password' required/></td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2} className='center'><p id='RegisterError' className='error'>&nbsp;</p></td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2} className='center'><input type='submit' value='Register'/></td>
                                 </tr>
                             </tbody>
                         </table>
