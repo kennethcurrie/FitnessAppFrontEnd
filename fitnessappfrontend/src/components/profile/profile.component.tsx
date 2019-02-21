@@ -26,19 +26,27 @@ export class ProfileComponent extends React.Component<any, any> {
 
 
   componentDidMount() {
-    const hc = this.updateChart(this.dummyData);
+    const hc = this.updateChart(this.dummyData, 'lunges');
     // push to end of stack so chart is done with its render before trying to reflow it
     setInterval(() => hc.reflow(), 0);
   }
 
-updateChart = (data): Highcharts.Chart => {
+updateChart = (data, workoutType: string, ): Highcharts.Chart => {
 
-  return Highcharts.chart('container', {
+  return Highcharts.chart( {
     chart: {
-      zoomType: 'x'
+      renderTo: 'container',
+      zoomType: 'x',
+      backgroundColor: {
+        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+        stops: [
+            [0, 'rgba(100, 25, 255, .6)'],
+            [1, 'rgba(200, 200, 255, .2)']
+        ]
+      }
     },
     title: {
-      text: 'USD to EUR exchange rate over time'
+      text: workoutType + ' History'
     },
     subtitle: {
       text: document.ontouchstart === undefined ?
@@ -49,7 +57,7 @@ updateChart = (data): Highcharts.Chart => {
     },
     yAxis: {
       title: {
-        text: 'Exchange rate'
+        text: 'score'
       }
     },
     legend: {
@@ -65,8 +73,8 @@ updateChart = (data): Highcharts.Chart => {
             y2: 1
           },
           stops: [
-            [0, 'blue'],
-            [1, 'white']
+            [0, 'rgba(100, 25, 255, .9)'],
+            [1, 'rgba(127, 255, 212, .6)']
           ]
         },
         marker: {
@@ -77,14 +85,13 @@ updateChart = (data): Highcharts.Chart => {
           hover: {
             lineWidth: 1
           }
-        },
-        threshold: undefined
+        }
       }
     },
 
     series: [{
       type: 'area',
-      name: 'USD to EUR',
+      name: workoutType + ' score',
       data: data
     }]
   });
