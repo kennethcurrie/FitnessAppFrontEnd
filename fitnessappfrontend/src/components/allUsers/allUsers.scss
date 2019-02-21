@@ -1,0 +1,17 @@
+$bg: #FFFFFF;
+$border: solid #000000 1px;
+
+#allUsers{
+    table{
+        background-color: $bg;
+        width:100%;
+        border-collapse: collapse;
+        text-align: center;
+        tr{
+            td, th{
+                border: $border;
+                padding: 5px;
+            }
+        }
+    }
+}
