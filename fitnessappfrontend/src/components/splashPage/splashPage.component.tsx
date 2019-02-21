@@ -2,6 +2,7 @@ import React from 'react';
 import { LoginComponent } from '../login/login.component';
 import { SignUpComponent } from '../signUp/signUp.component';
 import { ProfileComponent } from '../profile/profile.component';
+import './splash.scss';
 
 interface ISplashPageComponentProps {
   // props
