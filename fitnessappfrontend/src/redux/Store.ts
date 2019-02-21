@@ -10,9 +10,7 @@ const enhancer = composeEnhancers(
     applyMiddleware(reduxThunk, logger),
 );
 
-const store: Store<any> = createStore(
+export const store: Store<any> = createStore(
     state,
     enhancer
 );
-
-export default store;
