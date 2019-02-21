@@ -4,13 +4,14 @@ $border: #000000;
 
 // all pages
 #main{
-
-  max-width:800px;
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
-  background-color: $bg;
-  min-height: 500px;
+  margin-top: 1rem;
+  background-color: rgba(0, 0, 0, .5);
+  max-width:90%;
+  min-width:20rem;
+  min-height: 80%
 }
 
 a:link, a:visited{
