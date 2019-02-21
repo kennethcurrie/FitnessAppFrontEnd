@@ -1,31 +1,20 @@
-import { combineReducers } from "redux";
-// import { clickerReducer } from "./Clicker.reducer";
-import { chuckNorrisReducer } from "./ChuckNorris.reducer";
-// import { ticTacToeReducer } from "./TicTacToe.reducer";
+import { combineReducers } from 'redux';
+import { sessionReducer } from './session.reducer';
 
-export interface IClickerState {
-  clicks: number
-}
-
-export interface IChuckNorrisState {
-  joke: string
-}
-
-export interface ITicTacToeState{
-  game:[string[],string[],string[]],
-  message:string,
-  playerTurn:boolean,
-  winner:number
+export interface ISessionState {
+    userid: number;
+    username: string;
+    name: string;
+    role: number;
+    email: string;
+    private: boolean;
 }
 
 export interface IState {
-  // clicker: IClickerState,
-  chuckNorris: IChuckNorrisState
-  // ticTacToe: ITicTacToeState
+    user: ISessionState;
 }
 
 export const state = combineReducers<IState>({
-  // clicker: clickerReducer,
-  chuckNorris: chuckNorrisReducer,
-  // ticTacToe: ticTacToeReducer
-})
+    user: sessionReducer
+});
+
