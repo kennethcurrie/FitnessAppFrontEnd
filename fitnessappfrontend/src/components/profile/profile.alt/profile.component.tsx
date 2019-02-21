@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './profile.component.scss';
-const profilePic = require('../../resources/placeholder-profile-pic.jpg');
-const tmpGraphPic = require('../../resources/placeholder-chart.png');
+const profilePic = require('../../../resources/placeholder-profile-pic.jpg');
 import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
