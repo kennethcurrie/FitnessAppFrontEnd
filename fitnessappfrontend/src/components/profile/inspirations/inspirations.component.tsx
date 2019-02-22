@@ -18,14 +18,25 @@ export interface IFriendLinkInfo {
 
 export class InspirationsListComponent extends React.Component<IInspirationsProps, any> {
 
+    updateSquares = () => {
+        console.log('squares being updated!');
+    }
+
   render() {
 
     const inspirationSquares = this.props.friendInfo.map((friendInfo) => { return <Link to={friendInfo.profileLinkURL} ><div className='inspiration-square'><img src={friendInfo.picURL} /></div></Link>; });
 
+
     return(
       <>
         <div id='inspirations-full'>
-          <div id='inspirations-label'><strong>INSPIRATIONS</strong></div>
+          <div id='inspirations-label'>
+            <strong>INSPIRATIONS</strong>
+            <span id='inspirations-search'>
+                <span><strong>Search: </strong></span>
+                <input onChange={this.updateSquares} type='text' />
+            </span>
+          </div>
           <div id='inspirations-holder'>
             {inspirationSquares}
           </div>
