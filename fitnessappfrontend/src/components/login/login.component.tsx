@@ -1,16 +1,16 @@
 import React from 'react';
 import { AxiosResponse } from 'axios';
 import { Link } from 'react-router-dom';
+import { ISession, ICredentials } from '../../redux/interfaces';
 
 interface ILoginComponentProps {
-  // Props here
+    session: ISession;
+    updateCredentials: (username: string, password: string) => void;
+    login: (credentials: ICredentials) => void;
 }
 export class LoginComponent extends React.Component<ILoginComponentProps, any> {
     constructor(props) {
         super(props);
-        this.state = {
-            // initialize here
-        };
     }
 
     render() {
@@ -18,8 +18,7 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
     }
 
     getComponent() {
-        // username
-        // password
+        const { session, updateCredentials, login } = this.props;
         const result = (
             <div id='login' className='rounded'>
                 <div className='form-holder'>
@@ -31,17 +30,25 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
                             <tbody>
                                 <tr>
                                     <td>Username:</td>
-                                    <td><input type='text' placeholder='Enter username' required/></td>
+                                    <td><input type='text' placeholder='Enter username' required onChange={e => {
+                                        updateCredentials(e.target.value, session.credentials.password);
+                                    }}/></td>
                                 </tr>
                                 <tr>
                                     <td>Password:</td>
-                                    <td><input type='password' placeholder='Enter password' required/></td>
+                                    <td><input type='password' placeholder='Enter password' required onChange={e => {
+                                        updateCredentials(session.credentials.username, e.target.value);
+                                    }}/></td>
                                 </tr>
                                 <tr>
                                     <td colSpan={2} className='center'><p id='LoginError' className='error'>&nbsp;</p></td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={2} className='center'><input type='submit' value='Register'/></td>
+                                    <td colSpan={2} className='center'><button onClick={e => {
+                                        e.preventDefault();
+                                        console.log('Logged In');
+                                        this.props.login(session.credentials);
+                                    }}>Login</button></td>
                                 </tr>
                             </tbody>
                         </table>

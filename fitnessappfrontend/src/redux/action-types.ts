@@ -1,3 +1,6 @@
 export const ActionTypes = {
-    TEMP: 'TEMP'
+    TEMP: 'TEMP',
+    LOGIN: 'LOGIN',
+    UPDATE_CREDS: 'UPDATE_CREDS',
+    LOGOUT: 'LOGOUT'
 };
