@@ -9,6 +9,7 @@ interface INavComponentProps {
   isAdmin: boolean;
   isLoggedIn: boolean;
 }
+
 export class NavComponent extends React.Component<INavComponentProps, any> {
     constructor(props) {
         super(props);
