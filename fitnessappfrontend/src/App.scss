@@ -1,6 +1,4 @@
-$bg: #FFFFFF;
-$link: #000099;
-$border: #000000;
+@import 'style-vars';
 
 // all pages
 #main{
@@ -8,9 +6,9 @@ $border: #000000;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1rem;
-  background-color: rgba(0, 0, 0, .5);
-  max-width:90%;
-  min-width:20rem;
+  background-color: $solid-color-background;
+  max-width: 70%;
+  min-width: 20rem;
   min-height: 80%
 }
 
