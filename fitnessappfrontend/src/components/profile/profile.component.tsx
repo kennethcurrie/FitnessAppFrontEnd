@@ -19,6 +19,7 @@ import { ExcerciseChartComponent } from './excerciseChart/excerciseChart.compone
 import { InspirationsListComponent, IFriendLinkInfo } from './inspirations/inspirations.component';
 import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
+import { TakePicComponent } from '../takePicComponent/takePic.component';
 
 
 
@@ -41,6 +42,7 @@ export class ProfileComponent extends React.Component<any, any> {
   render() {
     return(
       <>
+        <TakePicComponent />
         {/* this holds everything */}
         <div id='all-profile-component'>
           {/* this is the profile and personal info section */}
