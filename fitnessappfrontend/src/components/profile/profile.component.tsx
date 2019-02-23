@@ -42,7 +42,6 @@ export class ProfileComponent extends React.Component<any, any> {
   render() {
     return(
       <>
-        <TakePicComponent />
         {/* this holds everything */}
         <div id='all-profile-component'>
           {/* this is the profile and personal info section */}
