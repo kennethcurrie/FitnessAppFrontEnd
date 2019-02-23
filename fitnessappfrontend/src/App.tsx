@@ -3,7 +3,6 @@ import './App.scss';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { NavComponent } from './components/nav/nav.component';
 import { SplashPageComponent } from './components/splashPage/splashPage.component';
-import { LogoutComponent } from './components/logout/logout.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/editProfile/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
@@ -47,7 +46,6 @@ class App extends React.Component<any, IAppState> {
                       <Switch>
                         <Route exact path='/admin/users' render={(props) => <AllUsersComponent {...props} {...this.state} />} />
                         <Route path='/admin/users/edit/:username' render={(props) => <EditUserComponent {...props} {...this.state} />} />
-                        <Route path='/logout' render={(props) => <LogoutComponent {...props} />} />
                         {/* these are shared between admin and users, however more options may be availible to admin */}
                         <Route path='/user/:username' render={(props) => <ProfileComponent {...props} />} />
                         {/* perhaps a button from the profile component rather than a link from the main router */}
@@ -66,7 +64,6 @@ class App extends React.Component<any, IAppState> {
                       <>
                         {this.state.isLoggedIn ?
                           <Switch>
-                            <Route path='/logout' render={(props) => <LogoutComponent {...props} />} />
                             {/* these are shared between admin and users, however more options may be availible to admin */}
                             <Route path='/user/:username' render={(props) => <ProfileComponent {...props} />} />
                             {/* perhaps a button from the profile component rather than a link from the main router */}
