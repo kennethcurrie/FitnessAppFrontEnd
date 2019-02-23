@@ -26,7 +26,7 @@ class App extends React.Component<any, IAppState> {
     super(props);
     this.state = {
       isAdmin: true,
-      isLoggedIn: false
+      isLoggedIn: true
     };
   }
 
