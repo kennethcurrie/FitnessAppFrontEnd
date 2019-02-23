@@ -36,7 +36,13 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
 
     const friendArr = this.state.displaySearch ? this.topSearchDummy : this.props.friendInfo;
 
-    const inspirationSquares = friendArr.map((friendInfo) => { return <Link to={friendInfo.profileLinkURL} ><div className='inspiration-square'><img src={friendInfo.picURL} /></div></Link>; });
+    const inspirationSquares = friendArr.map((friendInfo) => {
+        return <Link to={friendInfo.profileLinkURL} >
+                <div className='inspiration-square'>
+                    <img src={friendInfo.picURL} />
+                </div>
+               </Link>;
+        });
 
 
     return(
@@ -61,6 +67,16 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
 
 
   topSearchDummy: IFriendLinkInfo[] = [
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
+    { picURL: friendPhoto1, profileLinkURL: '' },
     { picURL: friendPhoto1, profileLinkURL: '' },
     { picURL: friendPhoto1, profileLinkURL: '' },
     { picURL: friendPhoto1, profileLinkURL: '' },
