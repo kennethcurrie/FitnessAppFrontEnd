@@ -26,6 +26,10 @@ export class TakePicComponent extends React.Component<any, any> {
         0);
     }
 
+    componentWillUnmount() {
+        this.exitPicMode();
+    }
+
     takePic = () => {
         const video = this.video.current;
         const canvas = this.canvas.current;
@@ -70,6 +74,13 @@ export class TakePicComponent extends React.Component<any, any> {
         }
     }
 
+    resetPic = () => {
+        const video = this.video.current;
+        if (video) {
+            video.play();
+        }
+    }
+
     render() {
         return (
             <>
@@ -81,7 +92,8 @@ export class TakePicComponent extends React.Component<any, any> {
                     </div>
                     <div id='pic-capture-buttons' style={{position: 'absolute', top: '1rem', left: '1rem'}}>
                         <button id='snap' onClick={this.takePic}>Snap Photo</button>
-                        <button> reset </button>
+                        <button onClick={this.resetPic}> reset </button>
+                        <button onClick={this.exitPicMode}> close </button>
                         <a id='download-photo' href={ this.state.data } download>download photo</a>
                     </div>
                     <canvas ref={this.canvas} id='canvas' width='1280' height='720'  style={{display: 'none' }}>waiting on permissions...</canvas>
