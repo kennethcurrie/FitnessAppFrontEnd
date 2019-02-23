@@ -39,15 +39,18 @@ export class TakePicComponent extends React.Component<any, any> {
                 prevHeight = video.height,
                 prevDisplay = video.style.display;
 
+
             video.pause();
 
             video.width = 1280;
             video.height = 720;
+            canvas.width = video.width;
+            canvas.height = video.height;
             video.style.display = 'block';
 
             const context = canvas.getContext('2d') as CanvasRenderingContext2D;
-            const sw = video.offsetWidth, // source width
-                sh = video.offsetHeight, // source height
+            const sw = video.width, // source width
+                sh = video.height, // source height
                 dw = canvas.width, // destination width
                 dh = canvas.height; // destination height
             context.drawImage(video, 0, 0, sw, sh, 0, 0, dw, dh);
@@ -86,7 +89,7 @@ export class TakePicComponent extends React.Component<any, any> {
             <>
                 <div id='take-pic-holder' className='fill-all' style={{position: 'relative'}}>
                     <div id='pic-capture-preview' className='fill-all' style={{position: 'relative'}}>
-                        <video className='fill-all' style={{display: '', backgroundColor: 'black' }}  id='snapshot-preview' ref={this.video}  onLoadedMetadata={(e) => {e.currentTarget.play(); }} autoPlay={true} >
+                        <video className='fill-all' style={{display: '', width: '5rem', backgroundColor: 'black' }}  id='snapshot-preview' ref={this.video}  onLoadedMetadata={(e) => {e.currentTarget.play(); }} autoPlay={true} >
                             error
                         </video>
                     </div>
@@ -96,7 +99,7 @@ export class TakePicComponent extends React.Component<any, any> {
                         <button onClick={this.exitPicMode}> close </button>
                         <a id='download-photo' href={ this.state.data } download>download photo</a>
                     </div>
-                    <canvas ref={this.canvas} id='canvas' width='1280' height='720'  style={{display: 'none' }}>waiting on permissions...</canvas>
+                    <canvas ref={this.canvas} id='canvas' width='1280' height='720'  style={{display: 'none', position: 'fixed' }}>waiting on permissions...</canvas>
                 </div>
             </>
         );
