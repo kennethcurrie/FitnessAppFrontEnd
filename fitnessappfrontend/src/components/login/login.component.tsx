@@ -49,8 +49,7 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
                                 <tr>
                                     <td colSpan={2} className='center'><button onClick={e => {
                                         e.preventDefault();
-                                        console.log('Logged In');
-                                        this.props.login(session.credentials);
+                                        login(session.credentials);
                                     }}>Login</button></td>
                                 </tr>
                             </tbody>

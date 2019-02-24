@@ -3,12 +3,13 @@ const logo = require('../../resources/fitness-icon.png');
 import './nav.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { IState } from '../../redux/interfaces';
+import { IState, IApp } from '../../redux/interfaces';
+import { logout } from '../../redux/actions/session.action';
 
 
 interface INavComponentProps {
-  isAdmin: boolean;
-  isLoggedIn: boolean;
+  app: IApp;
+  logout: (e: any) => void;
 }
 
 class NavComponent extends React.Component<INavComponentProps, any> {
@@ -24,8 +25,9 @@ class NavComponent extends React.Component<INavComponentProps, any> {
         let userElement = <></>;
         let adminElement = <></>;
         let logoutElement = <></>;
+        const { app, logout } = this.props;
 
-        if (this.props.isLoggedIn) {
+        if (app.isLoggedIn) {
             const usersFullNameString = `${'firstName'} ${'lastname'}`;
             userElement = (
                 <>
@@ -45,12 +47,12 @@ class NavComponent extends React.Component<INavComponentProps, any> {
             );
             logoutElement = (
                 <li className='nav-item'>
-                    <Link to='/logout' className='nav-link' href='#'>Log out</Link>
+                    <Link to='/logout' className='nav-link' href='#' onClick={logout}>Log out</Link>
                 </li>
             );
         }
 
-        if (this.props.isLoggedIn && this.props.isAdmin ) {
+        if (app.isLoggedIn && app.isAdmin ) {
             adminElement = (
                 <li className='nav-item'>
                     <Link to='/admin/users' className='nav-link'>User Management</Link>
@@ -75,10 +77,9 @@ class NavComponent extends React.Component<INavComponentProps, any> {
 }
 
 const mapStateToProps = (state: IState) => {
-    return {
-        isAdmin: state.session.user.role === 'admin',
-        isLoggedIn: state.session.user !== undefined
-    };
+    return { app: state.app };
 };
 
-export default connect(mapStateToProps)(NavComponent);
+const mapDispatchToProps = { logout };
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavComponent);

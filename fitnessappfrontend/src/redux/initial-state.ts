@@ -1,6 +1,10 @@
 import { IState } from './interfaces';
 
 export const initialState: IState = {
+    app: {
+        isLoggedIn: false,
+        isAdmin: false
+    },
     session: {
         credentials: {
             username: '',
