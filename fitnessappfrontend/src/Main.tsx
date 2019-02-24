@@ -9,7 +9,7 @@ import { EditProfileComponent } from './components/editProfile/editProfile.compo
 import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.component';
-import { SubmitExerciseComponent } from './components/submitExercise/submitExercise.component';
+import SubmitExerciseComponent from './components/submitExercise/submitExercise.component';
 import { connect } from 'react-redux';
 import { IState, IApp } from './redux/interfaces';
 
