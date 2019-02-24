@@ -36,8 +36,8 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
 
     const friendArr = this.state.displaySearch ? this.topSearchDummy : this.props.friendInfo;
 
-    const inspirationSquares = friendArr.map((friendInfo) => {
-        return <Link to={friendInfo.profileLinkURL} >
+    const inspirationSquares = friendArr.map((friendInfo, id) => {
+        return <Link key={id} to={friendInfo.profileLinkURL} >
                 <div className='inspiration-square'>
                     <img src={friendInfo.picURL} />
                 </div>

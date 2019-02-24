@@ -21,9 +21,9 @@ export class PostTimelineComponent extends React.Component<IPostTimelineProps, a
 
   render() {
 
-    const postItems = this.props.posts.map((post) => {
+    const postItems = this.props.posts.map((post, id) => {
       if (post.img || post.text) {
-        return <div className='post-item-container'>
+        return <div key={id} className='post-item-container'>
           <div className='post-item-content'>
             {(post.title) ? <div className='post-item-label'><p>{post.title}</p></div> : undefined}
             <div className={`post-item-body-${(post.text) ? 'with-text' : 'no-text'}-${(post.img) ? 'with-img' : 'no-img'}`}>

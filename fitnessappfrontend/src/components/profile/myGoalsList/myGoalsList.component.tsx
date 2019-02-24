@@ -20,8 +20,8 @@ export class MyGoalsListComponent extends React.Component<IMyGoalsListProps, any
 
   render() {
 
-    const goalRows = this.props.goals.map((goal) => {
-      return <div className={'goal-item goal-item-' + (goal.isCurrentGoal) ? 'current' : 'past' }>
+    const goalRows = this.props.goals.map((goal, id) => {
+      return <div key={id} className={'goal-item goal-item-' + (goal.isCurrentGoal) ? 'current' : 'past' }>
         <span className='goal-item-label'>GOAL: </span>
         <span className='goal-item-text'>{goal.goalText}</span>
       </div>;

@@ -68,8 +68,8 @@ class SubmitExerciseComponent extends Component<IProps, any> {
                                     onChange={e => { updateCurls(+e.target.value, workoutFields.curls.reps); }}
                                 />Lbs<br/> {
                                     workoutFields.curls.lbs > 0 ?
-                                    (<><input type='number' step='1' value={workoutFields.curls.reps || '1'} min='1' placeholder='0' name='CurlReps' id='CurlReps' 
-                                        onChange={e => { updateCurls(workoutFields.curls.lbs, +e.target.value); }} 
+                                    (<><input type='number' step='1' value={workoutFields.curls.reps || '1'} min='1' placeholder='0' name='CurlReps' id='CurlReps'
+                                        onChange={e => { updateCurls(workoutFields.curls.lbs, +e.target.value); }}
                                     />Reps</>) : (<></>)
                                 }
                               </td>

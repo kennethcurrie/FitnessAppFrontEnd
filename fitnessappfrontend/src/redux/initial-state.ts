@@ -2,8 +2,8 @@ import { IState } from './interfaces';
 
 export const initialState: IState = {
     app: {
-        isLoggedIn: true,
-        isAdmin: true
+        isLoggedIn: false,
+        isAdmin: false
     },
     session: {
         credentials: {
@@ -40,5 +40,11 @@ export const initialState: IState = {
         pushUps: 0,
         sitUps: 0,
         pullUps: 0
+    },
+    signUpFields: {
+        username: '',
+        name: '',
+        password: '',
+        email: ''
     }
 };

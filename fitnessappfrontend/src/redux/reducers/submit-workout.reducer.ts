@@ -1,48 +1,13 @@
-import { combineReducers } from 'redux';
-import { ActionTypes } from './action-types';
-import { initialState } from './initial-state';
-
-export const appReducer = (state = initialState.app, action: any) => {
-    switch (action.type) {
-        case ActionTypes.APP:
-            return {
-                ...action.payload
-            };
-
-        default:
-            return state;
-    }
-};
-
-export const sessionReducer = (state = initialState.session, action: any) => {
-    switch (action.type) {
-        case ActionTypes.UPDATE_CREDS:
-            return {
-                ...state,
-                credentials: { ...action.payload }
-            };
-
-        case ActionTypes.LOGIN:
-            return {
-                ...state,
-                user: { ...action.payload }
-            };
-
-        case ActionTypes.LOGOUT:
-            return action.payload;
-
-        default:
-            return state;
-    }
-};
+import { ActionTypes } from '../action-types';
+import { initialState } from '../initial-state';
 
 export const submitWorkoutReducer = (state: any = initialState.workoutFields, action: any) => {
     switch (action.type) {
         case ActionTypes.SUBMIT_WORKOUTS:
             console.log('Submitted Workouts: ' + action.payload);
-        return {
-            ...action.payload
-        };
+            return {
+                ...action.payload
+            };
 
         case ActionTypes.UPDATE_RUNNING:
             return {
@@ -108,9 +73,3 @@ export const submitWorkoutReducer = (state: any = initialState.workoutFields, ac
             return state;
     }
 };
-
-export const state = combineReducers({
-    app: appReducer,
-    session: sessionReducer,
-    workoutFields: submitWorkoutReducer
-});
