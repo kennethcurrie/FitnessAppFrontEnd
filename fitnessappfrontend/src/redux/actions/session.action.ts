@@ -11,8 +11,9 @@ export const updateCredentials = (username: string, password: string) => {
     };
 };
 
-export const login = (credentials: ICredentials) => {
-    const user: IUser = {
+// Temp
+const users: IUser[] = [
+    {
         userid: 1,
         username: 'admin',
         name: 'John Smith',
@@ -20,24 +21,41 @@ export const login = (credentials: ICredentials) => {
         email: 'jsmith@fitnessapp.com',
         private: true,
         pictureUrl: ''
-    };
+    },
+    {
+        userid: 2,
+        username: 'saitama',
+        name: 'Saitama',
+        role: 'User',
+        email: 'admin@punchman.jp',
+        private: false,
+        pictureUrl: ''
+    }
+];
 
-    const isUser = (credentials.username === user.username);
-    const isPass = (credentials.password === 'password');
+// Change to fetch when api is implemented.
+export const login = (credentials: ICredentials) => {
+    const user = users.find(e => {
+        const isUser = (credentials.username === e.username);
+        const isPass = (credentials.password === 'password');
+        return (isUser && isPass);
+    });
 
-    if (isUser && isPass) {
+    console.log(user);
+
+    if (user) {
         return {
             type: ActionTypes.LOGIN,
             payload: {
-                loggedIn: true,
                 user: { ...user }
             }
         };
     }
+
     return {
         type: ActionTypes.LOGIN,
         payload: {
-            loggedIn: false
+            user: undefined
         }
     };
 };

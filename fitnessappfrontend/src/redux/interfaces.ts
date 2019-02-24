@@ -14,7 +14,6 @@ export interface IUser {
 }
 
 export interface ISession {
-    loggedIn: boolean;
     credentials: ICredentials;
     user: IUser;
 }

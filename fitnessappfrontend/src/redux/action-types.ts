@@ -1,5 +1,5 @@
 export const ActionTypes = {
-    TEMP: 'TEMP',
+    APP: 'APP',
     LOGIN: 'LOGIN',
     UPDATE_CREDS: 'UPDATE_CREDS',
     LOGOUT: 'LOGOUT'
