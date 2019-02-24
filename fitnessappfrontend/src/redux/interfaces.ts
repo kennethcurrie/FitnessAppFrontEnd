@@ -9,10 +9,14 @@ export interface ICredentials {
 }
 
 export interface IUser {
-    userid: number;
     username: string;
     name: string;
+    password?: string;
     email: string;
+}
+
+export interface IUserData extends IUser {
+    userid: number;
     role: string;
     private: boolean;
     pictureUrl: string;
@@ -20,7 +24,7 @@ export interface IUser {
 
 export interface ISession {
     credentials: ICredentials;
-    user: IUser;
+    user: IUserData;
 }
 
 export interface IPoundRep {
@@ -45,4 +49,5 @@ export interface IState {
     app: IApp;
     session: ISession;
     workoutFields: IWorkouts;
+    signUpFields: IUser;
 }

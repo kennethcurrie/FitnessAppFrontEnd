@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        "**/{index.tsx,serviceWorker.js,setupTests.tsx}": true,
+        "**/{node_modules,resources,axios,doc}": true,
+        "**/*.{json,scss,css,svg,test.js,md,txt}": true
+    }
+}

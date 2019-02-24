@@ -1,5 +1,4 @@
 import { ActionTypes } from '../action-types';
-import { initialState } from '../initial-state';
 import { IWorkouts } from '../interfaces';
 
 export const submitWorkout = (e: any, workouts: IWorkouts) => {

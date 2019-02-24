@@ -1,5 +1,5 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUser } from '../interfaces';
+import { ICredentials, IUserData } from '../interfaces';
 import { initialState } from '../initial-state';
 
 export const updateCredentials = (username: string, password: string) => {
@@ -13,7 +13,7 @@ export const updateCredentials = (username: string, password: string) => {
 };
 
 // Temp
-const users: IUser[] = [
+const users: IUserData[] = [
     {
         userid: 1,
         username: 'admin',
