@@ -4,7 +4,6 @@ import NavComponent from './components/nav/nav.component';
 import { SplashPageComponent } from './components/splashPage/splashPage.component';
 import { AllUsersComponent } from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
-import { LogoutComponent } from './components/logout/logout.component';
 import { ProfileComponent } from './components/profile/profile.alt/profile.component';
 import { EditProfileComponent } from './components/editProfile/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
@@ -40,7 +39,6 @@ class MainComponent extends React.Component<IAppProps, any> {
                                         <Switch>
                                             <Route exact path='/admin/users' component={AllUsersComponent} />
                                             <Route path='/admin/users/edit/:username' component={ EditUserComponent} />
-                                            <Route path='/logout' component={LogoutComponent}/>
                                             {/* these are shared between admin and users, however more options may be availible to admin */}
                                             <Route path='/user/:username' component={ProfileComponent}/>
                                             {/* perhaps a button from the profile component rather than a link from the main router */}
@@ -59,7 +57,6 @@ class MainComponent extends React.Component<IAppProps, any> {
                                         <>
                                             {this.props.isLoggedIn ?
                                                 <Switch>
-                                                    <Route path='/logout' component={LogoutComponent} />
                                                     {/* these are shared between admin and users, however more options may be availible to admin */}
                                                     <Route path='/user/:username' component={ProfileComponent} />
                                                     {/* perhaps a button from the profile component rather than a link from the main router */}
@@ -91,7 +88,7 @@ class MainComponent extends React.Component<IAppProps, any> {
 const mapStateToProps = (state: IState) => {
     return {
         isLoggedIn: (state.session.user !== undefined),
-        isAdmin: (state.session.user && state.session.user.role === 'admin') 
+        isAdmin: (state.session.user && state.session.user.role === 'admin')
     };
 };
 
