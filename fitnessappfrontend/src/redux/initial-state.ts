@@ -2,7 +2,6 @@ import { IState } from './interfaces';
 
 export const initialState: IState = {
     session: {
-        loggedIn: false,
         credentials: {
             username: '',
             password: ''

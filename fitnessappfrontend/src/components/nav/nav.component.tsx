@@ -1,21 +1,19 @@
 import React from 'react';
 const logo = require('../../resources/fitness-icon.png');
 import './nav.scss';
-// import logo from '../resources/fitness-pattern-blue.jpg' // relative path to image
-import { AxiosResponse } from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { IState } from '../../redux/interfaces';
+
 
 interface INavComponentProps {
   isAdmin: boolean;
   isLoggedIn: boolean;
 }
 
-export class NavComponent extends React.Component<INavComponentProps, any> {
+class NavComponent extends React.Component<INavComponentProps, any> {
     constructor(props) {
         super(props);
-        this.state = {
-            // initialize here
-        };
     }
 
     render() {
@@ -75,3 +73,12 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
         return result;
     }
 }
+
+const mapStateToProps = (state: IState) => {
+    return {
+        isAdmin: state.session.user.role === 'admin',
+        isLoggedIn: state.session.user !== undefined
+    };
+};
+
+export default connect(mapStateToProps)(NavComponent);

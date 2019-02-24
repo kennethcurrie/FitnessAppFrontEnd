@@ -1,7 +1,10 @@
 import React from 'react';
 import { AxiosResponse } from 'axios';
 import { Link } from 'react-router-dom';
-import { ISession, ICredentials } from '../../redux/interfaces';
+import { ISession, ICredentials, IState } from '../../redux/interfaces';
+import { connect } from 'react-redux';
+import { updateCredentials } from '../../redux/actions/session.action';
+import { login } from '../../redux/actions/session.action';
 
 interface ILoginComponentProps {
     session: ISession;
@@ -32,7 +35,7 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
                                     <td>Username:</td>
                                     <td><input type='text' placeholder='Enter username' required onChange={e => {
                                         updateCredentials(e.target.value, session.credentials.password);
-                                    }}/></td>
+                                    }} /></td>
                                 </tr>
                                 <tr>
                                     <td>Password:</td>
@@ -59,3 +62,16 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
         return result;
     }
 }
+
+const mapStateToProps = (state: IState) => {
+    return {
+        session: state.session
+    };
+};
+
+const mapDispatchtoProps = {
+    updateCredentials,
+    login
+};
+
+export default connect(mapStateToProps, mapDispatchtoProps)(LoginComponent);
