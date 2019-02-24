@@ -1,5 +1,6 @@
 import { ActionTypes } from '../action-types';
 import { ICredentials, IUser } from '../interfaces';
+import { initialState } from '../initial-state';
 
 export const updateCredentials = (username: string, password: string) => {
     return {
@@ -34,28 +35,46 @@ const users: IUser[] = [
 ];
 
 // Change to fetch when api is implemented.
-export const login = (credentials: ICredentials) => {
+export const login = (credentials: ICredentials) => (dispatch) => {
     const user = users.find(e => {
         const isUser = (credentials.username === e.username);
         const isPass = (credentials.password === 'password');
         return (isUser && isPass);
     });
 
-    console.log(user);
-
     if (user) {
-        return {
+        dispatch({
             type: ActionTypes.LOGIN,
             payload: {
                 user: { ...user }
             }
-        };
+        });
+        dispatch({
+            type: ActionTypes.APP,
+            payload: {
+                isLoggedIn: true,
+                isAdmin: (user.role === 'Admin')
+            }
+        });
     }
 
-    return {
-        type: ActionTypes.LOGIN,
+    dispatch(updateCredentials('', ''));
+};
+
+export const logout = () => (dispatch) => {
+    dispatch({
+        type: ActionTypes.LOGOUT,
         payload: {
-            user: undefined
+            ...initialState.session.user
         }
-    };
+    });
+
+    dispatch({
+        type: ActionTypes.APP,
+        payload: {
+            ...initialState.app
+        }
+    });
+
+    dispatch(updateCredentials('', ''));
 };

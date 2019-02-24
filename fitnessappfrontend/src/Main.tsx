@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, RouteComponentProps, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import NavComponent from './components/nav/nav.component';
-import { SplashPageComponent } from './components/splashPage/splashPage.component';
+import SplashPageComponent from './components/splashPage/splashPage.component';
 import { AllUsersComponent } from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
 import { ProfileComponent } from './components/profile/profile.alt/profile.component';
@@ -11,19 +11,19 @@ import { SearchProfilesComponent } from './components/searchProfiles/searchProfi
 import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.component';
 import { SubmitExerciseComponent } from './components/submitExercise/submitExercise.component';
 import { connect } from 'react-redux';
-import { IState } from './redux/interfaces';
+import { IState, IApp } from './redux/interfaces';
 
 interface IAppProps {
-    isAdmin: boolean;
-    isLoggedIn: boolean;
+    app: IApp;
 }
 
-class MainComponent extends React.Component<IAppProps, any> {
+class MainComponent extends Component<IAppProps, any> {
     constructor(props) {
         super(props);
     }
 
     render() {
+        const { isAdmin, isLoggedIn } = this.props.app;
         return (
             <div id='content-holder'>
                 <BrowserRouter>
@@ -35,7 +35,7 @@ class MainComponent extends React.Component<IAppProps, any> {
                                 {/* regularComponents */}
                                 {
                                     // Admin
-                                    (this.props.isAdmin) ?
+                                    (isAdmin) ?
                                         <Switch>
                                             <Route exact path='/admin/users' component={AllUsersComponent} />
                                             <Route path='/admin/users/edit/:username' component={ EditUserComponent} />
@@ -55,7 +55,7 @@ class MainComponent extends React.Component<IAppProps, any> {
                                         :
                                         // Not Admin
                                         <>
-                                            {this.props.isLoggedIn ?
+                                            {isLoggedIn ?
                                                 <Switch>
                                                     {/* these are shared between admin and users, however more options may be availible to admin */}
                                                     <Route path='/user/:username' component={ProfileComponent} />
@@ -86,10 +86,7 @@ class MainComponent extends React.Component<IAppProps, any> {
 }
 
 const mapStateToProps = (state: IState) => {
-    return {
-        isLoggedIn: (state.session.user !== undefined),
-        isAdmin: (state.session.user && state.session.user.role === 'admin')
-    };
+    return { app: state.app };
 };
 
 export default connect(mapStateToProps)(MainComponent);

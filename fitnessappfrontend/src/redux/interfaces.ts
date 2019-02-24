@@ -1,3 +1,8 @@
+export interface IApp {
+    isLoggedIn: boolean;
+    isAdmin: boolean;
+}
+
 export interface ICredentials {
     username: string;
     password: string;
@@ -19,5 +24,6 @@ export interface ISession {
 }
 
 export interface IState {
+    app: IApp;
     session: ISession;
 }
