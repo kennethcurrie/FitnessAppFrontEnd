@@ -3,12 +3,13 @@ const logo = require('../../resources/fitness-icon.png');
 import './nav.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { IState, IApp } from '../../redux/interfaces';
+import { IState, IApp, IUserData } from '../../redux/interfaces';
 import { logout } from '../../redux/actions/session.action';
 
 
 interface INavComponentProps {
   app: IApp;
+  user: IUserData;
   logout: (e: any) => void;
 }
 
@@ -25,14 +26,15 @@ class NavComponent extends React.Component<INavComponentProps, any> {
         let userElement = <></>;
         let adminElement = <></>;
         let logoutElement = <></>;
-        const { app, logout } = this.props;
+        const { app, logout, user } = this.props;
+
 
         if (app.isLoggedIn) {
             const usersFullNameString = `${'firstName'} ${'lastname'}`;
             userElement = (
                 <>
                     <li className='nav-item'>
-                        <p className='nav-link' id='usersFullName'>{usersFullNameString}</p>
+                        <p className='nav-link' id='usersFullName'>{user.name}</p>
                     </li>
                     <li className='nav-item'>
                         <Link to='/' className='nav-link'>Home</Link>
@@ -77,7 +79,10 @@ class NavComponent extends React.Component<INavComponentProps, any> {
 }
 
 const mapStateToProps = (state: IState) => {
-    return { app: state.app };
+    return {
+        app: state.app,
+        user: state.session.user
+    };
 };
 
 const mapDispatchToProps = { logout };
