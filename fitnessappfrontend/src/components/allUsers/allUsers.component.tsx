@@ -4,6 +4,7 @@ import './allUsers.scss';
 import { IUserData } from '../../redux/interfaces';
 import { IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
+import { getUsers } from '../../redux/actions/get-users.action';
 
 const users = [
   {Fullname: 'John Smith', Username: 'Jsmith', Email: 'jsmith@gmail.com'},
@@ -14,6 +15,7 @@ const users = [
 
 interface IProps {
   users: IUserData[];
+  getUsers: () => void;
 }
 
 class AllUsersComponent extends Component<IProps, any> {
@@ -22,6 +24,7 @@ class AllUsersComponent extends Component<IProps, any> {
   }
 
   render() {
+    this.props.getUsers();
     const { users } = this.props;
     return (
       <div id='allUsers'>
@@ -32,7 +35,7 @@ class AllUsersComponent extends Component<IProps, any> {
             <th>Name</th>
             <th>Email</th>
           </tr>
-          {users.map(function(e) {
+          {users.map(function(e, id) {
             return (
               <tr key={id}>
                 <td>
@@ -54,4 +57,9 @@ const mapStateToProps = (state: IState) => {
     users: state.users
   };
 };
-export default connect(mapStateToProps)(AllUsersComponent);
+
+const mapDispatchToProps = {
+  getUsers
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllUsersComponent);
