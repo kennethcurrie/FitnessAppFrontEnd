@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './allUsers.scss';
+import { IUserData } from '../../redux/interfaces';
+import { IState } from '../../redux/interfaces';
+import { connect } from 'react-redux';
 
 const users = [
   {Fullname: 'John Smith', Username: 'Jsmith', Email: 'jsmith@gmail.com'},
@@ -9,8 +12,17 @@ const users = [
   {Fullname: 'Joe Smitty', Username: 'Jsmitty', Email: 'jsmity@gmail.com'},
 ];
 
-export class AllUsersComponent extends React.Component<any, any> {
+interface IProps {
+  users: IUserData[];
+}
+
+class AllUsersComponent extends Component<IProps, any> {
+  constructor(props: any) {
+    super(props);
+  }
+
   render() {
+    const { users } = this.props;
     return (
       <div id='allUsers'>
         <h1>All Users Component!</h1>
@@ -20,14 +32,14 @@ export class AllUsersComponent extends React.Component<any, any> {
             <th>Name</th>
             <th>Email</th>
           </tr>
-          {users.map(function(listValue) {
+          {users.map(function(e) {
             return (
               <tr>
                 <td>
-                  <Link to={'admin/users/edit/' + listValue.Username}>{listValue.Username}</Link>
+                  <Link to={'admin/users/edit/' + e.username}>{e.username}</Link>
                 </td>
-                <td>{listValue.Fullname}</td>
-                <td><a href={'mailto:' + listValue.Email}>{listValue.Email}</a></td>
+                <td>{e.name}</td>
+                <td><a href={'mailto:' + e.email}>{e.email}</a></td>
               </tr>
             );
           })}
@@ -36,3 +48,10 @@ export class AllUsersComponent extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: IState) => {
+  return {
+    users: state.users
+  };
+};
+export default connect(mapStateToProps)(AllUsersComponent);
