@@ -56,5 +56,20 @@ export const initialState: IState = {
             role: 'associate',
             private: false
         }
-    ]
+    ],
+    excerciseChartState: {
+        workoutType: 'dips',
+        excerciseData: [
+            [Date.UTC(2019, 1, 1), 1],
+            [Date.UTC(2019, 1, 2), 5],
+            [Date.UTC(2019, 1, 3), 1],
+            [Date.UTC(2019, 1, 4), 8],
+            [Date.UTC(2019, 1, 5), 16],
+            [Date.UTC(2019, 1, 5), 12],
+            [Date.UTC(2019, 1, 25), 3],
+            [Date.UTC(2019, 1, 26), 14],
+            [Date.UTC(2019, 1, 27), 7],
+            [Date.UTC(2019, 1, 28), 15]
+        ]
+    }
 };
