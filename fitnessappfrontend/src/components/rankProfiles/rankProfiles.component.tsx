@@ -31,8 +31,8 @@ export class RankProfilesComponent extends React.Component<any, any> {
   render() {
     const friendArr = this.topSearchDummy;
 
-    const inspirationSquares = friendArr.map((friendInfo) => {
-        return <Link to={friendInfo.profileLinkURL} >
+    const inspirationSquares = friendArr.map((friendInfo, id) => {
+        return <Link key={id} to={friendInfo.profileLinkURL} >
                 <div className='inspiration-square'>
                     <img src={friendInfo.picURL} />
                 </div>
@@ -46,8 +46,8 @@ export class RankProfilesComponent extends React.Component<any, any> {
             <strong>
                 <label>Top Ranked By</label>
                 <br/>
-                <select name='searchBy' id='searchBy'>
-                    <option selected value='rank'>Followers</option>
+                <select defaultValue='rank' name='searchBy' id='searchBy'>
+                    <option value='rank'>Followers</option>
                     <option value='running'>Running</option>
                     <option value='biking'>Biking</option>
                     <option value='swimming'>Swimming</option>

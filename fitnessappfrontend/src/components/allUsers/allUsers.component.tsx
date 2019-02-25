@@ -34,7 +34,7 @@ class AllUsersComponent extends Component<IProps, any> {
           </tr>
           {users.map(function(e) {
             return (
-              <tr>
+              <tr key={id}>
                 <td>
                   <Link to={'admin/users/edit/' + e.username}>{e.username}</Link>
                 </td>
