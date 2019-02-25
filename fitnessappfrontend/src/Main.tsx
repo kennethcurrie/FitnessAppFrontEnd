@@ -4,7 +4,6 @@ import NavComponent from './components/nav/nav.component';
 import SplashPageComponent from './components/splashPage/splashPage.component';
 import AllUsersComponent from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
-import { ProfileComponent } from './components/profile/profile.alt/profile.component';
 import { EditProfileComponent } from './components/editProfile/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
 import { SearchProfilesComponent } from './components/searchProfiles/searchProfiles.component';
@@ -13,6 +12,7 @@ import SubmitExerciseComponent from './components/submitExercise/submitExercise.
 import { connect } from 'react-redux';
 import { IState, IApp } from './redux/interfaces';
 import ExcerciseChartComponent from './components/profile/excerciseChart/excerciseChart.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 interface IAppProps {
     app: IApp;
