@@ -45,9 +45,7 @@ export const login = (credentials: ICredentials) => (dispatch) => {
     if (user) {
         dispatch({
             type: ActionTypes.LOGIN,
-            payload: {
-                user: { ...user }
-            }
+            payload: { ...user }
         });
         dispatch({
             type: ActionTypes.APP,

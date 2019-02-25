@@ -20,9 +20,9 @@ export class AllUsersComponent extends React.Component<any, any> {
             <th>Name</th>
             <th>Email</th>
           </tr>
-          {users.map(function(listValue) {
+          {users.map(function(listValue, id) {
             return (
-              <tr>
+              <tr key={id}>
                 <td>
                   <Link to={'admin/users/edit/' + listValue.Username}>{listValue.Username}</Link>
                 </td>
