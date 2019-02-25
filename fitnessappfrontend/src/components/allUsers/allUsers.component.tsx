@@ -6,12 +6,6 @@ import { IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import { getUsers } from '../../redux/actions/get-users.action';
 
-const users = [
-  {Fullname: 'John Smith', Username: 'Jsmith', Email: 'jsmith@gmail.com'},
-  {Fullname: 'Joe Smitty', Username: 'Jsmitty', Email: 'jsmity@gmail.com'},
-  {Fullname: 'Alice Data', Username: 'adata', Email: 'adata@hotmail.com'},
-  {Fullname: 'Joe Smitty', Username: 'Jsmitty', Email: 'jsmity@gmail.com'},
-];
 
 interface IProps {
   users: IUserData[];
