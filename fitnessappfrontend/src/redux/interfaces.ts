@@ -19,7 +19,7 @@ export interface IUserData extends IUser {
     userid: number;
     role: string;
     private: boolean;
-    pictureUrl: string;
+    pictureUrl?: string;
 }
 
 export interface ISession {

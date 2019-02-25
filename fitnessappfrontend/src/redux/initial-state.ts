@@ -54,7 +54,6 @@ export const initialState: IState = {
             name: 'Bob Dylan',
             email: 'email',
             role: 'associate',
-            pictureUrl: '',
             private: false
         }
     ]
