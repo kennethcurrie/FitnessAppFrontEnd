@@ -1,19 +1,21 @@
 import React from 'react';
 const logo = require('../../resources/fitness-icon.png');
-// import logo from '../resources/fitness-pattern-blue.jpg' // relative path to image
-import { AxiosResponse } from 'axios';
+import './nav.scss';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { IState, IApp, IUserData } from '../../redux/interfaces';
+import { logout } from '../../redux/actions/session.action';
+
 
 interface INavComponentProps {
-  isAdmin: boolean;
-  isLoggedIn: boolean;
+  app: IApp;
+  user: IUserData;
+  logout: (e: any) => void;
 }
-export class NavComponent extends React.Component<INavComponentProps, any> {
+
+class NavComponent extends React.Component<INavComponentProps, any> {
     constructor(props) {
         super(props);
-        this.state = {
-            // initialize here
-        };
     }
 
     render() {
@@ -24,13 +26,15 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
         let userElement = <></>;
         let adminElement = <></>;
         let logoutElement = <></>;
+        const { app, logout, user } = this.props;
 
-        if (this.props.isLoggedIn) {
+
+        if (app.isLoggedIn) {
             const usersFullNameString = `${'firstName'} ${'lastname'}`;
             userElement = (
                 <>
                     <li className='nav-item'>
-                        <p className='nav-link' id='usersFullName'>{usersFullNameString}</p>
+                        <p className='nav-link' id='usersFullName'>{user.name}</p>
                     </li>
                     <li className='nav-item'>
                         <Link to='/' className='nav-link'>Home</Link>
@@ -45,12 +49,12 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
             );
             logoutElement = (
                 <li className='nav-item'>
-                    <Link to='/logout' className='nav-link' href='#'>Log out</Link>
+                    <Link to='/logout' className='nav-link' href='#' onClick={logout}>Log out</Link>
                 </li>
             );
         }
 
-        if (this.props.isLoggedIn && this.props.isAdmin ) {
+        if (app.isLoggedIn && app.isAdmin ) {
             adminElement = (
                 <li className='nav-item'>
                     <Link to='/admin/users' className='nav-link'>User Management</Link>
@@ -73,3 +77,14 @@ export class NavComponent extends React.Component<INavComponentProps, any> {
         return result;
     }
 }
+
+const mapStateToProps = (state: IState) => {
+    return {
+        app: state.app,
+        user: state.session.user
+    };
+};
+
+const mapDispatchToProps = { logout };
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavComponent);
