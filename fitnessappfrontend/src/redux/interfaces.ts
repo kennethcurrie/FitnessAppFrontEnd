@@ -45,10 +45,16 @@ export interface IWorkouts {
     squats: number;
 }
 
+export interface IExcerciseChartState {
+  workoutType: string;
+  excerciseData: number[][];
+}
+
 export interface IState {
     app: IApp;
     session: ISession;
     workoutFields: IWorkouts;
     signUpFields: IUser;
     users: IUserData[];
+    excerciseChartState: IExcerciseChartState;
 }

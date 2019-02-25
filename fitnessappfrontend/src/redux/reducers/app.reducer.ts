@@ -5,6 +5,7 @@ export const appReducer = (state = initialState.app, action: any) => {
     switch (action.type) {
         case ActionTypes.APP:
             return {
+                ...state,
                 ...action.payload
             };
 

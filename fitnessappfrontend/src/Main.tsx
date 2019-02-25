@@ -12,6 +12,7 @@ import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.co
 import SubmitExerciseComponent from './components/submitExercise/submitExercise.component';
 import { connect } from 'react-redux';
 import { IState, IApp } from './redux/interfaces';
+import ExcerciseChartComponent from './components/profile/excerciseChart/excerciseChart.component';
 
 interface IAppProps {
     app: IApp;
