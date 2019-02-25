@@ -4,6 +4,9 @@ import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
+import { IExcerciseChartState, IState } from '../../../redux/interfaces';
+import { connect } from 'react-redux';
+import { excerciseChartActions } from '../../../redux/actions/excerciseChart.action';
 
 
 
@@ -19,13 +22,13 @@ The profile gives an overview of ...
   -show a graph displaying ratios of types of excersise, with lables
 
 */
-interface IExcerciseChartProps {
-  workoutType: string;
-  excerciseData: number[][];
+interface IExcerciseChartProps{
+  excerciseChartState: IExcerciseChartState;
+  updateExcerciseChartProps: (newState: IExcerciseChartState) => void
 }
 
-export class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any> {
 
+class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any> {
 
   componentDidMount() {
     const hc = this.updateChart();
@@ -55,7 +58,7 @@ updateChart = ( ): Highcharts.Chart => {
       }
     },
     title: {
-      text: this.props.workoutType + ' History',
+      text: this.props.excerciseChartState.workoutType + ' History',
       ...textStyle
     },
     subtitle: {
@@ -105,8 +108,8 @@ updateChart = ( ): Highcharts.Chart => {
 
     series: [{
       type: 'area',
-      name: this.props.workoutType + ' score',
-      data: this.props.excerciseData as any
+      name: this.props.excerciseChartState.workoutType + ' score',
+      data: this.props.excerciseChartState.excerciseData as any
     }]
   });
 }
@@ -127,3 +130,17 @@ updateChart = ( ): Highcharts.Chart => {
   }
 
 }
+
+
+
+const mapStateToProps = (state: IState) => {
+  return {
+    excerciseChartState: state.excerciseChartState
+  };
+};
+
+const mapDispatchToProps = { 
+  ...excerciseChartActions
+ };
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExcerciseChartComponent);
