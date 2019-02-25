@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import NavComponent from './components/nav/nav.component';
 import SplashPageComponent from './components/splashPage/splashPage.component';
-import { AllUsersComponent } from './components/allUsers/allUsers.component';
+import AllUsersComponent from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
 import { ProfileComponent } from './components/profile/profile.alt/profile.component';
 import { EditProfileComponent } from './components/editProfile/editProfile.component';

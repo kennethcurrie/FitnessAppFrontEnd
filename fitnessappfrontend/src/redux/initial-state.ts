@@ -46,5 +46,16 @@ export const initialState: IState = {
         name: '',
         password: '',
         email: ''
-    }
+    },
+    users: [
+        {
+            userid: 1,
+            username: 'Bob',
+            name: 'Bob Dylan',
+            email: 'email',
+            role: 'associate',
+            pictureUrl: '',
+            private: false
+        }
+    ]
 };

@@ -21,5 +21,7 @@ export const ActionTypes = {
     UPDATE_PASSWORD: 'UPDATE_PASSWORD',
     UPDATE_NAME: 'UPDATE_NAME',
     UPDATE_EMAIL: 'UPDATE_EMAIL',
-    SIGN_UP: 'SIGN_UP'
+    SIGN_UP: 'SIGN_UP',
+
+    GET_USERS: 'GET_USERS'
 };

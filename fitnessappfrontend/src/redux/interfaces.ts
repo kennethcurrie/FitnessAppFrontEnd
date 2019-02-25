@@ -50,4 +50,5 @@ export interface IState {
     session: ISession;
     workoutFields: IWorkouts;
     signUpFields: IUser;
+    users: IUserData[];
 }
