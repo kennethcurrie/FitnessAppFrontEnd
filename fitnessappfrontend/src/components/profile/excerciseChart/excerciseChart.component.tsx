@@ -38,39 +38,40 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
 
   componentDidMount() {
     const storeState = store.getState();
-    this.fetchChartData(storeState.session.user.userid, 'Running').then((value) => {
+    console.log('store.state');
+    console.log(storeState);
+    this.fetchChartData(storeState.session.user.id, 'Running').then((value) => {
       const hc = this.setUpChart(value);
       // push to end of stack so chart is done with its render before trying to reflow it
       hc.reflow();
     })  
-  }
 
-  // getImgTest = async () => {
-  //   Axios({
-  //     method: 'get',    
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer 37438a1fda0f98d8fb53e7a37dd27d3fc65d7b7c',
-  //       'Access-Control-Allow-Headers': 'Authorization'
-  //     },
-  //     url: 'https://api.imgur.com/3/image/id/8ABRUYt',
-  //     responseType: 'application/json'
-  //   })
-  //     .then(function(response) {
-  //       console.log('test')
-  //       console.log(response);        
-  //   });
-  // }
+    const workoutType = ['Running', 'Biking', 'Squats'];
+    let chosenWorkout = 0;
+
+    setInterval(() => {
+      chosenWorkout++;
+      chosenWorkout = chosenWorkout % workoutType.length;
+      this.fetchChartData(storeState.session.user.id, workoutType[chosenWorkout]).then((value) => {
+        const hc = this.setUpChart(value);
+        // push to end of stack so chart is done with its render before trying to reflow it
+        hc.reflow();
+      })  
+      
+    }, 3000);
+
+  }
+  
 
   fetchChartData = async (userId: number, excerciseType: string): Promise<IExcerciseChartState> => {
     let res = await appClient.get(`/history/user/${userId}/exercise/${excerciseType}`);
-    console.log('res.data');
-    console.log(res.data);
-    console.log('store state');
-    console.log(store.getState().session.user.userid);
+    // console.log('res.data');
+    // console.log(res.data);
+    // console.log('store state');
+    // console.log(store.getState());
     let result = {workoutType: 'none', excerciseData: [[0, 1], [9999999999999, 1]]}
     if(res.data){
-      const workoutType = 'Running';
+      const workoutType = excerciseType;
       const excerciseData = (res.data as any[]).map((element) => {
         return [element.occourred, element.units];
       });
