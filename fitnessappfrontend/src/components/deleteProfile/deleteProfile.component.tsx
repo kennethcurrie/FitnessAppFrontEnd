@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-
+import { appClient } from '../../axios/app.client';
 
 export class DeleteProfileComponent extends React.Component<any, any> {
   constructor(props) {
@@ -25,6 +25,19 @@ export class DeleteProfileComponent extends React.Component<any, any> {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
+
+  deleteProifle = (id: number) => async (e: any) => {
+    // try {
+    //   const res = await appClient.delete(`users/{id}`);
+    //   if (res.status >= 200 && res.status < 300) {
+    //     console.log('Profile Deleted');
+    //   }
+    // }
+    // catch (err) {
+    //   console.log(err);
+    // }
+    console.log('Deleted User');
+  };
 
   render() {
     return (
