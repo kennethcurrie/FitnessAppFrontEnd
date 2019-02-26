@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { excerciseChartActions } from '../../../redux/actions/excerciseChart.action';
 import { appClient } from '../../../axios/app.client';
 import { store } from '../../../redux/Store';
+import { async } from 'q';
+import Axios from 'axios';
 
 
 
@@ -40,8 +42,25 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       const hc = this.setUpChart(value);
       // push to end of stack so chart is done with its render before trying to reflow it
       hc.reflow();
-    })
+    })  
   }
+
+  // getImgTest = async () => {
+  //   Axios({
+  //     method: 'get',    
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer 37438a1fda0f98d8fb53e7a37dd27d3fc65d7b7c',
+  //       'Access-Control-Allow-Headers': 'Authorization'
+  //     },
+  //     url: 'https://api.imgur.com/3/image/id/8ABRUYt',
+  //     responseType: 'application/json'
+  //   })
+  //     .then(function(response) {
+  //       console.log('test')
+  //       console.log(response);        
+  //   });
+  // }
 
   fetchChartData = async (userId: number, excerciseType: string): Promise<IExcerciseChartState> => {
     let res = await appClient.get(`/history/user/${userId}/exercise/${excerciseType}`);
@@ -166,6 +185,14 @@ const mapStateToProps = (state: IState) => {
 
 const mapDispatchToProps = { 
   ...excerciseChartActions
- };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExcerciseChartComponent);
+
+
+
+
+
+
+
+
