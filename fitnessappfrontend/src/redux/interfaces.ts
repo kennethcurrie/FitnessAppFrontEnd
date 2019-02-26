@@ -36,7 +36,7 @@ export interface IWorkouts {
     running: number;
     biking: number;
     swimming: number;
-    curls: IPoundRep;
+    curls: IPoundRep; 
     benchPress: IPoundRep;
     deadLift: IPoundRep;
     pushUps: number;
