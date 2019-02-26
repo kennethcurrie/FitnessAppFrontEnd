@@ -59,14 +59,12 @@ export class TakePicComponent extends React.Component<any, any> {
             fetch(fullQualityURI)
             .then(res => res.blob())
             .then(blob => {      
-                var objectURL = URL.createObjectURL(blob);
+                //var objectURL = URL.createObjectURL(blob);
                 //myImage.src = objectURL;
                 const res = this.uploadImageToImgur(blob);
-                console.log('imgurUploadRes');
-                console.log(res);
                 return res;
-            } ).then((data) => {                
-                console.log('data is:');
+            } ).then((data) => {        
+                console.log('imgurUploadResponse');
                 console.log(data);
                 this.setState({ data: `https://imgur.com/${data.data.id}` });
             })
@@ -119,7 +117,7 @@ export class TakePicComponent extends React.Component<any, any> {
         );
     }
 
-    
+    // https://codepen.io/spiralx/pen/mJxWJE
     uploadImageToImgur = (blob) => {
         var formData = new FormData()
         formData.append('type', 'file')
