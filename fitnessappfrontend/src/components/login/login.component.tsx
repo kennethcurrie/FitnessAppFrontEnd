@@ -1,6 +1,4 @@
 import React from 'react';
-import { AxiosResponse } from 'axios';
-import { Link } from 'react-router-dom';
 import { ISession, ICredentials, IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import { updateCredentials } from '../../redux/actions/session.action';
