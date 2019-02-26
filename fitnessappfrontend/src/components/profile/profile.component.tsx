@@ -20,6 +20,7 @@ import { InspirationsListComponent, IFriendLinkInfo } from './inspirations/inspi
 import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
+import { store } from '../../redux/Store';
 
 
 
@@ -42,6 +43,7 @@ export class ProfileComponent extends React.Component<any, any> {
   render() {
     return(
       <>
+        <TakePicComponent />
         {/* this holds everything */}
         <div id='all-profile-component'>
           {/* this is the profile and personal info section */}
@@ -50,7 +52,7 @@ export class ProfileComponent extends React.Component<any, any> {
               <div id='profile-pic-full'>
                 <div id='nickname-label' className='label'><strong>Nickname</strong></div>
                 <div id='profile-pic-holder'>
-                  <img id='profile-pic' className='bound-img' src={profilePic}/>
+                  <img id='profile-pic' className='bound-img' src={store.getState().session.user.pictureUrl}/>
                 </div>
               </div>
               <div id='stats-full'>
@@ -68,7 +70,7 @@ export class ProfileComponent extends React.Component<any, any> {
             <ExcerciseChartComponent  />
             <InspirationsListComponent friendInfo={this.topFriendInfo} />
             <MyGoalsListComponent goals={this.myGoals} />
-            <PostTimelineComponent posts={this.progressPosts} />
+            {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
       </>

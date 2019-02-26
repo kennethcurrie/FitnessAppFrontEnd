@@ -1,6 +1,7 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUserData } from '../interfaces';
+import { ICredentials, IUserData, IUser } from '../interfaces';
 import { initialState } from '../initial-state';
+import { appClient } from '../../axios/app.client';
 
 export const updateCredentials = (username: string, password: string) => {
     return {
@@ -13,7 +14,7 @@ export const updateCredentials = (username: string, password: string) => {
 };
 
 // Temp
-const users: IUserData[] = [
+const uusers: IUserData[] = [
     {
         userid: 1,
         username: 'admin',
@@ -35,13 +36,9 @@ const users: IUserData[] = [
 ];
 
 // Change to fetch when api is implemented.
-export const login = (credentials: ICredentials) => (dispatch) => {
-    const user = users.find(e => {
-        const isUser = (credentials.username === e.username);
-        const isPass = (credentials.password === 'password');
-        return (isUser && isPass);
-    });
-
+export const login = (credentials: ICredentials) => async (dispatch) => {
+    const user = (await appClient.get(`/users/username/${credentials.username}`)).data;
+    console.log('TODO: password checking not yet implemented');
     if (user) {
         dispatch({
             type: ActionTypes.LOGIN,

@@ -55,7 +55,19 @@ export class TakePicComponent extends React.Component<any, any> {
                 dh = canvas.height; // destination height
             context.drawImage(video, 0, 0, sw, sh, 0, 0, dw, dh);
             const fullQualityURI = canvas.toDataURL('image/jpeg', 1.0);
-            this.setState({ data: fullQualityURI });
+                  
+            fetch(fullQualityURI)
+            .then(res => res.blob())
+            .then(blob => {      
+                //var objectURL = URL.createObjectURL(blob);
+                //myImage.src = objectURL;
+                const res = this.uploadImageToImgur(blob);
+                return res;
+            } ).then((data) => {        
+                console.log('imgurUploadResponse');
+                console.log(data);
+                this.setState({ data: `https://imgur.com/${data.data.id}` });
+            })
 
             video.width = prevWidth;
             video.height = prevHeight;
@@ -104,4 +116,36 @@ export class TakePicComponent extends React.Component<any, any> {
             </>
         );
     }
+
+    // https://codepen.io/spiralx/pen/mJxWJE
+    uploadImageToImgur = (blob) => {
+        var formData = new FormData()
+        formData.append('type', 'file')
+        formData.append('image', blob)
+      
+        return fetch('https://api.imgur.com/3/upload.json', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Client-ID f067429fa2a38b7'// imgur specific
+          },
+          body: formData
+        })
+          .then(this.processStatus) 
+          .then(this.parseJson)
+    }    
+      
+    parseJson(response) {
+        return response.json()
+    }
+
+
+    processStatus(response) {
+        if (response.status === 200 || response.status === 0) {
+          return Promise.resolve(response)
+        } 
+        else {
+          return Promise.reject(new Error(`Error loading url`))
+        }
+      }
 }
