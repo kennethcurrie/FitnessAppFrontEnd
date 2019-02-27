@@ -58,7 +58,7 @@ export const initialState: IState = {
         }
     ],
     excerciseChartState: {
-        workoutType: 'placeholder',
+        workoutType: 'running',
         excerciseData: [
             [Date.UTC(2010, 1, 1), 1],
             [Date.UTC(2011, 1, 2), 5],
