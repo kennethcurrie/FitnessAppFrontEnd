@@ -5,7 +5,10 @@ import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
 import { Link } from 'react-router-dom';
+import { store } from '../../../redux/Store';
+import { IUser } from '../../../redux/interfaces';
 const friendPhoto1 = require('../../../resources/placeholder-friend-photo-1.jpg');
+const profilePic = require('../../../resources/default-profile-pic.jpg');
 
 
 interface IInspirationsProps {
@@ -26,6 +29,12 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
         };
     }
 
+    componentDidMount = () => {
+      this.setState({
+          displaySearch: !this.state.displaySearch
+      });
+    }
+
     updateSquares = () => {
         this.setState({
             displaySearch: !this.state.displaySearch
@@ -34,15 +43,18 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
 
   render() {
 
-    const friendArr = this.state.displaySearch ? this.topSearchDummy : this.props.friendInfo;
+    const friendArr: any[] = store.getState().session.user.followedUsers
 
-    const inspirationSquares = friendArr.map((friendInfo, id) => {
-        return <Link key={id} to={friendInfo.profileLinkURL} >
-                <div className='inspiration-square'>
-                    <img src={friendInfo.picURL} />
-                </div>
-               </Link>;
-        });
+    let inspirationSquares = friendArr.map((friend) => {
+      return ( 
+        <Link key={friend.id} to={`/user/${friend.username}`}>
+           <div className='inspiration-square'  >
+               <img src={friend.pictureUrl || profilePic} />
+           </div>
+        </Link>
+      );
+    });
+    if(friendArr.length <= 0) inspirationSquares = [<><p>You haven't followed any inspirations yet!</p></>]
 
 
     return(
