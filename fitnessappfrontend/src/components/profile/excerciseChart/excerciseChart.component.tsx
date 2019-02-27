@@ -11,8 +11,7 @@ import { appClient } from '../../../axios/app.client';
 import { store } from '../../../redux/Store';
 import { async } from 'q';
 import Axios from 'axios';
-
-
+import workoutInfo from '../../../resources/workoutResourcesModule';
 
 /*
 A profile is the home page for the average user.
@@ -69,7 +68,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
     }
     return result ;
   }
-
+  
   setUpChart = ( workoutHistory: any): Highcharts.Chart => {
 
     const textStyle = {
@@ -78,6 +77,20 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
         color: 'rgba(225, 255, 255, 1)'
       }
     };
+
+    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]});
+    console.log('workoutHistory');
+    console.log(workoutHistory);
+
+    let workoutIconButtons = ''
+    for (const key in workoutInfo) {
+      if (workoutInfo.hasOwnProperty(key)) {
+        const icon = workoutInfo[key];        
+        workoutIconButtons += `<button class="btn ${(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : ''}"><img src=${icon} /></button>`;
+      }
+    }
+
+    const workoutTypeSelector = `<div id='workout-type-selector'>${workoutIconButtons}</div>`;
 
     return Highcharts.chart( {
       chart: {
@@ -93,7 +106,8 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
         }
       },
       title: {
-        text: workoutHistory.workoutType + ' History',
+        useHTML: true,
+        text: workoutTypeSelector,
         ...textStyle
       },
       subtitle: {
