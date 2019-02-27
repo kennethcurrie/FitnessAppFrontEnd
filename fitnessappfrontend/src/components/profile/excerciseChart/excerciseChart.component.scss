@@ -76,12 +76,14 @@ body ::-webkit-scrollbar {
 
 /* Track */
 body ::-webkit-scrollbar-track {
-  background: #ff0000;
+  border-radius: 25px;
+  background: #888; 
 }
  
 /* Handle */
 body ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #ff0000;
+  border-radius: 25px;
 }
 
 /* Handle on hover */
