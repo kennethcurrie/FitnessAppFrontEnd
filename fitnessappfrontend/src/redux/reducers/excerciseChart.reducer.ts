@@ -5,11 +5,7 @@ export const excerciseChartReducer = (state = initialState.excerciseChartState, 
     switch (action.type) {
         
         case ActionTypes.UPDATE_EXCERCISE_CHART_COMPONENT_STATE:
-            return {
-                ...state, 
-                excersiseChartProps: action.payload
-            };
-
+            return action.payload;
         default:
             return state;
     }
