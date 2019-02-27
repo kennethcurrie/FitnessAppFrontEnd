@@ -54,10 +54,6 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
 
   fetchChartData = async (userId: number, excerciseType: string): Promise<IExcerciseChartState> => {
     let res = await appClient.get(`/history/user/${userId}/exercise/${excerciseType}`);
-    // console.log('res.data');
-    // console.log(res.data);
-    // console.log('store state');
-    // console.log(store.getState());
     let result = {workoutType: 'none', excerciseData: [[0, 1], [9999999999999, 1]]}
     if(res.data){
       const workoutType = excerciseType;
@@ -68,8 +64,12 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
     }
     return result ;
   }
-  
+
   setUpChart = ( workoutHistory: any): Highcharts.Chart => {
+
+    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]});
+    console.log('workoutHistory');
+    console.log(workoutHistory);
 
     const textStyle = {
       style: {
@@ -78,19 +78,6 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       }
     };
 
-    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]});
-    console.log('workoutHistory');
-    console.log(workoutHistory);
-
-    let workoutIconButtons = ''
-    for (const key in workoutInfo) {
-      if (workoutInfo.hasOwnProperty(key)) {
-        const icon = workoutInfo[key];        
-        workoutIconButtons += `<button class="btn ${(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : ''}"><img src=${icon} /></button>`;
-      }
-    }
-
-    const workoutTypeSelector = `<div id='workout-type-selector'>${workoutIconButtons}</div>`;
 
     return Highcharts.chart( {
       chart: {
@@ -107,7 +94,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       },
       title: {
         useHTML: true,
-        text: workoutTypeSelector,
+        text: '',
         ...textStyle
       },
       subtitle: {
@@ -166,10 +153,22 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
 
 
   render() {
+    let workoutHistory = this.props.excerciseChartState;
+
+    let workoutIconButtons: any[] = []
+    for (const key in workoutInfo) {
+      if (workoutInfo.hasOwnProperty(key)) {
+        const icon = workoutInfo[key];      
+        const btnClasses = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '';
+        workoutIconButtons.push(<button className={'btn ' + btnClasses}><img src={icon} /></button>);
+      }
+    }
+    const workoutTypeSelector = <div id='workout-type-container'><div id='workout-type-selector'>{workoutIconButtons}</div></div>;
     return(
       <>
         <div id='history-full'>
           <div id='history-label'><strong>MY PROGRESS</strong></div>
+          {workoutTypeSelector}
           <div id='history-holder'>
             <div id='history-graph'></div>
           </div>
