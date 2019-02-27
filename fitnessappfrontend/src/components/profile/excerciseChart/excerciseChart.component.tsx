@@ -45,21 +45,11 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       // push to end of stack so chart is done with its render before trying to reflow it
       hc.reflow();
     })  
-
-    const workoutType = ['Running', 'Biking', 'Squats'];
-    let chosenWorkout = 0;
-
-    setInterval(() => {
-      chosenWorkout++;
-      chosenWorkout = chosenWorkout % workoutType.length;
-      this.fetchChartData(storeState.session.user.id, workoutType[chosenWorkout]).then((value) => {
-        const hc = this.setUpChart(value);
-        // push to end of stack so chart is done with its render before trying to reflow it
-        hc.reflow();
-      })  
-      
-    }, 3000);
-
+    this.fetchChartData(storeState.session.user.id, 'Running').then((value) => {
+      const hc = this.setUpChart(value);
+      // push to end of stack so chart is done with its render before trying to reflow it
+      hc.reflow();
+    });
   }
   
 
@@ -167,7 +157,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
         <div id='history-full'>
           <div id='history-label'><strong>MY PROGRESS</strong></div>
           <div id='history-holder'>
-            <div className='bound-img'><div id='history-graph'></div></div>
+            <div id='history-graph'></div>
           </div>
         </div>
       </>

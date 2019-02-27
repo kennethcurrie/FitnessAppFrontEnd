@@ -69,7 +69,7 @@ export class ProfileComponent extends React.Component<any, any> {
           <div id='right-side'>
             <ExcerciseChartComponent  />
             <InspirationsListComponent friendInfo={this.topFriendInfo} />
-            <MyGoalsListComponent goals={this.myGoals} />
+            {/* <MyGoalsListComponent goals={this.myGoals} /> */}
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
