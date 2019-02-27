@@ -51,8 +51,12 @@ export class ProfileComponent extends React.Component<any, any> {
             <div id='sticky'>
               <div id='profile-pic-full'>
                 <div id='nickname-label' className='label'><strong>{(store.getState()).session.user.fullName}</strong></div>
-                <div id='profile-pic-holder'>
-                  <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
+                <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
+                  <img id='profile-pic' className='bound-img' src={profilePicSrc}/>                  
+                  <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
+                        <button id='take-photo' onClick={()=>{}}>Snap Photo</button>
+                        <button id='upload-photo' onClick={()=>{}}>Upload Photo</button>
+                    </div>
                 </div>
               </div>
               <div id='stats-full'>
