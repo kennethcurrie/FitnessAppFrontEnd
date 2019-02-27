@@ -1,15 +1,15 @@
 
 
-import * as benchPressIcon from './icons/png/benchPress.png';
-import * as bikingIcon from './icons/png/biking.png';
-import * as curlsIcon from './icons/png/curls.png';
-import * as deadLiftIcon from './icons/png/deadLift.png';
-import * as pullUpsIcon from './icons/png/pullUps.png';
-import * as pushUpsIcon from './icons/png/pushUps.png';
-import * as runningIcon from './icons/png/running.png';
-import * as sitUpsIcon from './icons/png/sitUps.png';
-import * as squatsIcon from './icons/png/squats.png';
-import * as swimmingIcon from './icons/png/swimming.png';
+import * as benchPressIcon from './icons/png/BenchPress.png';
+import * as bikingIcon from './icons/png/Biking.png';
+import * as curlsIcon from './icons/png/Curls.png';
+import * as deadLiftIcon from './icons/png/DeadLift.png';
+import * as pullUpsIcon from './icons/png/PullUps.png';
+import * as pushUpsIcon from './icons/png/PushUps.png';
+import * as runningIcon from './icons/png/Running.png';
+import * as sitUpsIcon from './icons/png/SitUps.png';
+import * as squatsIcon from './icons/png/Squats.png';
+import * as swimmingIcon from './icons/png/Swimming.png';
  
 const workoutInfo = {
     benchPress: benchPressIcon , 
