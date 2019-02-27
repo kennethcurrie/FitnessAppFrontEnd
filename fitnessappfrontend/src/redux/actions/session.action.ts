@@ -37,18 +37,18 @@ const uusers: IUserData[] = [
 
 // Change to fetch when api is implemented.
 export const login = (credentials: ICredentials) => async (dispatch) => {
-    const user = (await appClient.get(`/users/username/${credentials.username}`)).data;
-    console.log('TODO: password checking not yet implemented');
+    const user = (await appClient.post(`/auth`, credentials)).data;
+    console.log('Add Content-Type To Accepatable headers in api. WebConfig');
     if (user) {
         dispatch({
             type: ActionTypes.LOGIN,
-            payload: { ...user }
+            payload: user
         });
         dispatch({
             type: ActionTypes.APP,
             payload: {
                 isLoggedIn: true,
-                isAdmin: (user.role === 'Admin')
+                isAdmin: (user.accountType.role === 'Admin')
             }
         });
     }
