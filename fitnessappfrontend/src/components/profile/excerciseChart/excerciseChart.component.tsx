@@ -82,6 +82,10 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       }
     };
 
+    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]});
+    console.log('workoutHistory');
+    console.log(workoutHistory);
+
     let workoutIconButtons = ''
     for (const key in workoutInfo) {
       if (workoutInfo.hasOwnProperty(key)) {

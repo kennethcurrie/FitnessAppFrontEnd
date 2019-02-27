@@ -33,13 +33,11 @@
 
 /* Style buttons */
 .btn {
-    background-color: DodgerBlue; /* Blue background */
+    background-color: rgba(0, 0, 0, 0); /* Blue background */
     border: none; /* Remove borders */
-    color: white; /* White text */
-    font-size: 16px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
-    width: 2rem;
-    height: 2rem;
+    width: 4rem;
+    height: 4rem;
     overflow: hidden;
 }
   
