@@ -14,11 +14,6 @@
     height: 5%;
 }
 
-#history-buttons
-{
-    height: 5%;
-}
-
 #history-holder
 {
   width: 100%;
@@ -33,12 +28,20 @@
 
 /* Style buttons */
 .btn {
-    background-color: rgba(0, 0, 0, 0); /* Blue background */
+    background-color: rgba(0, 0, 0, 0); /* Alpha background */
     border: none; /* Remove borders */
     cursor: pointer; /* Mouse pointer on hover */
     width: 4rem;
     height: 4rem;
     overflow: hidden;
+}
+
+.selected {
+  background-color: rgba(255, 0, 242, 0.377); /* Blue background */
+}
+.btn .selected img {
+  height:120%;
+  width: 120%;
 }
   
 /* Darker background on mouse-over */
@@ -49,4 +52,17 @@
 .btn img {
     width: 100%;
     height: 100%;
+}
+
+#workout-type-selector
+{
+  width:100%;
+  overflow-y: visible;
+  overflow-x: auto
+}
+
+#history-graph .highcharts-title
+{
+  width: 100%;
+  left: 0;
 }

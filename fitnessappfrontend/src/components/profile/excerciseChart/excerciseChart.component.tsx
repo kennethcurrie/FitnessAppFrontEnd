@@ -68,11 +68,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
     }
     return result ;
   }
-
-  workoutTypes = ['benchPress', 'biking', 'curls',
-    'deadLift', 'pullUps', 'pushUps', 'running',
-    'sitUps', 'squats', 'swimming' ];
-
+  
   setUpChart = ( workoutHistory: any): Highcharts.Chart => {
 
     const textStyle = {
@@ -90,9 +86,11 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
     for (const key in workoutInfo) {
       if (workoutInfo.hasOwnProperty(key)) {
         const icon = workoutInfo[key];        
-        workoutIconButtons += `<button class="btn"><img src=${icon} /></button>`;
+        workoutIconButtons += `<button class="btn ${(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : ''}"><img src=${icon} /></button>`;
       }
     }
+
+    const workoutTypeSelector = `<div id='workout-type-selector'>${workoutIconButtons}</div>`;
 
     return Highcharts.chart( {
       chart: {
@@ -109,7 +107,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       },
       title: {
         useHTML: true,
-        text: workoutIconButtons,
+        text: workoutTypeSelector,
         ...textStyle
       },
       subtitle: {
@@ -175,7 +173,6 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
           <div id='history-holder'>
             <div id='history-graph'></div>
           </div>
-          <div id='history-buttons'><strong>MY PROGRESS</strong></div>
         </div>
       </>
     );
