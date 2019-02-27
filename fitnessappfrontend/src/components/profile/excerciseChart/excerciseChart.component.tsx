@@ -39,12 +39,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
     const storeState = store.getState();
     console.log('store.state');
     console.log(storeState);
-    this.fetchChartData(storeState.session.user.id, 'Running').then((value) => {
-      const hc = this.setUpChart(value);
-      // push to end of stack so chart is done with its render before trying to reflow it
-      hc.reflow();
-    })  
-    this.fetchChartData(storeState.session.user.id, 'Running').then((value) => {
+    this.fetchChartData(storeState.session.user.id, this.props.excerciseChartState.workoutType).then((value) => {
       const hc = this.setUpChart(value);
       // push to end of stack so chart is done with its render before trying to reflow it
       hc.reflow();
@@ -159,7 +154,17 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
     for (const key in workoutInfo) {
       if (workoutInfo.hasOwnProperty(key)) {
         const icon = workoutInfo[key];      
-        const btnClasses = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '';
+
+        console.log('key.toLowerCase()')
+        console.log(key.toLowerCase())
+        console.log('workoutHistory.workoutType.toLowerCase()')
+        console.log(workoutHistory.workoutType.toLowerCase())
+        console.log('key.toLowerCase() === workoutHistory.workoutType.toLowerCase()')
+        console.log(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())
+        console.log("(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : ''")
+        console.log((key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '')
+
+        const btnClasses: string = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '';
         workoutIconButtons.push(<button className={'btn ' + btnClasses}><img src={icon} /></button>);
       }
     }
