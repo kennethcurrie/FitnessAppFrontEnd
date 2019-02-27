@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './profile.component.scss';
-const profilePic = require('../../resources/placeholder-profile-pic.jpg');
+const profilePic = require('../../resources/default-profile-pic.jpg');
 const progressPhoto1 = require('../../resources/placeholder-progress-photo-1.jpg');
 const progressPhoto2 = require('../../resources/placeholder-progress-photo-2.jpg');
 const progressPhoto3 = require('../../resources/placeholder-progress-photo-3.jpg');
@@ -21,6 +21,7 @@ import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
+import { IState } from '../../redux/interfaces';
 
 
 
@@ -39,20 +40,19 @@ The profile gives an overview of ...
 
 export class ProfileComponent extends React.Component<any, any> {
 
-
   render() {
+    const profilePicSrc = store.getState().session.user.pictureUrl || profilePic;
     return(
       <>
-        <TakePicComponent />
         {/* this holds everything */}
         <div id='all-profile-component'>
           {/* this is the profile and personal info section */}
           <div id='left-side'>
             <div id='sticky'>
               <div id='profile-pic-full'>
-                <div id='nickname-label' className='label'><strong>Nickname</strong></div>
+                <div id='nickname-label' className='label'><strong>{(store.getState()).session.user.fullName}</strong></div>
                 <div id='profile-pic-holder'>
-                  <img id='profile-pic' className='bound-img' src={store.getState().session.user.pictureUrl}/>
+                  <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                 </div>
               </div>
               <div id='stats-full'>
