@@ -1,5 +1,5 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUserData, IExcerciseChartState } from '../interfaces';
+import { ICredentials, IUser, IExcerciseChartState } from '../interfaces';
 import { initialState } from '../initial-state';
 import excerciseChartComponent from '../../components/profile/excerciseChart/excerciseChart.component';
 
@@ -10,4 +10,4 @@ export const excerciseChartActions = {
             payload: newState
         };
     }
-}
+};
