@@ -4,7 +4,7 @@ const profilePic = require('../../resources/default-profile-pic.jpg');
 const progressPhoto1 = require('../../resources/placeholder-progress-photo-1.jpg');
 const progressPhoto2 = require('../../resources/placeholder-progress-photo-2.jpg');
 const progressPhoto3 = require('../../resources/placeholder-progress-photo-3.jpg');
-const progressPhoto4 = require('../../resources/placeholder-progress-photo-4.jpg'); 
+const progressPhoto4 = require('../../resources/placeholder-progress-photo-4.jpg');
 const progressPhoto5 = require('../../resources/placeholder-progress-photo-5.jpg');
 const friendPhoto1 = require('../../resources/placeholder-friend-photo-1.jpg');
 const friendPhoto2 = require('../../resources/placeholder-friend-photo-2.jpg');
@@ -37,14 +37,14 @@ The profile gives an overview of ...
   -show a graph displaying ratios of types of excersise, with lables
 
 */
-interface IProfileComponentState{
+interface IProfileComponentState {
   showTakePicModal: boolean;
   photoURL: string;
 }
 
-export class ProfileComponent extends React.Component<any, IProfileComponentState> {
+export class ProfileComponent extends Component<any, IProfileComponentState> {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {showTakePicModal: false, photoURL:''}
   }
@@ -60,7 +60,7 @@ export class ProfileComponent extends React.Component<any, IProfileComponentStat
               <div id='profile-pic-full'>
                 <div id='nickname-label' className='label'><strong>{(store.getState()).session.user.fullName}</strong></div>
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
-                  <img id='profile-pic' className='bound-img' src={profilePicSrc}/>                  
+                  <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
                         <button id='take-photo' onClick={()=>{this.setState({...this.state, showTakePicModal:true})}}>Snap Photo</button>                        
                         <button id='upload-photo' onClick={()=>{}}>
@@ -104,7 +104,7 @@ export class ProfileComponent extends React.Component<any, IProfileComponentStat
 
 
   dummyData = [
-    [2,7]
+    [2, 7]
   ];
   longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
   topFriendInfo: IFriendLinkInfo[] = [

@@ -1,5 +1,5 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUserData, IUser } from '../interfaces';
+import { ICredentials } from '../interfaces';
 import { initialState } from '../initial-state';
 import { appClient } from '../../axios/app.client';
 import { setCredentialsCookie, clearCredentialsCookie } from '../../resources/htmlCookie.util';
@@ -39,24 +39,18 @@ export const login = (credentials: ICredentials) => async (dispatch) => {
     catch (err) {
         console.log(err);
     }
-
-    dispatch(updateCredentials('', ''));
 };
 
 export const logout = () => (dispatch) => {
     clearCredentialsCookie();
     dispatch({
         type: ActionTypes.LOGOUT,
-        payload: {
-            ...initialState.session.user
-        }
+        payload: initialState.session.user
     });
 
     dispatch({
         type: ActionTypes.APP,
-        payload: {
-            ...initialState.app
-        }
+        payload: initialState.app
     });
 
     dispatch(updateCredentials('', ''));
