@@ -37,9 +37,16 @@ The profile gives an overview of ...
   -show a graph displaying ratios of types of excersise, with lables
 
 */
+interface IProfileComponentState{
+  showTakePicModal: boolean;
+}
 
-export class ProfileComponent extends React.Component<any, any> {
+export class ProfileComponent extends React.Component<any, IProfileComponentState> {
 
+  constructor(props){
+    super(props);
+    this.state = {showTakePicModal: false}
+  }
   render() {
     const profilePicSrc = store.getState().session.user.pictureUrl || profilePic;
     return(
@@ -54,8 +61,8 @@ export class ProfileComponent extends React.Component<any, any> {
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>                  
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
-                        <button id='take-photo' onClick={()=>{}}>Snap Photo</button>
-                        <button id='upload-photo' onClick={()=>{}}>Upload Photo</button>
+                        <button id='take-photo' onClick={()=>{this.setState({showTakePicModal:true})}}>Snap Photo</button>                        
+                        <button id='upload-photo' onClick={()=>{}}><input type="file" name="myImage" accept="image/*" /></button>
                     </div>
                 </div>
               </div>
@@ -77,6 +84,7 @@ export class ProfileComponent extends React.Component<any, any> {
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
+        {(this.state.showTakePicModal)? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent /></div></div> : <></>}
       </>
     );
   }
