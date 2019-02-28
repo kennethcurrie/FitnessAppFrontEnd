@@ -31,7 +31,7 @@ export class TakePicComponent extends React.Component<any, any> {
     }
 
     takePic = () => {
-        const video = this.video.current;
+        const video: HTMLVideoElement = this.video.current as HTMLVideoElement;
         const canvas = this.canvas.current;
 
         if (canvas && video) {
@@ -42,8 +42,8 @@ export class TakePicComponent extends React.Component<any, any> {
 
             video.pause();
 
-            video.width = 1280;
-            video.height = 720;
+            video.width = (video.srcObject as MediaStream).getVideoTracks()[0].getSettings().width as number;
+            video.height = (video.srcObject as MediaStream).getVideoTracks()[0].getSettings().height as number;
             canvas.width = video.width;
             canvas.height = video.height;
             video.style.display = 'block';
