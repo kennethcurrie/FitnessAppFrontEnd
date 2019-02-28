@@ -3,13 +3,13 @@ const logo = require('../../resources/fitness-icon.png');
 import './nav.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { IState, IApp, IUserData } from '../../redux/interfaces';
+import { IState, IApp, IUser } from '../../redux/interfaces';
 import { logout } from '../../redux/actions/session.action';
 
 
 interface INavComponentProps {
   app: IApp;
-  user: IUserData;
+  user: IUser;
   logout: (e: any) => void;
 }
 

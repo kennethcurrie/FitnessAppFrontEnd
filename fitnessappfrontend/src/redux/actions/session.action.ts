@@ -1,7 +1,8 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUserData, IUser } from '../interfaces';
+import { ICredentials } from '../interfaces';
 import { initialState } from '../initial-state';
 import { appClient } from '../../axios/app.client';
+import { setCredentialsCookie, clearCredentialsCookie } from '../../resources/htmlCookie.util';
 
 export const updateCredentials = (username: string, password: string) => {
     return {
@@ -13,62 +14,43 @@ export const updateCredentials = (username: string, password: string) => {
     };
 };
 
-// Temp
-const uusers: IUserData[] = [
-    {
-        userid: 1,
-        username: 'admin',
-        name: 'John Smith',
-        role: 'Admin',
-        email: 'jsmith@fitnessapp.com',
-        private: true,
-        pictureUrl: ''
-    },
-    {
-        userid: 2,
-        username: 'saitama',
-        name: 'Saitama',
-        role: 'User',
-        email: 'admin@punchman.jp',
-        private: false,
-        pictureUrl: ''
-    }
-];
-
-// Change to fetch when api is implemented.
 export const login = (credentials: ICredentials) => async (dispatch) => {
-    const user = (await appClient.post(`/auth`, credentials)).data;
-    console.log('Add Content-Type To Accepatable headers in api. WebConfig');
-    if (user) {
-        dispatch({
-            type: ActionTypes.LOGIN,
-            payload: user
-        });
-        dispatch({
-            type: ActionTypes.APP,
-            payload: {
-                isLoggedIn: true,
-                isAdmin: (user.accountType.role === 'Admin')
-            }
-        });
-    }
+    try {
+        const res = (await appClient.post('auth', credentials));
+        console.log('hit login action');
 
-    dispatch(updateCredentials('', ''));
+        if (res.status === 200) {
+            setCredentialsCookie(credentials);
+            dispatch({
+                type: ActionTypes.LOGIN,
+                payload: { ...res.data }
+            });
+            dispatch({
+                type: ActionTypes.APP,
+                payload: {
+                    isLoggedIn: true,
+                    isAdmin: (res.data.accountType.role === 'Admin')
+                }
+            });
+        } else if (res.status === 401) {
+            console.log('401');
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
 };
 
 export const logout = () => (dispatch) => {
+    clearCredentialsCookie();
     dispatch({
         type: ActionTypes.LOGOUT,
-        payload: {
-            ...initialState.session.user
-        }
+        payload: initialState.session.user
     });
 
     dispatch({
         type: ActionTypes.APP,
-        payload: {
-            ...initialState.app
-        }
+        payload: initialState.app
     });
 
     dispatch(updateCredentials('', ''));

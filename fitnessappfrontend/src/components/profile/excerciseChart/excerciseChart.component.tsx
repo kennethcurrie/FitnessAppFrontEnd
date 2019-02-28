@@ -25,15 +25,15 @@ The profile gives an overview of ...
   -show a graph displaying ratios of types of excersise, with lables
 
 */
-interface IExcerciseChartProps{
+interface IExcerciseChartProps {
   excerciseChartState: IExcerciseChartState;
-  updateExcerciseChartProps: (newState: IExcerciseChartState) => void
+  updateExcerciseChartProps: (newState: IExcerciseChartState) => void;
 }
 
 
 class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any> {
 
-  
+
 
   componentDidMount() {
     const storeState = store.getState();
@@ -45,13 +45,14 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       hc.reflow();
     });
   }
-  
+
 
   fetchChartData = async (userId: number, excerciseType: string): Promise<IExcerciseChartState> => {
-    let res = await appClient.get(`/history/user/${userId}/exercise/${excerciseType}`);
-    let result = {workoutType: 'none', excerciseData: [[0, 1], [9999999999999, 1]]}
+    const res = await appClient.get(`/history/user/${userId}/exercise/${excerciseType}`);
+    let result = { workoutType: 'none', excerciseData: [[0, 1], [9999999999999, 1]] };
+
     console.log(res.data);
-    if(res.data){
+    if (res.data) {
       const workoutType = excerciseType;
       const excerciseData = (res.data as any[]).map((element) => {
         return [element.occourred, element.units];
@@ -63,9 +64,9 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
 
   setUpChart = ( workoutHistory: any): Highcharts.Chart => {
 
-    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]});
-    console.log('workoutHistory');
-    console.log(workoutHistory);
+    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]; });
+    // console.log('workoutHistory');
+    // console.log(workoutHistory);
 
     const textStyle = {
       style: {
@@ -147,19 +148,17 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
 
 
   render() {
-    let workoutHistory = this.props.excerciseChartState;
-    
+    const workoutHistory = this.props.excerciseChartState;
     const storeState = store.getState();
+    const workoutIconButtons: any[] = [];
 
-    let workoutIconButtons: any[] = []
     for (const key in workoutInfo) {
       if (workoutInfo.hasOwnProperty(key)) {
-        const icon = workoutInfo[key];      
+        const icon = workoutInfo[key];
 
-        if((key.toLowerCase() === workoutHistory.workoutType.toLowerCase()))
-        {
-          console.log('key.toLowerCase()')
-          console.log(key.toLowerCase())
+        if ((key.toLowerCase() === workoutHistory.workoutType.toLowerCase())) {
+          // console.log('key.toLowerCase()');
+          // console.log(key.toLowerCase());
         }
         // console.log('workoutHistory.workoutType.toLowerCase()')
         // console.log(workoutHistory.workoutType.toLowerCase())
@@ -168,16 +167,16 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
         // console.log("(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : ''")
         // console.log((key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '')
 
-        const btnClasses: string = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '';
-        workoutIconButtons.push(<button onClick={ ()=>{
+        const btnClasses: string = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase()) ? 'selected' : '';
+        workoutIconButtons.push(<button onClick={ () => {
           this.props.updateExcerciseChartProps({...this.props.excerciseChartState, workoutType: key.toLowerCase()}),
-          setTimeout(()=>{ 
+          setTimeout(() => {
             this.fetchChartData(storeState.session.user.id, this.props.excerciseChartState.workoutType).then((value) => {
             const hc = this.setUpChart(value);
             // push to end of stack so chart is done with its render before trying to reflow it
             hc.reflow();
           });
-          })}} className={'btn ' + btnClasses}><img src={icon} /></button>);
+          }); }} className={'btn ' + btnClasses}><img src={icon} /></button>);
       }
     }
     const workoutTypeSelector = <div id='workout-type-container'><div id='workout-type-selector'>{workoutIconButtons}</div></div>;
@@ -204,7 +203,7 @@ const mapStateToProps = (state: IState) => {
   };
 };
 
-const mapDispatchToProps = { 
+const mapDispatchToProps = {
   updateExcerciseChartProps: excerciseChartActions.updateExcerciseChartProps
 };
 

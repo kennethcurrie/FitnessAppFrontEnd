@@ -1,5 +1,6 @@
 import { ActionTypes } from '../action-types';
 import { IUser } from '../interfaces';
+import { appClient } from '../../axios/app.client'; 
 
 export const updateUsername = (value: string) => {
     return {
@@ -29,12 +30,34 @@ export const updateEmail = (value: string) => {
     };
 };
 
-export const signUp = (signUpFields: IUser) => (dispatch) => {
+export const signUp = (signUpFields: IUser) => async (dispatch) => {
+    let res = await appClient.post('/users', {
+        username: signUpFields.username,
+        fullname:  signUpFields.name,
+        password: signUpFields.password,
+        email:  signUpFields.email,
+        privateprofile: true,
+    });
+
     console.log(`Profile Created: ${signUpFields}`);
     dispatch({
         type: ActionTypes.SIGN_UP,
         payload: { ...signUpFields }
     });
+
+    if(res.data){
+        dispatch({
+            type: ActionTypes.LOGIN,
+            payload: res.data
+        });
+        dispatch({
+            type: ActionTypes.APP,
+            payload: {
+                isLoggedIn: true,
+                isAdmin: false
+            }
+        })
+    }
 
     dispatch(updateUsername(''));
     dispatch(updatePassword(''));

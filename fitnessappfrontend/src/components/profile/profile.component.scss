@@ -183,3 +183,22 @@
 {
   border-radius: 25px;
 }
+
+#cover-everything
+{
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#take-pic-bounding{
+  width: 48rem;
+  height: 36rem;
+}
