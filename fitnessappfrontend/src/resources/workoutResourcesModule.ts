@@ -10,17 +10,17 @@ import * as runningIcon from './icons/png/Running.png';
 import * as sitUpsIcon from './icons/png/SitUps.png';
 import * as squatsIcon from './icons/png/Squats.png';
 import * as swimmingIcon from './icons/png/Swimming.png';
- 
+
 const workoutInfo = {
-    benchPress: benchPressIcon , 
+    benchPress: benchPressIcon ,
     biking: bikingIcon ,
     curls: curlsIcon ,
     deadLift: deadLiftIcon ,
-    pullUps:pullUpsIcon ,
-    pushUps: pushUpsIcon , 
+    pullUps: pullUpsIcon ,
+    pushUps: pushUpsIcon ,
     running: runningIcon ,
-    sitUps: sitUpsIcon, 
-    squats: squatsIcon, 
+    sitUps: sitUpsIcon,
+    squats: squatsIcon,
     swimming: swimmingIcon
 };
 

@@ -42,20 +42,15 @@ export const initialState: IState = {
         pullUps: 0
     },
     signUpFields: {
+        userid: 0,
         username: '',
+        email: '',
+        role: '',
+        private: false,
         name: '',
-        password: '',
-        email: ''
+        pictureUrl: ''
     },
     users: [
-        {
-            userid: 1,
-            username: 'Bob',
-            name: 'Bob Dylan',
-            email: 'email',
-            role: 'associate',
-            private: false
-        }
     ],
     excerciseChartState: {
         workoutType: 'running',
