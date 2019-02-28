@@ -4,10 +4,10 @@ import * as benchPressIcon from './icons/png/BenchPress.png';
 import * as bikingIcon from './icons/png/Biking.png';
 import * as curlsIcon from './icons/png/Curls.png';
 import * as deadLiftIcon from './icons/png/Deadlift.png';
-import * as pullUpsIcon from './icons/png/PullUps.png';
-import * as pushUpsIcon from './icons/png/PushUps.png';
+import * as pullUpsIcon from './icons/png/Pullups.png';
+import * as pushUpsIcon from './icons/png/Pushups.png';
 import * as runningIcon from './icons/png/Running.png';
-import * as sitUpsIcon from './icons/png/SitUps.png';
+import * as sitUpsIcon from './icons/png/Situps.png';
 import * as squatsIcon from './icons/png/Squats.png';
 import * as swimmingIcon from './icons/png/Swimming.png';
  
