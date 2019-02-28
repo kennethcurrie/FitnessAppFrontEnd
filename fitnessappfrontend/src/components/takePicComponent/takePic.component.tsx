@@ -31,7 +31,7 @@ export class TakePicComponent extends React.Component<any, any> {
     }
 
     takePic = () => {
-        const video = this.video.current;
+        const video: HTMLVideoElement = this.video.current as HTMLVideoElement;
         const canvas = this.canvas.current;
 
         if (canvas && video) {
@@ -42,8 +42,8 @@ export class TakePicComponent extends React.Component<any, any> {
 
             video.pause();
 
-            video.width = 1280;
-            video.height = 720;
+            video.width = (video.srcObject as MediaStream).getVideoTracks()[0].getSettings().width as number;
+            video.height = (video.srcObject as MediaStream).getVideoTracks()[0].getSettings().height as number;
             canvas.width = video.width;
             canvas.height = video.height;
             video.style.display = 'block';
@@ -55,7 +55,19 @@ export class TakePicComponent extends React.Component<any, any> {
                 dh = canvas.height; // destination height
             context.drawImage(video, 0, 0, sw, sh, 0, 0, dw, dh);
             const fullQualityURI = canvas.toDataURL('image/jpeg', 1.0);
-            this.setState({ data: fullQualityURI });
+                  
+            fetch(fullQualityURI)
+            .then(res => res.blob())
+            .then(blob => {      
+                //var objectURL = URL.createObjectURL(blob);
+                //myImage.src = objectURL;
+                const res = this.uploadImageToImgur(blob);
+                return res;
+            } ).then((data) => {        
+                console.log('imgurUploadResponse');
+                console.log(data);
+                this.setState({ data: `https://imgur.com/${data.data.id}` });
+            })
 
             video.width = prevWidth;
             video.height = prevHeight;
@@ -89,7 +101,7 @@ export class TakePicComponent extends React.Component<any, any> {
             <>
                 <div id='take-pic-holder' className='fill-all' style={{position: 'relative'}}>
                     <div id='pic-capture-preview' className='fill-all' style={{position: 'relative'}}>
-                        <video className='fill-all' style={{display: '', width: '5rem', backgroundColor: 'black' }}  id='snapshot-preview' ref={this.video}  onLoadedMetadata={(e) => {e.currentTarget.play(); }} autoPlay={true} >
+                        <video className='fill-all' style={{display: '', backgroundColor: 'black' }}  id='snapshot-preview' ref={this.video}  onLoadedMetadata={(e) => {e.currentTarget.play(); }} autoPlay={true} >
                             error
                         </video>
                     </div>
@@ -104,4 +116,36 @@ export class TakePicComponent extends React.Component<any, any> {
             </>
         );
     }
+
+    // https://codepen.io/spiralx/pen/mJxWJE
+    uploadImageToImgur = (blob) => {
+        var formData = new FormData()
+        formData.append('type', 'file')
+        formData.append('image', blob)
+      
+        return fetch('https://api.imgur.com/3/upload.json', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            Authorization: 'Client-ID f067429fa2a38b7'// imgur specific
+          },
+          body: formData
+        })
+          .then(this.processStatus) 
+          .then(this.parseJson)
+    }    
+      
+    parseJson(response) {
+        return response.json()
+    }
+
+
+    processStatus(response) {
+        if (response.status === 200 || response.status === 0) {
+          return Promise.resolve(response)
+        } 
+        else {
+          return Promise.reject(new Error(`Error loading url`))
+        }
+      }
 }

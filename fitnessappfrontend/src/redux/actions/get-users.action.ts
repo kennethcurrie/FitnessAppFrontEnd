@@ -6,11 +6,23 @@ export const getUsers = () => async (dispatch) => {
         const res = await appClient.get('users');
         console.log(res.data);
         if (res.status >= 200 && res.status < 300) {
-            // dispatch({
-            //     type: ActionTypes.GET_USERS,
-            //     payload: { ...res.data }
-            // });
-            console.log(res.data);
+            const result = res.data.map(user => {
+                return {
+                    userid: user.id,
+                    username: user.userName,
+                    password: '', // don't send back the passwords
+                    email: user.email,
+                    name: user.fullName,
+                    role: user.accountType.role,
+                    private: user.isPrivate
+                };
+            });
+            console.log('Data Mapped to New Array');
+            console.log(result);
+            dispatch({
+                    type: ActionTypes.GET_USERS,
+                    payload: result
+            });
         }
     }
     catch (err) {

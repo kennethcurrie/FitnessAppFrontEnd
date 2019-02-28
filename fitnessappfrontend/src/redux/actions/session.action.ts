@@ -1,6 +1,7 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUserData } from '../interfaces';
+import { ICredentials, IUserData, IUser } from '../interfaces';
 import { initialState } from '../initial-state';
+import { appClient } from '../../axios/app.client';
 
 export const updateCredentials = (username: string, password: string) => {
     return {
@@ -12,48 +13,28 @@ export const updateCredentials = (username: string, password: string) => {
     };
 };
 
-// Temp
-const users: IUserData[] = [
-    {
-        userid: 1,
-        username: 'admin',
-        name: 'John Smith',
-        role: 'Admin',
-        email: 'jsmith@fitnessapp.com',
-        private: true,
-        pictureUrl: ''
-    },
-    {
-        userid: 2,
-        username: 'saitama',
-        name: 'Saitama',
-        role: 'User',
-        email: 'admin@punchman.jp',
-        private: false,
-        pictureUrl: ''
+export const login = (credentials: ICredentials) => async (dispatch) => {
+    try {
+        const res = (await appClient.post('auth', credentials));
+
+        if (res.status === 200) {
+            dispatch({
+                type: ActionTypes.LOGIN,
+                payload: { ...res.data }
+            });
+            dispatch({
+                type: ActionTypes.APP,
+                payload: {
+                    isLoggedIn: true,
+                    isAdmin: (res.data.accountType.role === 'Admin')
+                }
+            });
+        } else if (res.status === 401) {
+            console.log('401');
+        }
     }
-];
-
-// Change to fetch when api is implemented.
-export const login = (credentials: ICredentials) => (dispatch) => {
-    const user = users.find(e => {
-        const isUser = (credentials.username === e.username);
-        const isPass = (credentials.password === 'password');
-        return (isUser && isPass);
-    });
-
-    if (user) {
-        dispatch({
-            type: ActionTypes.LOGIN,
-            payload: { ...user }
-        });
-        dispatch({
-            type: ActionTypes.APP,
-            payload: {
-                isLoggedIn: true,
-                isAdmin: (user.role === 'Admin')
-            }
-        });
+    catch (err) {
+        console.log(err);
     }
 
     dispatch(updateCredentials('', ''));

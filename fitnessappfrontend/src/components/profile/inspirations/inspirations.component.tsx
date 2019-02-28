@@ -5,7 +5,11 @@ import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
 import { Link } from 'react-router-dom';
+import { store } from '../../../redux/Store';
+import { IUser } from '../../../redux/interfaces';
 const friendPhoto1 = require('../../../resources/placeholder-friend-photo-1.jpg');
+const profilePic = require('../../../resources/default-profile-pic.jpg');
+import { appClient } from '../../../axios/app.client';
 
 
 interface IInspirationsProps {
@@ -22,27 +26,59 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
     constructor(props) {
         super(props);
         this.state = {
-            displaySearch: false
+            displaySearch: false,
+            searchStr: '',
+            searchArr: [
+                { picURL: friendPhoto1, profileLinkURL: '' },
+                { picURL: friendPhoto1, profileLinkURL: '' },
+                { picURL: friendPhoto1, profileLinkURL: '' }
+              ]
         };
     }
 
-    updateSquares = () => {
+    updateSquares = async (e) => {
         this.setState({
-            displaySearch: !this.state.displaySearch
-        });
+            ...this.state,
+            searchStr: e.target.value
+        },
+            async () => {
+            if (this.state.searchStr !== '') {
+                try {
+                    const res = await appClient.get('/users/search/' + this.state.searchStr);
+                    console.log(res.data);
+                    res.data.splice(6);
+                    this.setState({
+                        displaySearch: true,
+                        searchArr: res.data
+                    });
+                } catch (err) {
+                    console.log(err);
+                }
+            } else {
+                this.setState({
+                    displaySearch: false,
+                    searchArr: []
+                });
+            }
+        }
+        );
     }
 
   render() {
 
-    const friendArr = this.state.displaySearch ? this.topSearchDummy : this.props.friendInfo;
+    const friendArr: any[] = this.state.displaySearch === false ?
+        store.getState().session.user.followedUsers : this.state.searchArr;
 
-    const inspirationSquares = friendArr.map((friendInfo, id) => {
-        return <Link key={id} to={friendInfo.profileLinkURL} >
-                <div className='inspiration-square'>
-                    <img src={friendInfo.picURL} />
-                </div>
-               </Link>;
-        });
+    let inspirationSquares = friendArr.map((friend) => {
+      return (
+        <Link key={friend.id} to={`/user/${friend.username}`}>
+           <div className='inspiration-square'  >
+               <img src={friend.pictureUrl || profilePic} />
+           </div>
+        </Link>
+      );
+    });
+    if (friendArr.length <= 0) inspirationSquares = [<><p>You haven't followed any inspirations yet!</p></>];
 
 
     return(
@@ -52,7 +88,7 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
             <strong>INSPIRATIONS</strong>
             <span id='inspirations-search'>
                 <span><strong>Search: </strong></span>
-                <input onChange={this.updateSquares} type='text' />
+                <input  onChange={(e) => {this.updateSquares(e); }} type='text' />
             </span>
           </div>
           <div id='inspirations-holder'>
@@ -62,30 +98,6 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
       </>
     );
   }
-
-
-
-
-  topSearchDummy: IFriendLinkInfo[] = [
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto1, profileLinkURL: '' }
-  ];
-
-
 
 }
 

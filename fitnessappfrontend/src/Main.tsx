@@ -4,14 +4,13 @@ import NavComponent from './components/nav/nav.component';
 import SplashPageComponent from './components/splashPage/splashPage.component';
 import AllUsersComponent from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
-import { ProfileComponent } from './components/profile/profile.alt/profile.component';
 import { EditProfileComponent } from './components/editProfile/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
-import { SearchProfilesComponent } from './components/searchProfiles/searchProfiles.component';
 import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.component';
 import SubmitExerciseComponent from './components/submitExercise/submitExercise.component';
 import { connect } from 'react-redux';
 import { IState, IApp } from './redux/interfaces';
+import { ProfileComponent } from './components/profile/profile.component';
 
 interface IAppProps {
     app: IApp;
@@ -44,8 +43,6 @@ class MainComponent extends Component<IAppProps, any> {
                                             {/* perhaps a button from the profile component rather than a link from the main router */}
                                             <Route path='/profile/edit' component={EditProfileComponent} />
                                             <Route path='/profile/delete' component={DeleteProfileComponent} />
-                                            {/* also functionality built into the nav, where should logic be located? */}
-                                            <Route path='/search' component={SearchProfilesComponent} />
                                             {/* changed to rank */}
                                             <Route path='/rankings' component={RankProfilesComponent} />
                                             {/* maybe this works like facebook where theres a "new post" section in your feed, rather than this being its own page */}
@@ -62,8 +59,6 @@ class MainComponent extends Component<IAppProps, any> {
                                                     {/* perhaps a button from the profile component rather than a link from the main router */}
                                                     <Route path='/profile/edit' component={EditProfileComponent} />
                                                     <Route path='/profile/delete' component={DeleteProfileComponent} />
-                                                    {/* also functionality built into the nav, where should logic be located? */}
-                                                    <Route path='/search' component={SearchProfilesComponent} />
                                                     {/* changed to rank */}
                                                     <Route path='/rankings' component={RankProfilesComponent} />
                                                     {/* maybe this works like facebook where theres a "new post" section in your feed, rather than this being its own page */}

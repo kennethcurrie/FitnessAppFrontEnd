@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { IUser, IState } from '../../redux/interfaces';
 import * as actions from '../../redux/actions/sign-up.action';
+import { async } from 'q';
+import { appClient } from '../../axios/app.client';
+import { login } from '../../redux/actions/session.action';
+import { ActionTypes } from '../../redux/action-types';
 
 interface IProps {
     signUpFields: IUser;
@@ -70,7 +74,7 @@ class SignUpComponent extends Component<IProps, any> {
                                 </tr>
                                 <tr>
                                     <td colSpan={2} className='center'><button
-                                        onClick={ e => { e.preventDefault(); signUp(signUpFields); }}
+                                        onClick={ e => { e.preventDefault(); signUp(signUpFields); setTimeout(()=>{this.sendNewUserToDB()})}}
                                     >Register</button> </td>
                                 </tr>
                             </tbody>
@@ -81,6 +85,34 @@ class SignUpComponent extends Component<IProps, any> {
         );
         return result;
         // if the user is signed in and they submit the sign up form, log them out
+    }
+
+    sendNewUserToDB = () => async(dispatch) => {
+        let res = await appClient.post('/users', {
+            username: this.props.signUpFields.username,
+            name:  this.props.signUpFields.name,
+            password: this.props.signUpFields.password,
+            email:  this.props.signUpFields.email,
+            privateprofile: true,
+        });
+        console.log( 'res.data')
+        console.log( res.data)
+        console.log( 'this.props.signUpFields')
+        console.log( this.props.signUpFields)
+        res.data
+        if(res.data){
+            dispatch({
+                type: ActionTypes.LOGIN,
+                payload: res.data
+            });
+            dispatch({
+                type: ActionTypes.APP,
+                payload: {
+                    isLoggedIn: true,
+                    isAdmin: false
+                }
+            })
+        }
     }
 }
 
