@@ -62,7 +62,12 @@ export class ProfileComponent extends React.Component<any, IProfileComponentStat
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>                  
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
                         <button id='take-photo' onClick={()=>{this.setState({showTakePicModal:true})}}>Snap Photo</button>                        
-                        <button id='upload-photo' onClick={()=>{}}><input type="file" name="myImage" accept="image/*" /></button>
+                        <button id='upload-photo' onClick={()=>{}}>
+                          <label>
+                            Custom Upload
+                            <input type="file"style={{display:'none'}}/>
+                          </label>
+                        </button>
                     </div>
                 </div>
               </div>
