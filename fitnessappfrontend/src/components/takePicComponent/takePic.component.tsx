@@ -101,7 +101,7 @@ export class TakePicComponent extends React.Component<any, any> {
             <>
                 <div id='take-pic-holder' className='fill-all' style={{position: 'relative'}}>
                     <div id='pic-capture-preview' className='fill-all' style={{position: 'relative'}}>
-                        <video className='fill-all' style={{display: '', width: '5rem', backgroundColor: 'black' }}  id='snapshot-preview' ref={this.video}  onLoadedMetadata={(e) => {e.currentTarget.play(); }} autoPlay={true} >
+                        <video className='fill-all' style={{display: '', backgroundColor: 'black' }}  id='snapshot-preview' ref={this.video}  onLoadedMetadata={(e) => {e.currentTarget.play(); }} autoPlay={true} >
                             error
                         </video>
                     </div>
