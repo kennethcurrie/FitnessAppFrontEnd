@@ -39,13 +39,14 @@ The profile gives an overview of ...
 */
 interface IProfileComponentState{
   showTakePicModal: boolean;
+  photoURL: string;
 }
 
 export class ProfileComponent extends React.Component<any, IProfileComponentState> {
 
   constructor(props){
     super(props);
-    this.state = {showTakePicModal: false}
+    this.state = {showTakePicModal: false, photoURL:''}
   }
   render() {
     const profilePicSrc = store.getState().session.user.pictureUrl || profilePic;
@@ -61,7 +62,7 @@ export class ProfileComponent extends React.Component<any, IProfileComponentStat
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>                  
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
-                        <button id='take-photo' onClick={()=>{this.setState({showTakePicModal:true})}}>Snap Photo</button>                        
+                        <button id='take-photo' onClick={()=>{this.setState({...this.state, showTakePicModal:true})}}>Snap Photo</button>                        
                         <button id='upload-photo' onClick={()=>{}}>
                           <label>
                             Custom Upload
@@ -89,9 +90,16 @@ export class ProfileComponent extends React.Component<any, IProfileComponentStat
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
-        {(this.state.showTakePicModal)? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent /></div></div> : <></>}
+        {(this.state.showTakePicModal)? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent closeModal={this.closeModal} /></div></div> : <></>}
       </>
     );
+  }
+
+  closeModal = () => {
+    this.setState({...this.state, showTakePicModal: false})
+  }
+  uploadNewPhotoURL = (newPhotoURL) => {
+    
   }
 
 
