@@ -3,7 +3,7 @@
 import * as benchPressIcon from './icons/png/BenchPress.png';
 import * as bikingIcon from './icons/png/Biking.png';
 import * as curlsIcon from './icons/png/Curls.png';
-import * as deadLiftIcon from './icons/png/Deadlift.png';
+import * as deadLiftIcon from './icons/png/DeadLift.png';
 import * as pullUpsIcon from './icons/png/PullUps.png';
 import * as pushUpsIcon from './icons/png/PushUps.png';
 import * as runningIcon from './icons/png/Running.png';
