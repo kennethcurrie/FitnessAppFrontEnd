@@ -74,7 +74,7 @@ class SignUpComponent extends Component<IProps, any> {
                                 </tr>
                                 <tr>
                                     <td colSpan={2} className='center'><button
-                                        onClick={ e => { e.preventDefault(); signUp(signUpFields); setTimeout(()=>{this.sendNewUserToDB()})}}
+                                        onClick={ e => { e.preventDefault(); signUp(signUpFields); setTimeout(() => {this.sendNewUserToDB(); }); }}
                                     >Register</button> </td>
                                 </tr>
                             </tbody>
@@ -88,19 +88,19 @@ class SignUpComponent extends Component<IProps, any> {
     }
 
     sendNewUserToDB = () => async(dispatch) => {
-        let res = await appClient.post('/users', {
+        const res = await appClient.post('/users', {
             username: this.props.signUpFields.username,
             name:  this.props.signUpFields.name,
             password: this.props.signUpFields.password,
             email:  this.props.signUpFields.email,
             privateprofile: true,
         });
-        console.log( 'res.data')
-        console.log( res.data)
-        console.log( 'this.props.signUpFields')
-        console.log( this.props.signUpFields)
-        res.data
-        if(res.data){
+        console.log( 'res.data');
+        console.log( res.data);
+        console.log( 'this.props.signUpFields');
+        console.log( this.props.signUpFields);
+        res.data;
+        if (res.data) {
             dispatch({
                 type: ActionTypes.LOGIN,
                 payload: res.data
@@ -111,7 +111,7 @@ class SignUpComponent extends Component<IProps, any> {
                     isLoggedIn: true,
                     isAdmin: false
                 }
-            })
+            });
         }
     }
 }
