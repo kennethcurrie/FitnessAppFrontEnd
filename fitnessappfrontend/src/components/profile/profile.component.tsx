@@ -15,7 +15,7 @@ import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
-import ExcerciseChartComponent  from './excerciseChart/excerciseChart.component';
+import { ExerciseChartComponent }  from './exerciseChart/exerciseChart.component';
 import { InspirationsListComponent, IFriendLinkInfo } from './inspirations/inspirations.component';
 import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
@@ -84,6 +84,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
 
   getComponent(){
     let viewed = this.state.viewed as IUser; 
+    if(!viewed) return <></>;
     const profilePicSrc = viewed.pictureUrl || profilePic;
     return(
       <>
@@ -119,7 +120,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
             </div>
           </div>
           <div id='right-side'>
-            <ExcerciseChartComponent  />
+            <ExerciseChartComponent viewed={this.state.viewed as IUser}  />
             <InspirationsListComponent friendInfo={this.topFriendInfo} />
             {/* <MyGoalsListComponent goals={this.myGoals} /> */}
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}

@@ -52,9 +52,9 @@ export const initialState: IState = {
     },
     users: [
     ],
-    excerciseChartState: {
+    exerciseChartState: {
         workoutType: 'running',
-        excerciseData: [
+        exerciseData: [
             [Date.UTC(2010, 1, 1), 1],
             [Date.UTC(2011, 1, 2), 5],
             [Date.UTC(2012, 1, 3), 1],
