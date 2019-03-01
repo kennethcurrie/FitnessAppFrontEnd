@@ -16,9 +16,9 @@ interface IInspirationsProps {
 }
 
 interface IInspirationsState {
-  displaySearch: boolean,
-  searchStr: string,
-  searchArr: any[]
+  displaySearch: boolean;
+  searchStr: string;
+  searchArr: any[];
 }
 
 export class InspirationsListComponent extends React.Component<IInspirationsProps, IInspirationsState> {
@@ -62,13 +62,13 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
     }
 
   render() {
-    let result = <></>
-    if(this.props.viewed)
-      result = this.getComponent()
+    let result = <></>;
+    if (this.props.viewed)
+      result = this.getComponent();
     return result;
   }
 
-  getComponent(){
+  getComponent() {
 
     const friendArr: any[] = this.state.displaySearch === false ?
         (this.props.viewed as any).followedUsers : this.state.searchArr;

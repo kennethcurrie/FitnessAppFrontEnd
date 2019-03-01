@@ -42,17 +42,17 @@ The profile gives an overview of ...
 interface IProfileComponentState {
   showTakePicModal: boolean;
   photoURL: string;
-  viewed: IUser | undefined
+  viewed: IUser | undefined;
 }
 
 export class ProfileComponent extends Component<RouteComponentProps, IProfileComponentState> {
 
   constructor(props) {
     super(props);
-    this.state = {showTakePicModal: false, photoURL:'', viewed: undefined}
+    this.state = {showTakePicModal: false, photoURL: '', viewed: undefined};
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setViewed();
   }
   componentDidUpdate (prevProps) {
@@ -62,29 +62,29 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
   }
 
   setViewed = async () => {
-    var username = this.props.match.params && (this.props.match.params as any).username;
+    const username = this.props.match.params && (this.props.match.params as any).username;
     console.log(username);
     let viewedUser = store.getState().session.user;
-    if(username){
-      const possibleViewed = (await appClient.get(`/users/username/${username}`)).data
-      if(possibleViewed) viewedUser = possibleViewed;
+    if (username) {
+      const possibleViewed = (await appClient.get(`/users/username/${username}`)).data;
+      if (possibleViewed) viewedUser = possibleViewed;
       viewedUser.name = viewedUser.fullName;
     }
-    console.log('viewing...')
+    console.log('viewing...');
     console.log(viewedUser);
-    this.setState({...this.state, viewed: viewedUser})
+    this.setState({...this.state, viewed: viewedUser});
   }
 
   render() {
     let result = <></>;
-    if(this.state.viewed)
+    if (this.state.viewed)
       result = this.getComponent();
     return result;
   }
 
-  getComponent(){
-    let viewed = this.state.viewed as IUser; 
-    if(!viewed) return <></>;
+  getComponent() {
+    const viewed = this.state.viewed as IUser;
+    if (!viewed) return <></>;
     const profilePicSrc = viewed.pictureUrl || profilePic;
     return(
       <>
@@ -98,11 +98,11 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
-                        <button id='take-photo' onClick={()=>{this.setState({...this.state, showTakePicModal:true})}}>Snap Photo</button>                        
-                        <button id='upload-photo' onClick={()=>{}}>
+                        <button id='take-photo' onClick={() => {this.setState({...this.state, showTakePicModal: true}); }}>Snap Photo</button>
+                        <button id='upload-photo' onClick={() => {}}>
                           <label>
                             Custom Upload
-                            <input type="file"style={{display:'none'}}/>
+                            <input type='file'style={{display: 'none'}}/>
                           </label>
                         </button>
                     </div>
@@ -126,16 +126,16 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
-        {(this.state.showTakePicModal)? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent closeModal={this.closeModal} /></div></div> : <></>}
+        {(this.state.showTakePicModal) ? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent closeModal={this.closeModal} /></div></div> : <></>}
       </>
     );
   }
 
   closeModal = () => {
-    this.setState({...this.state, showTakePicModal: false})
+    this.setState({...this.state, showTakePicModal: false});
   }
   uploadNewPhotoURL = (newPhotoURL) => {
-    
+
   }
 
 
@@ -143,7 +143,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
     [2, 7]
   ];
   longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
-  
+
    progressPosts: IPostItem[] = [
     { title: undefined, text: 'test post body text', img: progressPhoto1},
     { title: 'test title', text: undefined, img: progressPhoto2},

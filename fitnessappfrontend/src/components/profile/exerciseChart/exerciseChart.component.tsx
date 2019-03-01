@@ -4,7 +4,7 @@ import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
-import {IUser } from '../../../redux/interfaces';
+import { IUser } from '../../../redux/interfaces';
 import { appClient } from '../../../axios/app.client';
 import { store } from '../../../redux/Store';
 import { async } from 'q';
@@ -23,8 +23,8 @@ The profile gives an overview of ...
   -show a graph displaying ratios of types of excersise, with lables
 
 */
-interface IExerciseChartProps { 
-  viewed: IUser
+interface IExerciseChartProps {
+  viewed: IUser;
 }
 
 interface IExerciseChartState {
@@ -36,12 +36,12 @@ interface IExerciseChartState {
 export class ExerciseChartComponent extends React.Component<IExerciseChartProps, IExerciseChartState> {
 
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       workoutType: 'Running',
-      exerciseData: [[0,0], [1,0]]
-    }
+      exerciseData: [[0, 0], [1, 0]]
+    };
   }
 
   componentDidMount() {
@@ -154,7 +154,7 @@ export class ExerciseChartComponent extends React.Component<IExerciseChartProps,
 
 
   render() {
-    const workoutHistory = this.state
+    const workoutHistory = this.state;
     const workoutIconButtons: any[] = [];
 
     for (const key in workoutInfo) {
@@ -179,12 +179,12 @@ export class ExerciseChartComponent extends React.Component<IExerciseChartProps,
             this.fetchChartData(this.props.viewed.id, this.state.workoutType).then((value) => {
               const hc = this.setUpChart(value);
               // push to end of stack so chart is done with its render before trying to reflow it
-              setTimeout(() =>{
+              setTimeout(() => {
                 hc.reflow();
-              })
+              });
             });
-          })
-        }
+          });
+        };
         workoutIconButtons.push(<button onClick={btnFunc} className={'btn ' + btnClasses}><img src={icon} /></button>);
       }
     }

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { appClient } from '../../axios/app.client';
 import { store } from '../../redux/Store';
 
-interface ITakePicComponentProps{
+interface ITakePicComponentProps {
     closeModal: () => void;
 }
-interface ITakePicComponentState{
+interface ITakePicComponentState {
     picUrl: string;
-    isPicSnapped:boolean
+    isPicSnapped: boolean;
 }
 
 export class TakePicComponent extends React.Component<ITakePicComponentProps, ITakePicComponentState> {
@@ -43,9 +43,9 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
 
     snapPic = () => {
         const video: HTMLVideoElement = this.video.current as HTMLVideoElement;
-        if(video) {
+        if (video) {
             video.pause();
-            this.setState({...this.setState, isPicSnapped:true})
+            this.setState({...this.setState, isPicSnapped: true});
         }
     }
 
@@ -74,20 +74,20 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
                 dh = canvas.height; // destination height
             context.drawImage(video, 0, 0, sw, sh, 0, 0, dw, dh);
             const fullQualityURI = canvas.toDataURL('image/jpeg', 1.0);
-                  
+
             fetch(fullQualityURI)
             .then(res => res.blob())
-            .then(blob => {      
-                //var objectURL = URL.createObjectURL(blob);
-                //myImage.src = objectURL;
+            .then(blob => {
+                // var objectURL = URL.createObjectURL(blob);
+                // myImage.src = objectURL;
                 const res = this.uploadImageToImgur(blob);
                 return res;
-            } ).then((data) => {        
+            } ).then((data) => {
                 console.log('imgurUploadResponse');
                 console.log(data);
                 const newPicUrl = `https://i.imgur.com/${data.data.id}.jpg`;
                 this.updateUserPhotoInDB(newPicUrl);
-            })
+            });
 
             video.width = prevWidth;
             video.height = prevHeight;
@@ -102,7 +102,7 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
             video.pause();
             const stream = video.srcObject as MediaStream;
             const tracks = stream && stream.getTracks();
-            if(tracks){
+            if (tracks) {
                 tracks.forEach(function(track) {
                     track.stop();
                 });
@@ -118,13 +118,13 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
         if (video) {
             video.play();
         }
-        this.setState({...this.setState, isPicSnapped:false})
+        this.setState({...this.setState, isPicSnapped: false});
     }
 
-    updateUserPhotoInDB = (newPicUrl: string)=>{
+    updateUserPhotoInDB = (newPicUrl: string) => {
         const currentUser = store.getState().session.user;
         currentUser.picUrl = this.state.picUrl;
-        appClient.post(`/users/${currentUser.id}/pics`, {picUrl:newPicUrl})
+        appClient.post(`/users/${currentUser.id}/pics`, {picUrl: newPicUrl});
     }
 
     render() {
@@ -138,7 +138,7 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
                     </div>
                     <div id='pic-capture-buttons' style={{position: 'absolute', top: '1rem', left: '1rem'}}>
                         {
-                            (this.state.isPicSnapped)?
+                            (this.state.isPicSnapped) ?
                                 <button id='save' onClick={this.saveAndClose}>Save Photo</button>
                             :
                                 <button id='snap' onClick={this.snapPic}>Snap Photo</button>
@@ -154,10 +154,10 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
 
     // https://codepen.io/spiralx/pen/mJxWJE
     uploadImageToImgur = (blob) => {
-        var formData = new FormData()
-        formData.append('type', 'file')
-        formData.append('image', blob)
-      
+        const formData = new FormData();
+        formData.append('type', 'file');
+        formData.append('image', blob);
+
         return fetch('https://api.imgur.com/3/upload.json', {
           method: 'POST',
           headers: {
@@ -166,21 +166,21 @@ export class TakePicComponent extends React.Component<ITakePicComponentProps, IT
           },
           body: formData
         })
-          .then(this.processStatus) 
-          .then(this.parseJson)
-    }    
-      
+          .then(this.processStatus)
+          .then(this.parseJson);
+    }
+
     parseJson(response) {
-        return response.json()
+        return response.json();
     }
 
 
     processStatus(response) {
         if (response.status === 200 || response.status === 0) {
-          return Promise.resolve(response)
-        } 
+          return Promise.resolve(response);
+        }
         else {
-          return Promise.reject(new Error(`Error loading url`))
+          return Promise.reject(new Error(`Error loading url`));
         }
       }
 }
