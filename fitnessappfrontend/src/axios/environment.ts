@@ -1,5 +1,5 @@
 const dev = {
-    appContext: 'http://localhost:5500' // api url
+    appContext: 'http://ec2-13-58-166-107.us-east-2.compute.amazonaws.com:5500' // api url
 };
 
 const prod = {
