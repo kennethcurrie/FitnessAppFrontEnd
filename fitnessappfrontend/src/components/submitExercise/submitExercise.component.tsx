@@ -52,25 +52,24 @@ class SubmitExerciseComponent extends Component<IProps, any> {
                 workoutObject.exercise.id = 3;
                 break;
             case ('curls'):
-                workoutObject.units = amount;
+
                 workoutObject.exercise.id = 4;
                 break;
             case ('deadlift'):
-                workoutObject.units = amount;
-                workoutObject.exercise.id = 5;
-                break;
-            case ('squats'):
                 workoutObject.exercise.id = 6;
                 break;
+            case ('squats'):
+                workoutObject.exercise.id = 8;
+                break;
             case ('benchpress'):
-                console.log('amount');
-                console.log(amount);
-                console.log('amount');
-                workoutObject.units = amount;
-                workoutObject.exercise.id = 7;
+
+                console.log('the thing after');
+                console.log(workoutObject);
+                console.log('the thing after');
+                workoutObject.exercise.id = 5;
                 break;
             case ('pushups'):
-                workoutObject.exercise.id = 8;
+                workoutObject.exercise.id = 7;
                 break;
             case ('situps'):
                 workoutObject.exercise.id = 9;
@@ -83,9 +82,7 @@ class SubmitExerciseComponent extends Component<IProps, any> {
                 break;
         }
 
-        console.log('the thing after');
-        console.log(workoutObject);
-        console.log('the thing after');
+
         const res = await appClient.post('/history', workoutObject);
     };
 
