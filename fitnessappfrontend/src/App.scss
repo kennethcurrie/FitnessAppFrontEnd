@@ -76,6 +76,23 @@ a:link, a:visited{
   height: 100%;
 }
 
+#footer
+{  
+  margin: 0em 1.5em;
+  background-color: rgba(100, 25, 255, .2);
+  color: white;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0.5em;
+  border-radius: 25px;
+}
+
+#footer a{
+  padding: 2px;
+}
+
 /////////////////////////////////////////
 // Rank Profiles
 #searchBy {
