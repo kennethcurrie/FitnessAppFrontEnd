@@ -5,8 +5,9 @@ import { ProfileComponent } from '../profile/profile.component';
 import './splash.scss';
 import { IState, IApp } from '../../redux/interfaces';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 
-interface ISplashPageComponentProps {
+interface ISplashPageComponentProps extends RouteComponentProps {
   app: IApp;
 }
 

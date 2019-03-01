@@ -21,7 +21,9 @@ import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
-import { IState } from '../../redux/interfaces';
+import { IState, IUser } from '../../redux/interfaces';
+import { RouteComponentProps } from 'react-router';
+import { appClient } from '../../axios/app.client';
 
 
 
@@ -40,16 +42,49 @@ The profile gives an overview of ...
 interface IProfileComponentState {
   showTakePicModal: boolean;
   photoURL: string;
+  viewed: IUser | undefined
 }
 
-export class ProfileComponent extends Component<any, IProfileComponentState> {
+export class ProfileComponent extends Component<RouteComponentProps, IProfileComponentState> {
 
   constructor(props) {
     super(props);
-    this.state = {showTakePicModal: false, photoURL:''}
+    this.state = {showTakePicModal: false, photoURL:'', viewed: undefined}
   }
+
+  componentDidMount(){
+    this.setViewed();
+  }
+  componentDidUpdate (prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.setViewed();
+    }
+  }
+
+  setViewed = async () => {
+    var username = this.props.match.params && (this.props.match.params as any).username;
+    console.log(username);
+    let viewedUser = store.getState().session.user;
+    if(username){
+      const possibleViewed = (await appClient.get(`/users/username/${username}`)).data
+      if(possibleViewed) viewedUser = possibleViewed;
+      viewedUser.name = viewedUser.fullName;
+    }
+    console.log('viewing...')
+    console.log(viewedUser);
+    this.setState({...this.state, viewed: viewedUser})
+  }
+
   render() {
-    const profilePicSrc = store.getState().session.user.pictureUrl || profilePic;
+    let result = <></>;
+    if(this.state.viewed)
+      result = this.getComponent();
+    return result;
+  }
+
+  getComponent(){
+    let viewed = this.state.viewed as IUser; 
+    const profilePicSrc = viewed.pictureUrl || profilePic;
     return(
       <>
         {/* this holds everything */}
@@ -58,7 +93,7 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
           <div id='left-side'>
             <div id='sticky'>
               <div id='profile-pic-full'>
-                <div id='nickname-label' className='label'><strong>{(store.getState()).session.user.fullName}</strong></div>
+                <div id='nickname-label' className='label'><strong>{viewed.name}</strong></div>
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
