@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './submitExercise.scss';
-import { IWorkouts, IState } from '../../redux/interfaces';
+import { IWorkouts, IState, ISession } from '../../redux/interfaces';
 import * as foo from '../../redux/actions/workouts.action';
+import { appClient } from '../../axios/app.client';
 
 
 interface IProps {
+    session: ISession;
     workoutFields: IWorkouts;
     updateRunning: (distance: number) => void;
     updateSwimming: (distance: number) => void;
@@ -21,11 +23,96 @@ interface IProps {
 }
 
 class SubmitExerciseComponent extends Component<IProps, any> {
+
     constructor(props: any) {
         super(props);
     }
 
+    updateWorkout = async (exercise: string, amount: number) => {
+
+        const workoutObject = {
+            'units': amount,
+            'occourred': Date.now(),
+            'user': {
+                'id': this.props.session.user.id,
+            },
+            'exercise': {
+                'id': 1
+            }
+        };
+
+        switch (exercise) {
+            case ('running'):
+                workoutObject.exercise.id = 1;
+                break;
+            case ('biking'):
+                workoutObject.exercise.id = 2;
+                break;
+            case ('swimming'):
+                workoutObject.exercise.id = 3;
+                break;
+            case ('curls'):
+                workoutObject.units = amount;
+                workoutObject.exercise.id = 4;
+                break;
+            case ('deadlift'):
+                workoutObject.units = amount;
+                workoutObject.exercise.id = 5;
+                break;
+            case ('squats'):
+                workoutObject.exercise.id = 6;
+                break;
+            case ('benchpress'):
+                console.log('amount');
+                console.log(amount);
+                console.log('amount');
+                workoutObject.units = amount;
+                workoutObject.exercise.id = 7;
+                break;
+            case ('pushups'):
+                workoutObject.exercise.id = 8;
+                break;
+            case ('situps'):
+                workoutObject.exercise.id = 9;
+                break;
+            case ('pullups'):
+                workoutObject.exercise.id = 10;
+                break;
+            default:
+                console.log('nothing');
+                break;
+        }
+
+        console.log('the thing after');
+        console.log(workoutObject);
+        console.log('the thing after');
+        const res = await appClient.post('/history', workoutObject);
+    };
+
+    sendWorkout = () => {
+        const { workoutFields: workouts } = this.props;
+        console.log('workouts benchpress');
+        console.log(workouts.benchPress);
+        console.log(workouts.benchPress.lbs * workouts.benchPress.reps);
+        console.log('workouts benchpress');
+        this.updateWorkout('running', workouts.running);
+        this.updateWorkout('biking', workouts.biking);
+        this.updateWorkout('swimming', workouts.swimming);
+        this.updateWorkout('curls', workouts.curls.lbs * workouts.curls.reps);
+        this.updateWorkout('deadlift', workouts.deadLift.lbs * workouts.deadLift.reps);
+        this.updateWorkout('squats', workouts.squats);
+        this.updateWorkout('benchpress', workouts.benchPress.lbs * workouts.benchPress.reps);
+        this.updateWorkout('pushups', workouts.pushUps);
+        this.updateWorkout('situps', workouts.sitUps);
+        this.updateWorkout('pullups', workouts.pullUps);
+    };
+
   render() {
+    //   console.log('hey');
+    //   console.log(this.props.user.userid);
+    //   console.log('hey');
+    //   console.log(this.props);
+    //   console.log('hey');
     const {
         workoutFields,
         updateRunning, updateBiking, updateSwimming,
@@ -128,10 +215,13 @@ class SubmitExerciseComponent extends Component<IProps, any> {
                               <td colSpan={2} className='center'><p id='WorkoutError' className='error'>&nbsp;</p></td>
                           </tr>
                           <tr>
-                              <td colSpan={2} className='center'><input type='submit' value='Submit' onClick={e => {
+                              <td colSpan={2} className='center'><input type='submit' value='Submit'
+                                    onClick={e => {
                                   e.preventDefault();
+                                  this.sendWorkout();
                                   this.props.submitWorkout(e, workoutFields);
-                              }}/></td>
+                                 }
+                              }/></td>
                           </tr>
                       </tbody>
                   </table>
@@ -143,7 +233,10 @@ class SubmitExerciseComponent extends Component<IProps, any> {
 }
 
 const mapStateToProps = (state: IState) => {
-    return { workoutFields: state.workoutFields };
+    return {
+        workoutFields: state.workoutFields,
+        session: state.session
+    };
 };
 const mapDispatchToProps = { ...foo };
 export default connect(mapStateToProps, mapDispatchToProps)(SubmitExerciseComponent);

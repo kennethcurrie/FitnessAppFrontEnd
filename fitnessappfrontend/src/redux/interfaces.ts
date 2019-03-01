@@ -13,7 +13,7 @@ export interface IUser {
     name: string;
     password?: string;
     email: string;
-    userid: number;
+    id: number;
     role: string;
     private: boolean;
     pictureUrl?: string;

@@ -15,14 +15,14 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
         super(props);
     }
 
-    componentDidMount(){
+    componentDidMount() {
     }
 
     render() {
-        const credentials = getCredentialsCookie()
+        const credentials = getCredentialsCookie();
 
-        if(credentials){
-            console.log('tried to log in with credentials')
+        if (credentials) {
+            console.log('tried to log in with credentials');
             this.props.login(credentials);
         }
 
