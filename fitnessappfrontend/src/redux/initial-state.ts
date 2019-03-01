@@ -11,7 +11,7 @@ export const initialState: IState = {
             password: ''
         },
         user: {
-            userid: 0,
+            id: 0,
             username: '',
             email: '',
             role: '',
@@ -42,7 +42,7 @@ export const initialState: IState = {
         pullUps: 0
     },
     signUpFields: {
-        userid: 0,
+        id: 0,
         username: '',
         email: '',
         role: '',
