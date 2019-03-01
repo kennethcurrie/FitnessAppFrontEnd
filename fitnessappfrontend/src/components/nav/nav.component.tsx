@@ -1,6 +1,5 @@
 import React from 'react';
 const logo = require('../../resources/fitness-icon.png');
-import './nav.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IState, IApp, IUser } from '../../redux/interfaces';

@@ -2,7 +2,6 @@ import React from 'react';
 import LoginComponent from '../login/login.component';
 import SignUpComponent from '../signUp/signUp.component';
 import { ProfileComponent } from '../profile/profile.component';
-import './splash.scss';
 import { IState, IApp } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';

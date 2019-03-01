@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './myGoalsList.component.scss';
 import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';

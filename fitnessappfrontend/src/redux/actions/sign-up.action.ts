@@ -1,6 +1,6 @@
 import { ActionTypes } from '../action-types';
 import { IUser } from '../interfaces';
-import { appClient } from '../../axios/app.client'; 
+import { appClient } from '../../axios/app.client';
 
 export const updateUsername = (value: string) => {
     return {
@@ -31,7 +31,7 @@ export const updateEmail = (value: string) => {
 };
 
 export const signUp = (signUpFields: IUser) => async (dispatch) => {
-    let res = await appClient.post('/users', {
+    const res = await appClient.post('/users', {
         username: signUpFields.username,
         fullname:  signUpFields.name,
         password: signUpFields.password,
@@ -45,7 +45,7 @@ export const signUp = (signUpFields: IUser) => async (dispatch) => {
         payload: { ...signUpFields }
     });
 
-    if(res.data){
+    if (res.data) {
         dispatch({
             type: ActionTypes.LOGIN,
             payload: res.data
@@ -56,7 +56,7 @@ export const signUp = (signUpFields: IUser) => async (dispatch) => {
                 isLoggedIn: true,
                 isAdmin: false
             }
-        })
+        });
     }
 
     dispatch(updateUsername(''));
