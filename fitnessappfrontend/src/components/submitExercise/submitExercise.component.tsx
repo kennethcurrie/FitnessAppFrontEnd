@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './submitExercise.scss';
 import { IWorkouts, IState, ISession } from '../../redux/interfaces';
 import * as foo from '../../redux/actions/workouts.action';
 import { appClient } from '../../axios/app.client';

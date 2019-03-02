@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './inspirations.component.scss';
 import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';

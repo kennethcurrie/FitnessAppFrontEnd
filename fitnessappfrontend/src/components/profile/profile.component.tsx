@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './profile.component.scss';
 const profilePic = require('../../resources/default-profile-pic.jpg');
 const progressPhoto1 = require('../../resources/placeholder-progress-photo-1.jpg');
 const progressPhoto2 = require('../../resources/placeholder-progress-photo-2.jpg');

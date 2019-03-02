@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './allUsers.scss';
 import { IUser } from '../../redux/interfaces';
 import { IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
