@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './submitExercise.scss';
 import { IWorkouts, IState, ISession } from '../../redux/interfaces';
 import * as foo from '../../redux/actions/workouts.action';
 import { appClient } from '../../axios/app.client';
@@ -118,11 +117,11 @@ class SubmitExerciseComponent extends Component<IProps, any> {
     } = this.props;
 
     return (
-      <div id='submit'>
-        <h1>Submit Exercise Component!</h1>
+      <div id='submit' className='box one-column center'>
+        <h1>Submit Exercise</h1>
           <div className='form-holder'>
               <form>
-                  <table>
+                  <table className='lined'>
                       <thead>
 
                       </thead>

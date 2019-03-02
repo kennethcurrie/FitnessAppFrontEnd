@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './profile.component.scss';
 const profilePic = require('../../resources/default-profile-pic.jpg');
 const progressPhoto1 = require('../../resources/placeholder-progress-photo-1.jpg');
 const progressPhoto2 = require('../../resources/placeholder-progress-photo-2.jpg');
@@ -88,12 +87,12 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
     return(
       <>
         {/* this holds everything */}
-        <div id='all-profile-component'>
+        <div id='all-profile-component' className='two-column'>
           {/* this is the profile and personal info section */}
           <div id='left-side'>
             <div id='sticky'>
               <div id='profile-pic-full'>
-                <div id='nickname-label' className='label'><strong>{viewed.name}</strong></div>
+                <div id='nickname-label' className='label center'><strong>{viewed.name}</strong></div>
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>

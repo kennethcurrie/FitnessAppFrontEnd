@@ -62,7 +62,7 @@ export class RankProfilesComponent extends React.Component<IInspirationsProps, a
 
     return(
       <>
-        <div id='inspirations-full'>
+        <div id='inspirations-full' className='box one-column center'>
           <div id='inspirations-label'>
             <strong>
                 <label>Top Ranked By Subscribers</label>

@@ -32,7 +32,7 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
     getComponent() {
         const { session, updateCredentials, login } = this.props;
         const result = (
-            <div id='login' className='rounded'>
+            <div id='login' className='box'>
                 <div className='form-holder'>
                     <form>
                         <table>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './allUsers.scss';
 import { IUser } from '../../redux/interfaces';
 import { IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
@@ -24,9 +23,9 @@ class AllUsersComponent extends Component<IProps, any> {
   render() {
     const { users } = this.props;
     return (
-      <div id='allUsers'>
-        <h1>All Users Component!</h1>
-        <table>
+      <div id='allUsers' className='box one-column center'>
+        <h1>All Users</h1>
+        <table className='lined'>
           <thead>
             <tr>
               <th>Username</th>
@@ -39,7 +38,8 @@ class AllUsersComponent extends Component<IProps, any> {
               return (
                 <tr key={id}>
                   <td>
-                    <Link to={'admin/users/edit/' + e.username}>{e.username}</Link>
+                    {/* <Link to={'admin/users/edit/' + e.username}>{e.username}</Link> */}
+                    <Link to={'/user/' + e.username}>{e.username}</Link>
                   </td>
                   <td>{e.name}</td>
                   <td><a href={'mailto:' + e.email}>{e.email}</a></td>

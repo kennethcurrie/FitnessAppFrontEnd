@@ -36,7 +36,7 @@ class SignUpComponent extends Component<ISignupComponentProps, any> {
         } = this.props;
 
         const result = (
-            <div id='SignUp' className='rounded'>
+            <div id='SignUp' className='box'>
                 <div className='form-holder'>
                     <form>
                         <table>

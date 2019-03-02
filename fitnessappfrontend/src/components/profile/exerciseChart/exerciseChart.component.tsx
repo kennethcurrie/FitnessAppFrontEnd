@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './exerciseChart.component.scss';
 import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
@@ -192,7 +191,7 @@ export class ExerciseChartComponent extends React.Component<IExerciseChartProps,
     return(
       <>
         <div id='history-full'>
-          <div id='history-label'><strong>MY PROGRESS</strong></div>
+          <div id='history-label' className='center'><strong>MY PROGRESS</strong></div>
           {workoutTypeSelector}
           <div id='history-holder'>
             <div id='history-graph'></div>
