@@ -27,10 +27,14 @@ export const signUpReducer = (state: any = initialState.signUpFields, action: an
                 name: action.payload
             };
 
-        case ActionTypes.SIGN_UP:
+        case ActionTypes.UPDATE_ISPRIVATE:
             return {
-                ...action.payload
+                ...state,
+                private: action.payload
             };
+
+        case ActionTypes.SIGN_UP:
+            return { ...action.payload };
 
         default:
             return state;
