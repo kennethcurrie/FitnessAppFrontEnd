@@ -30,16 +30,22 @@ export const updateEmail = (value: string) => {
     };
 };
 
+export const updateIsPrivate = (value: boolean) => {
+    return {
+        type: ActionTypes.UPDATE_ISPRIVATE,
+        payload: value
+    };
+};
+
 export const signUp = (signUpFields: IUser) => async (dispatch) => {
     const res = await appClient.post('/users', {
         username: signUpFields.username,
         fullname:  signUpFields.name,
         password: signUpFields.password,
         email:  signUpFields.email,
-        privateprofile: true,
+        privateprofile: signUpFields.private,
     });
 
-    console.log(`Profile Created: ${signUpFields}`);
     dispatch({
         type: ActionTypes.SIGN_UP,
         payload: { ...signUpFields }
@@ -63,4 +69,5 @@ export const signUp = (signUpFields: IUser) => async (dispatch) => {
     dispatch(updatePassword(''));
     dispatch(updateName(''));
     dispatch(updateEmail(''));
+    dispatch(updateIsPrivate(false));
 };

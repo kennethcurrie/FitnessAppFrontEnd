@@ -1,26 +1,73 @@
 import React, { Component } from 'react';
-import { IState, ISession } from '../../redux/interfaces';
+import { IState, IApp, IUser } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/sign-up.action';
-import { ISignupComponentProps } from '../signUp/signUp.component';
+import { updateUser } from '../../redux/actions/edit-profile.actions';
 
-interface IEditProfileProps extends ISignupComponentProps {
-    session: ISession;
+interface IEditProfileProps {
+  user: IUser;
+  fields: IUser;
+  updateUsername: (value: string) => void;
+  updatePassword: (value: string) => void;
+  updateName: (value: string) => void;
+  updateEmail: (value: string) => void;
+  updateIsPrivate: (value: boolean) => void;
+  updateUser: (fields: IUser) => void;
+  deleteUser: (username: string) => void;
 }
 
-export class EditProfileComponent extends Component<IEditProfileProps, any> {
+class EditProfileComponent extends Component<IEditProfileProps, any> {
   render() {
+    const { user, fields } = this.props;
     return (
-        <h1>{this.props.session.user.email}</h1>
+      <>
+        <form className='edit-profile'>
+          <label htmlFor='name'>Full Name</label>
+          <input type='text' name='name' defaultValue={fields.name} onChange={e => {
+            this.props.updateName(e.target.value);
+          }} />
+
+          <label htmlFor='username'>Username</label>
+          <input type='text' name='username' defaultValue={fields.username} onChange={e => {
+            this.props.updateUsername(e.target.value);
+          }} />
+
+          <label htmlFor='email'>Email</label>
+          <input type='email' name='email' defaultValue={fields.email} onChange={e => {
+            this.props.updateEmail(e.target.value);
+          }} />
+
+          <div style={{ margin: '5px 0' }}>
+            <input type='checkbox' name='is-private' defaultChecked={fields.private} onChange={e => {
+              this.props.updateIsPrivate(e.target.checked);
+            }} />
+            <label htmlFor='is-private'>Private Profile</label><br />
+          </div>
+
+          <div style={{ width: '200px', margin: '0 auto' }}>
+            <button onClick={e => {
+              e.preventDefault();
+              this.props.updateUser(this.props.fields);
+            }}>Save</button>
+            <button onClick={e => {
+              console.log('Deleting Profile');
+            }}>Delete</button>
+          </div>
+        </form>
+      </>
     );
   }
 }
 
 const mapStateToProps = (state: IState) => {
-    return {
-        session: state.session
-    };
+  return {
+    user: state.session.user,
+    fields: state.signUpFields
+  };
 };
-const mapDispatchToProps = { ...actions };
+const mapDispatchToProps = {
+  ...actions,
+  updateUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfileComponent);
