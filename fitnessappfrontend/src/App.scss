@@ -213,10 +213,10 @@ a:link, a:visited {
 // Rank Profiles
 #searchBy {
   border-radius: 25px;
+}
 
-  :focus {
-    outline: none;
-  }
+#searchBy:focus {
+  outline: none;
 }
 
 // Exercise chart
@@ -270,10 +270,10 @@ a:link, a:visited {
       width: 120%;
     }
   }
+}
 
-  :hover {
-    background-color: $hovered-icon;
-  }
+.btn:hover {
+  background-color: $hovered-icon;
 }
 
 #workout-type-container {
@@ -316,12 +316,13 @@ body ::-webkit-scrollbar-thumb:hover {
 
   input {
     border-radius: 25px;
+  }
 
-    :focus {
-      outline: none;
-    }
+  input:focus {
+    outline: none;
   }
 }
+
 
 #inspirations-full {
   margin-top: 1rem;
