@@ -29,8 +29,14 @@ export class SplashPageComponent extends React.Component<ISplashPageComponentPro
     } else {
       return (
       <div id='Splash'>
-        <LoginComponent />
-        <SignUpComponent {...this.props} />
+        <div className='two-column'>
+          <div className='ambi-side'>
+            <LoginComponent />
+          </div>
+          <div className='ambi-side'>
+            <SignUpComponent {...this.props} />
+          </div>
+        </div>
       </div>
       );
     }

@@ -191,7 +191,7 @@ export class ExerciseChartComponent extends React.Component<IExerciseChartProps,
     return(
       <>
         <div id='history-full'>
-          <div id='history-label'><strong>MY PROGRESS</strong></div>
+          <div id='history-label' className='center'><strong>MY PROGRESS</strong></div>
           {workoutTypeSelector}
           <div id='history-holder'>
             <div id='history-graph'></div>

@@ -1,6 +1,6 @@
 //vars
-$bg: #FFFFFF;
-$link: #000099;
+$text: #FFFFFF;
+$link: #00FFFF;
 $error: #FF0000;
 $border: solid #000000 1px;
 $test:lime;
@@ -8,6 +8,52 @@ $solid-color-main: rgba(100, 25, 255, .2);
 $solid-color-background: rgba(0, 0, 0, 0.8);
 $gradient-color-up: linear-gradient(to bottom, rgba(100, 25, 255, .6), rgba(200, 200, 255, .2));
 $gradient-color-down: linear-gradient(to bottom, rgba(200, 200, 255, .2), rgba(100, 25, 255, .6));
+
+//body
+body{
+  color: $text;
+}
+
+// layout
+.two-column{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: .5em 1.5em;
+}
+
+.one-column{
+  margin: .5em 1.5em;
+}
+
+#left-side{
+  // min-width: 20rem;
+  width: 30%;
+  padding-left: 0px;
+}
+
+#right-side{
+  // min-width: 20rem;
+  width: 70%;
+  padding-right: 0px;
+}
+
+.ambi-side {
+  border-radius: 25px;
+  box-sizing: border-box;
+  padding: 0.5em;
+  width: 50%;
+}
+
+.box {
+  border-radius: 25px;
+  box-sizing: border-box;
+  padding: 0.5em;
+  background: -webkit-linear-gradient(top, rgba(200, 200, 255, 0.2), rgba(100, 25, 255, 0.6));
+  background: linear-gradient(to bottom, rgba(200, 200, 255, 0.2), rgba(100, 25, 255, 0.6));
+  padding: 0.5rem;
+}
 
 //General styles
 .error{
@@ -18,20 +64,13 @@ $gradient-color-down: linear-gradient(to bottom, rgba(200, 200, 255, .2), rgba(1
   text-align: center;
 }
 
-.rounded{
-  background-color: $bg;
-  border: $border;
-}
-
 .form-holder{
-  background-color: $bg;
 
   table{
     width: 100%;
     border-collapse: collapse;
     
     td{
-      border: $border;
 
       input{
         max-width: 80%;
@@ -44,7 +83,7 @@ $gradient-color-down: linear-gradient(to bottom, rgba(200, 200, 255, .2), rgba(1
 #nav{
   display: block;
   width:100%;
-  background-color: rgba(240, 248, 255, 0.459);
+  background-color: rgba(100, 100, 100, 0.459);
   min-height: 3em;
   align-items: right;
 
@@ -147,16 +186,6 @@ a:link, a:visited{
 
 //Root
 
-#SignUp{
-  width:45%;
-  float: right;
-}
-
-#login{
-  width:45%;
-  float: left;
-}
-
 .fill-all{
   width: 100%;
   height: 100%;
@@ -166,7 +195,6 @@ a:link, a:visited{
 {  
   margin: 0em 1.5em;
   background-color: rgba(100, 25, 255, .2);
-  color: white;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -190,18 +218,17 @@ a:link, a:visited{
 }
 
 // All Users
-#allUsers{
-  table{
-      background-color: $bg;
-      width:100%;
-      border-collapse: collapse;
-      text-align: center;
-      tr{
-          td, th{
-              border: $border;
-              padding: 5px;
-          }
-      }
+table.lined{
+  width:100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-bottom: 1em;
+
+  tr{
+    td, th{
+        border: $border;
+        padding: 5px;
+    }
   }
 }
 
@@ -212,7 +239,7 @@ a:link, a:visited{
   background: linear-gradient(to bottom, rgba(100, 25, 255, .6), rgba(200, 200, 255, .2));
   height: 25rem;
   width: 40rem;
-  max-width: 100%;
+  width: 100%;
 }
 
 #history-label
@@ -351,7 +378,6 @@ flex-wrap: wrap;
 .inspiration-square
 {
 margin: 0.5rem;
-padding: 0.1rem;
 height: 8rem;
 width: 8rem;
 background-color: rgba(100, 25, 255, .3);
@@ -375,17 +401,6 @@ object-position: 50% 70%;
 }
 
 //Profile
-#all-profile-component
-{
-  width: 100%;
-  height: 100%;
-  display:flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  color: white;
-} 
-
 
 #content-holder
 {
@@ -393,11 +408,6 @@ object-position: 50% 70%;
   height: 100vh;
   background-repeat: repeat;
   overflow: auto;
-}
-
-#profile-pic-full
-{
-  color:white;
 }
 
 #profile-pic-holder
@@ -418,18 +428,7 @@ object-position: 50% 70%;
 {
   position: sticky;
   top: 1rem;
-}
-
-#left-side
-{
-  min-width: 20rem;
-  max-width: 25%;
-}
-
-#right-side
-{
-  min-width: 20rem;
-  max-width: 65%;
+  padding-left: 0px;
 }
 
 #my-goals-full
