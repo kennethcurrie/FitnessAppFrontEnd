@@ -22,6 +22,7 @@ import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.co
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
 import { IState } from '../../redux/interfaces';
+import  EditProfileComponent from '../editProfile/editProfile.component';
 
 
 
@@ -46,7 +47,7 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
 
   constructor(props) {
     super(props);
-    this.state = {showTakePicModal: false, photoURL:''}
+    this.state = {showTakePicModal: false, photoURL: '' };
   }
   render() {
     const profilePicSrc = store.getState().session.user.pictureUrl || profilePic;
@@ -62,25 +63,17 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
-                        <button id='take-photo' onClick={()=>{this.setState({...this.state, showTakePicModal:true})}}>Snap Photo</button>                        
-                        <button id='upload-photo' onClick={()=>{}}>
+                        <button id='take-photo' onClick={() => {this.setState({...this.state, showTakePicModal:true})}}>Snap Photo</button>                        
+                        <button id='upload-photo' onClick={() => {}}>
                           <label>
                             Custom Upload
-                            <input type="file"style={{display:'none'}}/>
+                            <input type='file' style={{display: 'none'}}/>
                           </label>
                         </button>
                     </div>
                 </div>
               </div>
-              <div id='stats-full'>
-                <div id='stats-label' className='label'><strong>Stats</strong></div>
-                <div id='stats-holder'>
-                  instagram: blah <br />
-                  twitter: blah <br />
-                  facebook: blah <br />
-                  countrymatch: blah
-                </div>
-              </div>
+                <EditProfileComponent signUpFields={store.getState().signUpFields}/>
             </div>
           </div>
           <div id='right-side'>
@@ -90,7 +83,7 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
-        {(this.state.showTakePicModal)? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent closeModal={this.closeModal} /></div></div> : <></>}
+        {(this.state.showTakePicModal) ? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent closeModal={this.closeModal} /></div></div> : <></>}
       </>
     );
   }
@@ -99,7 +92,6 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
     this.setState({...this.state, showTakePicModal: false})
   }
   uploadNewPhotoURL = (newPhotoURL) => {
-    
   }
 
 
