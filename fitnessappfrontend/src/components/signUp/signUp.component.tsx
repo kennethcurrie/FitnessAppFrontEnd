@@ -74,7 +74,7 @@ class SignUpComponent extends Component<ISignupComponentProps, any> {
                                 </tr>
                                 <tr>
                                     <td colSpan={2} className='center'><button
-                                        onClick={ e => { e.preventDefault(); signUp(signUpFields); setTimeout(()=>{this.sendNewUserToDB()})}}
+                                        onClick={ e => { e.preventDefault(); signUp(signUpFields); setTimeout(() => {this.sendNewUserToDB(); }); }}
                                     >Register</button> </td>
                                 </tr>
                             </tbody>

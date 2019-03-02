@@ -49,9 +49,9 @@ export interface IWorkouts {
     squats: number;
 }
 
-export interface IExcerciseChartState {
+export interface IExerciseChartState {
   workoutType: string;
-  excerciseData: number[][];
+  exerciseData: number[][];
 }
 
 export interface IState {
@@ -60,5 +60,5 @@ export interface IState {
     workoutFields: IWorkouts;
     signUpFields: IUser;
     users: IUser[];
-    excerciseChartState: IExcerciseChartState;
+    exerciseChartState: IExerciseChartState;
 }

@@ -15,16 +15,16 @@ import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
-import ExcerciseChartComponent  from './excerciseChart/excerciseChart.component';
-import { InspirationsListComponent, IFriendLinkInfo } from './inspirations/inspirations.component';
+import { ExerciseChartComponent }  from './exerciseChart/exerciseChart.component';
+import { InspirationsListComponent } from './inspirations/inspirations.component';
 import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
-import { IState } from '../../redux/interfaces';
 import  EditProfileComponent from '../editProfile/editProfile.component';
-
-
+import { IState, IUser } from '../../redux/interfaces';
+import { RouteComponentProps } from 'react-router';
+import { appClient } from '../../axios/app.client';
 
 /*
 A profile is the home page for the average user.
@@ -41,16 +41,50 @@ The profile gives an overview of ...
 interface IProfileComponentState {
   showTakePicModal: boolean;
   photoURL: string;
+  viewed: IUser | undefined;
 }
 
-export class ProfileComponent extends Component<any, IProfileComponentState> {
+export class ProfileComponent extends Component<RouteComponentProps, IProfileComponentState> {
 
   constructor(props) {
     super(props);
-    this.state = {showTakePicModal: false, photoURL: '' };
+    this.state = {showTakePicModal: false, photoURL: '', viewed: undefined};
   }
+
+  componentDidMount() {
+    this.setViewed();
+  }
+  componentDidUpdate (prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.setViewed();
+    }
+  }
+
+  setViewed = async () => {
+    const username = this.props.match.params && (this.props.match.params as any).username;
+    console.log(username);
+    let viewedUser = store.getState().session.user;
+    if (username) {
+      const possibleViewed = (await appClient.get(`/users/username/${username}`)).data;
+      if (possibleViewed) viewedUser = possibleViewed;
+      viewedUser.name = viewedUser.fullName;
+    }
+    console.log('viewing...');
+    console.log(viewedUser);
+    this.setState({...this.state, viewed: viewedUser});
+  }
+
   render() {
-    const profilePicSrc = store.getState().session.user.pictureUrl || profilePic;
+    let result = <></>;
+    if (this.state.viewed)
+      result = this.getComponent();
+    return result;
+  }
+
+  getComponent() {
+    const viewed = this.state.viewed as IUser;
+    if (!viewed) return <></>;
+    const profilePicSrc = viewed.pictureUrl || profilePic;
     return(
       <>
         {/* this holds everything */}
@@ -59,15 +93,15 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
           <div id='left-side'>
             <div id='sticky'>
               <div id='profile-pic-full'>
-                <div id='nickname-label' className='label'><strong>{(store.getState()).session.user.fullName}</strong></div>
+                <div id='nickname-label' className='label'><strong>{viewed.name}</strong></div>
                 <div id='profile-pic-holder' className='fill-all' style={{position: 'relative'}}>
                   <img id='profile-pic' className='bound-img' src={profilePicSrc}/>
                   <div id='pic-capture-buttons' style={{position: 'absolute', bottom: '1rem', right: '1rem'}}>
-                        <button id='take-photo' onClick={() => {this.setState({...this.state, showTakePicModal:true})}}>Snap Photo</button>                        
+                        <button id='take-photo' onClick={() => {this.setState({...this.state, showTakePicModal: true}); }}>Snap Photo</button>
                         <button id='upload-photo' onClick={() => {}}>
                           <label>
                             Custom Upload
-                            <input type='file' style={{display: 'none'}}/>
+                            <input type='file'style={{display: 'none'}}/>
                           </label>
                         </button>
                     </div>
@@ -77,8 +111,8 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
             </div>
           </div>
           <div id='right-side'>
-            <ExcerciseChartComponent  />
-            <InspirationsListComponent friendInfo={this.topFriendInfo} />
+            <ExerciseChartComponent viewed={this.state.viewed as IUser}  />
+            <InspirationsListComponent viewed={this.state.viewed as IUser} />
             {/* <MyGoalsListComponent goals={this.myGoals} /> */}
             {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
@@ -89,9 +123,10 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
   }
 
   closeModal = () => {
-    this.setState({...this.state, showTakePicModal: false})
+    this.setState({...this.state, showTakePicModal: false});
   }
   uploadNewPhotoURL = (newPhotoURL) => {
+    
   }
 
 
@@ -99,13 +134,7 @@ export class ProfileComponent extends Component<any, IProfileComponentState> {
     [2, 7]
   ];
   longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
-  topFriendInfo: IFriendLinkInfo[] = [
-    { picURL: friendPhoto1, profileLinkURL: '' },
-    { picURL: friendPhoto2, profileLinkURL: '' },
-    { picURL: friendPhoto3, profileLinkURL: '' },
-    { picURL: friendPhoto4, profileLinkURL: '' },
-    { picURL: friendPhoto5, profileLinkURL: '' }
-  ];
+
    progressPosts: IPostItem[] = [
     { title: undefined, text: 'test post body text', img: progressPhoto1},
     { title: 'test title', text: undefined, img: progressPhoto2},

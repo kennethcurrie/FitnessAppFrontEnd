@@ -7,32 +7,28 @@ import * as ExportData from 'highcharts/modules/export-data';
 import { Link } from 'react-router-dom';
 import { store } from '../../../redux/Store';
 import { IUser } from '../../../redux/interfaces';
-const friendPhoto1 = require('../../../resources/placeholder-friend-photo-1.jpg');
-const profilePic = require('../../../resources/default-profile-pic.jpg');
+const defaultProfilePic = require('../../../resources/default-profile-pic.jpg');
 import { appClient } from '../../../axios/app.client';
 
 
 interface IInspirationsProps {
-  friendInfo: IFriendLinkInfo[];
+  viewed: IUser;
 }
 
-export interface IFriendLinkInfo {
-  picURL: any; // string;
-  profileLinkURL: string;
+interface IInspirationsState {
+  displaySearch: boolean;
+  searchStr: string;
+  searchArr: any[];
 }
 
-export class InspirationsListComponent extends React.Component<IInspirationsProps, any> {
+export class InspirationsListComponent extends React.Component<IInspirationsProps, IInspirationsState> {
 
     constructor(props) {
         super(props);
         this.state = {
             displaySearch: false,
             searchStr: '',
-            searchArr: [
-                { picURL: friendPhoto1, profileLinkURL: '' },
-                { picURL: friendPhoto1, profileLinkURL: '' },
-                { picURL: friendPhoto1, profileLinkURL: '' }
-              ]
+            searchArr: []
         };
     }
 
@@ -45,6 +41,7 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
             if (this.state.searchStr !== '') {
                 try {
                     const res = await appClient.get('/users/search/' + this.state.searchStr);
+                    console.log('res.data');
                     console.log(res.data);
                     res.data.splice(6);
                     this.setState({
@@ -65,15 +62,22 @@ export class InspirationsListComponent extends React.Component<IInspirationsProp
     }
 
   render() {
+    let result = <></>;
+    if (this.props.viewed)
+      result = this.getComponent();
+    return result;
+  }
+
+  getComponent() {
 
     const friendArr: any[] = this.state.displaySearch === false ?
-        store.getState().session.user.followedUsers : this.state.searchArr;
+        (this.props.viewed as any).followedUsers : this.state.searchArr;
 
     let inspirationSquares = friendArr.map((friend) => {
       return (
         <Link key={friend.id} to={`/user/${friend.username}`}>
            <div className='inspiration-square'  >
-               <img src={friend.pictureUrl || profilePic} />
+               <img src={friend.pictureUrl || defaultProfilePic} />
            </div>
         </Link>
       );
