@@ -7,7 +7,7 @@ import { appClient } from '../../axios/app.client';
 import { login } from '../../redux/actions/session.action';
 import { ActionTypes } from '../../redux/action-types';
 
-interface IProps {
+export interface ISignupComponentProps {
     signUpFields: IUser;
     updateUsername: (value: string) => void;
     updatePassword: (value: string) => void;
@@ -16,7 +16,7 @@ interface IProps {
     signUp: (signUpFields: IUser) => void;
 }
 
-class SignUpComponent extends Component<IProps, any> {
+class SignUpComponent extends Component<ISignupComponentProps, any> {
     constructor(props) {
         super(props);
     }

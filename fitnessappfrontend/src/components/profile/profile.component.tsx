@@ -21,11 +21,10 @@ import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component
 import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
+import  EditProfileComponent from '../editProfile/editProfile.component';
 import { IState, IUser } from '../../redux/interfaces';
 import { RouteComponentProps } from 'react-router';
 import { appClient } from '../../axios/app.client';
-
-
 
 /*
 A profile is the home page for the average user.
@@ -108,15 +107,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
                     </div>
                 </div>
               </div>
-              <div id='stats-full'>
-                <div id='stats-label' className='label'><strong>Stats</strong></div>
-                <div id='stats-holder'>
-                  instagram: blah <br />
-                  twitter: blah <br />
-                  facebook: blah <br />
-                  countrymatch: blah
-                </div>
-              </div>
+                <EditProfileComponent signUpFields={store.getState().signUpFields}/>
             </div>
           </div>
           <div id='right-side'>
@@ -135,7 +126,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
     this.setState({...this.state, showTakePicModal: false});
   }
   uploadNewPhotoURL = (newPhotoURL) => {
-
+    
   }
 
 
