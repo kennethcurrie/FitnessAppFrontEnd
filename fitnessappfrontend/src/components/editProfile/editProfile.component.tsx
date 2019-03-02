@@ -11,7 +11,7 @@ interface IEditProfileProps extends ISignupComponentProps {
 export class EditProfileComponent extends Component<IEditProfileProps, any> {
   render() {
     return (
-        <h1>{this.props.session.user}</h1>
+        <h1>{this.props.session.user.email}</h1>
     );
   }
 }
