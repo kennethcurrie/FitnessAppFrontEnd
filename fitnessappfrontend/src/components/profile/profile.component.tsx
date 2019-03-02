@@ -17,14 +17,15 @@ import * as ExportData from 'highcharts/modules/export-data';
 import SubscribeComponent from './subscribe/subscribe.component';
 import { ExerciseChartComponent }  from './exerciseChart/exerciseChart.component';
 import { InspirationsListComponent } from './inspirations/inspirations.component';
-import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
-import { PostTimelineComponent, IPostItem } from './postTimeline/postTimeline.component';
+import { IGoal } from './myGoalsList/myGoalsList.component';
+import { IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
 import  EditProfileComponent from '../editProfile/editProfile.component';
-import { IState, IUser } from '../../redux/interfaces';
+import { IUser } from '../../redux/interfaces';
 import { RouteComponentProps } from 'react-router';
 import { appClient } from '../../axios/app.client';
+import { Link } from 'react-router-dom';
 
 /*
 A profile is the home page for the average user.
@@ -106,8 +107,13 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
                         </button>
                     </div>
                 </div>
+                <Link style={{
+                  display: 'block',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                  color: 'white'
+                }} to='/profile/edit' >Edit Profile</Link>
               </div>
-                <EditProfileComponent signUpFields={store.getState().signUpFields}/>
                 <SubscribeComponent viewed={this.state.viewed as IUser} />
             </div>
           </div>

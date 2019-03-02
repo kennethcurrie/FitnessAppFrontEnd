@@ -4,7 +4,7 @@ import NavComponent from './components/nav/nav.component';
 import SplashPageComponent from './components/splashPage/splashPage.component';
 import AllUsersComponent from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
-import { EditProfileComponent } from './components/editProfile/editProfile.component';
+import EditProfileComponent from './components/editProfile/editProfile.component';
 import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
 import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.component';
 import SubmitExerciseComponent from './components/submitExercise/submitExercise.component';
@@ -72,7 +72,10 @@ class MainComponent extends Component<IAppProps, any> {
                                         </>
                                 }
                             </Switch>
-                            <div id='footer'>Icons made by <a href='https://flat-icons.com/' title='Flat Icons'> Flat Icons </a> from <a href='https://www.flaticon.com/' title='Flaticon'> www.flaticon.com </a> is licensed by <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons BY 3.0' target='_blank'> CC 3.0 BY </a></div>
+                            <footer style={{textAlign: 'center'}} id='footer'>
+                                <small>Icons made by <a href='https://flat-icons.com/' title='Flat Icons'> Flat Icons </a> from <a href='https://www.flaticon.com/' title='Flaticon'> www.flaticon.com </a> is licensed by <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons BY 3.0' target='_blank'> CC 3.0 BY </a><br/>
+                                &copy; {new Date().getFullYear()}. HotDog Fitness App.</small>
+                            </footer>
                         </div>
                     </>
                 </BrowserRouter>

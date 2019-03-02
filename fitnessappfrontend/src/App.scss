@@ -530,3 +530,24 @@ body ::-webkit-scrollbar-thumb:hover {
   width: 48rem;
   height: 36rem;
 }
+
+// Edit/Delete Profile Styles
+.edit-profile {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+}
+.edit-profile input {
+  display: block;
+  width: 100%;
+}
+.edit-profile input[type="checkbox"] {
+  width: auto;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.edit-profile button {
+  display: inline-block;
+  width: 50%;
+}
