@@ -14,6 +14,7 @@ import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
+import SubscribeComponent from './subscribe/subscribe.component';
 import { ExerciseChartComponent }  from './exerciseChart/exerciseChart.component';
 import { InspirationsListComponent } from './inspirations/inspirations.component';
 import { MyGoalsListComponent, IGoal } from './myGoalsList/myGoalsList.component';
@@ -107,6 +108,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
                 </div>
               </div>
                 <EditProfileComponent signUpFields={store.getState().signUpFields}/>
+                <SubscribeComponent viewed={this.state.viewed as IUser} />
             </div>
           </div>
           <div id='right-side'>
@@ -125,7 +127,7 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
     this.setState({...this.state, showTakePicModal: false});
   }
   uploadNewPhotoURL = (newPhotoURL) => {
-    
+
   }
 
 

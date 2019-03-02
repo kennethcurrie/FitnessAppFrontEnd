@@ -17,6 +17,7 @@ export interface IUser {
     role: string;
     private: boolean;
     pictureUrl?: string;
+    followedUsers?: IUser[];
 }
 
 // export interface IUser extends IUser {
