@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { IUser, IState } from '../../../redux/interfaces';
-const defaultProfilePic = require('../../../resources/default-profile-pic.jpg');
 import { appClient } from '../../../axios/app.client';
 import { connect } from 'react-redux';
 
@@ -54,11 +52,6 @@ export class SubscribeComponent extends React.Component<ISubscribeProps, ISubscr
   }
 
   getComponent() {
-    console.log('---------------------subs----------------------');
-    console.log(this.props.viewer);
-    console.log(this.props.viewed);
-    console.log(this.state.Subscribed);
-    console.log('---------------------subs----------------------');
     if (this.state.Subscribed) {
         return(
             <div id='subscription'>
