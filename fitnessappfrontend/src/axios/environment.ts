@@ -3,7 +3,7 @@ const dev = {
 };
 
 const prod = {
-    appContext: 'http://ec2-18-236-190-255.us-west-2.compute.amazonaws.com:3000'
+    appContext: 'http://ec2-13-58-166-107.us-east-2.compute.amazonaws.com:5500'
 };
 
 export let environment = dev;
