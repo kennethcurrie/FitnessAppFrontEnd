@@ -13,7 +13,7 @@ interface IEditProfileProps {
   updateEmail: (value: string) => void;
   updateIsPrivate: (value: boolean) => void;
   updateUser: (fields: IUser) => void;
-  deleteUser: (username: string) => void;
+  // deleteUser: (username: string) => void;
 }
 
 class EditProfileComponent extends Component<IEditProfileProps, any> {

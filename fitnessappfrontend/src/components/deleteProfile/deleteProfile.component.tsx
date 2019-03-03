@@ -26,25 +26,14 @@ export class DeleteProfileComponent extends React.Component<any, any> {
     this.setState({modalIsOpen: false});
   }
 
-  deleteProifle = (id: number) => async (e: any) => {
-    // try {
-    //   const res = await appClient.delete(`users/{id}`);
-    //   if (res.status >= 200 && res.status < 300) {
-    //     console.log('Profile Deleted');
-    //   }
-    // }
-    // catch (err) {
-    //   console.log(err);
-    // }
+  deleteProfile = (id: number) => async (e: any) => {
     console.log('Deleted User');
   };
 
   render() {
     return (
       <div id='delete'>
-        <h1>Delete Profile Component!</h1>
-        <p>Deleting your profile is permanent and irrevocable. All data will be lost.</p>
-        <button onClick={this.openModal}>Open Modal</button>
+        <button onClick={this.openModal}>Delete Account</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}

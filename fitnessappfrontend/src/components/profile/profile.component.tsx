@@ -1,30 +1,14 @@
 import React, { Component } from 'react';
 const profilePic = require('../../resources/default-profile-pic.jpg');
-const progressPhoto1 = require('../../resources/placeholder-progress-photo-1.jpg');
-const progressPhoto2 = require('../../resources/placeholder-progress-photo-2.jpg');
-const progressPhoto3 = require('../../resources/placeholder-progress-photo-3.jpg');
-const progressPhoto4 = require('../../resources/placeholder-progress-photo-4.jpg');
-const progressPhoto5 = require('../../resources/placeholder-progress-photo-5.jpg');
-const friendPhoto1 = require('../../resources/placeholder-friend-photo-1.jpg');
-const friendPhoto2 = require('../../resources/placeholder-friend-photo-2.jpg');
-const friendPhoto3 = require('../../resources/placeholder-friend-photo-3.jpg');
-const friendPhoto4 = require('../../resources/placeholder-friend-photo-4.jpg');
-const friendPhoto5 = require('../../resources/placeholder-friend-photo-5.jpg');
-import $ from 'jquery';
-import * as Highcharts from 'highcharts';
-import * as Exporting from 'highcharts/modules/exporting';
-import * as ExportData from 'highcharts/modules/export-data';
-import SubscribeComponent from './subscribe/subscribe.component';
+import SubscribeEditComponent from './subscribeEdit/subcribeEdit.component';
 import { ExerciseChartComponent }  from './exerciseChart/exerciseChart.component';
 import { InspirationsListComponent } from './inspirations/inspirations.component';
-import { IGoal } from './myGoalsList/myGoalsList.component';
-import { IPostItem } from './postTimeline/postTimeline.component';
 import { TakePicComponent } from '../takePicComponent/takePic.component';
 import { store } from '../../redux/Store';
-import  EditProfileComponent from '../editProfile/editProfile.component';
-import { IUser } from '../../redux/interfaces';
+import { IUser, IState } from '../../redux/interfaces';
 import { RouteComponentProps } from 'react-router';
 import { appClient } from '../../axios/app.client';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 /*
@@ -107,21 +91,15 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
                         </button>
                     </div>
                 </div>
-                <Link style={{
-                  display: 'block',
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                  color: 'white'
-                }} to='/profile/edit' >Edit Profile</Link>
               </div>
-                <SubscribeComponent viewed={this.state.viewed as IUser} />
+              <div className='box'>
+                <SubscribeEditComponent viewed={this.state.viewed as IUser}  />
+              </div>
             </div>
           </div>
           <div id='right-side'>
             <ExerciseChartComponent viewed={this.state.viewed as IUser}  />
             <InspirationsListComponent viewed={this.state.viewed as IUser} />
-            {/* <MyGoalsListComponent goals={this.myGoals} /> */}
-            {/* <PostTimelineComponent posts={this.progressPosts} /> */}
           </div>
         </div>
         {(this.state.showTakePicModal) ? <div id='cover-everything'><div id='take-pic-bounding'><TakePicComponent closeModal={this.closeModal} /></div></div> : <></>}
@@ -135,47 +113,13 @@ export class ProfileComponent extends Component<RouteComponentProps, IProfileCom
   uploadNewPhotoURL = (newPhotoURL) => {
 
   }
-
-
-  dummyData = [
-    [2, 7]
-  ];
-  longText = 'blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah';
-
-   progressPosts: IPostItem[] = [
-    { title: undefined, text: 'test post body text', img: progressPhoto1},
-    { title: 'test title', text: undefined, img: progressPhoto2},
-    { title: undefined, text: 'test post body text', img: undefined},
-    { title: undefined, text: undefined, img: progressPhoto3},
-    { title: 'test title', text: undefined, img: undefined},
-    { title: undefined, text: 'test post body text', img: undefined},
-    { title: undefined, text: 'test post body text', img: progressPhoto4},
-    { title: 'testtitle', text: undefined, img: progressPhoto5},
-    { title: undefined, text: undefined, img: undefined},
-   ];
-  // (<>
-  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto1} /></div></div>
-  //   <div className='post-item-container'><div className='post-item-content'>helloooo</div></div>
-  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto2} /></div></div>
-  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto3} /></div></div>
-  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto4} /></div></div>
-  //   <div className='post-item-container'><div className='post-item-content'>{this.longText}</div></div>
-  //   <div className='post-item-container'><div className='post-item-content'><img className='bound-img' src={progressPhoto5} /></div></div>
-  // </>);
-  myGoals: IGoal[] = [
-    {isCurrentGoal: true, goalText: 'this is a current goal'},
-    {isCurrentGoal: true, goalText: 'this is a current goal'},
-    {isCurrentGoal: true, goalText: 'this is a current goal'},
-    {isCurrentGoal: true, goalText: 'this is a current goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-    {isCurrentGoal: false, goalText: 'this is a past goal'},
-  ];
-
 }
+
+const mapStateToProps = (state: IState) => {
+  return {
+    app: state.app,
+    viewer: state.session.user
+  };
+};
+
+export default connect(mapStateToProps)(ProfileComponent);

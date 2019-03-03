@@ -58,6 +58,7 @@ body {
   padding: 0.5em;
   background: $gradient-color-up;
   padding: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 //General styles
@@ -74,14 +75,15 @@ body {
   height: 100%;
 }
 
+  
+input {
+  max-width: 80%;
+}
+
 //Table styles
 table {
   width: 100%;
   border-collapse: collapse;
-  
-  input {
-    max-width: 80%;
-  }
 
   .lined {
     text-align: center;
@@ -533,21 +535,24 @@ body ::-webkit-scrollbar-thumb:hover {
 
 // Edit/Delete Profile Styles
 .edit-profile {
-  display: block;
-  width: 500px;
-  margin: 0 auto;
-}
-.edit-profile input {
-  display: block;
-  width: 100%;
-}
-.edit-profile input[type="checkbox"] {
-  width: auto;
-  display: inline-block;
-  margin: 0 5px;
+  margin: .5em;
+
+  input {
+    display: block;
+    width: 100%;
+  }
+  
+  input[type="checkbox"] {
+    width: auto;
+    display: inline-block;
+    margin: 0 5px;
+  }
+
+  button {
+    display: inline-block;
+    width: 50%;
+  }
 }
 
-.edit-profile button {
-  display: inline-block;
-  width: 50%;
-}
+
+
