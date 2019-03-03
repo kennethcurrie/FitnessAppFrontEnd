@@ -34,7 +34,7 @@ class MainComponent extends Component<IAppProps, any> {
                                 {/* regularComponents */}
                                 {
                                     // Admin
-                                    (isAdmin) ?
+                                    (isLoggedIn && isAdmin) ?
                                         <Switch>
                                             <Route exact path='/admin/users' component={AllUsersComponent} />
                                             <Route path='/admin/users/edit/:username' component={ EditUserComponent} />

@@ -62,16 +62,16 @@ export const login = (credentials: ICredentials) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+    dispatch({
+        type: ActionTypes.APP,
+        payload: {
+            isLoggedIn: false,
+            isAdmin: false
+        }
+    });
     clearCredentialsCookie();
     dispatch({
         type: ActionTypes.LOGOUT,
-        payload: initialState.session.user
+        payload: initialState
     });
-
-    dispatch({
-        type: ActionTypes.APP,
-        payload: initialState.app
-    });
-
-    dispatch(updateCredentials('', ''));
 };
