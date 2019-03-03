@@ -3,6 +3,7 @@ import { ISession, ICredentials, IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import { updateCredentials } from '../../redux/actions/session.action';
 import { login } from '../../redux/actions/session.action';
+import { getCredentialsCookie, setCredentialsCookie } from '../../resources/htmlCookie.util';
 
 interface ILoginComponentProps {
     session: ISession;
@@ -14,14 +15,24 @@ export class LoginComponent extends React.Component<ILoginComponentProps, any> {
         super(props);
     }
 
+    componentDidMount() {
+    }
+
     render() {
+        const credentials = getCredentialsCookie();
+
+        if (credentials) {
+            console.log('tried to log in with credentials');
+            this.props.login(credentials);
+        }
+
         return this.getComponent();
     }
 
     getComponent() {
         const { session, updateCredentials, login } = this.props;
         const result = (
-            <div id='login' className='rounded'>
+            <div id='login' className='box'>
                 <div className='form-holder'>
                     <form>
                         <table>

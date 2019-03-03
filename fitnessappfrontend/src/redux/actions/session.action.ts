@@ -1,7 +1,8 @@
 import { ActionTypes } from '../action-types';
-import { ICredentials, IUserData, IUser } from '../interfaces';
+import { ICredentials } from '../interfaces';
 import { initialState } from '../initial-state';
 import { appClient } from '../../axios/app.client';
+import { setCredentialsCookie, clearCredentialsCookie } from '../../resources/htmlCookie.util';
 
 export const updateCredentials = (username: string, password: string) => {
     return {
@@ -16,11 +17,17 @@ export const updateCredentials = (username: string, password: string) => {
 export const login = (credentials: ICredentials) => async (dispatch) => {
     try {
         const res = (await appClient.post('auth', credentials));
+        console.log(res.data);
 
         if (res.status === 200) {
+            setCredentialsCookie(credentials);
             dispatch({
                 type: ActionTypes.LOGIN,
-                payload: { ...res.data }
+                payload: {
+                    ...res.data,
+                    name: res.data.fullName,
+                    private: res.data.isPrivate
+                }
             });
             dispatch({
                 type: ActionTypes.APP,
@@ -29,6 +36,22 @@ export const login = (credentials: ICredentials) => async (dispatch) => {
                     isAdmin: (res.data.accountType.role === 'Admin')
                 }
             });
+            dispatch({
+                type: ActionTypes.UPDATE_USERNAME,
+                payload: res.data.username
+            });
+            dispatch({
+                type: ActionTypes.UPDATE_NAME,
+                payload: res.data.fullName
+            });
+            dispatch({
+                type: ActionTypes.UPDATE_EMAIL,
+                payload: res.data.email
+            });
+            dispatch({
+                type: ActionTypes.UPDATE_ISPRIVATE,
+                payload: res.data.isPrivate
+            });
         } else if (res.status === 401) {
             console.log('401');
         }
@@ -36,24 +59,19 @@ export const login = (credentials: ICredentials) => async (dispatch) => {
     catch (err) {
         console.log(err);
     }
-
-    dispatch(updateCredentials('', ''));
 };
 
 export const logout = () => (dispatch) => {
     dispatch({
-        type: ActionTypes.LOGOUT,
-        payload: {
-            ...initialState.session.user
-        }
-    });
-
-    dispatch({
         type: ActionTypes.APP,
         payload: {
-            ...initialState.app
+            isLoggedIn: false,
+            isAdmin: false
         }
     });
-
-    dispatch(updateCredentials('', ''));
+    clearCredentialsCookie();
+    dispatch({
+        type: ActionTypes.LOGOUT,
+        payload: initialState
+    });
 };

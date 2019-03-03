@@ -11,7 +11,7 @@ export const initialState: IState = {
             password: ''
         },
         user: {
-            userid: 0,
+            id: 0,
             username: '',
             email: '',
             role: '',
@@ -42,24 +42,19 @@ export const initialState: IState = {
         pullUps: 0
     },
     signUpFields: {
+        id: 0,
         username: '',
+        email: '',
+        role: '',
+        private: false,
         name: '',
-        password: '',
-        email: ''
+        pictureUrl: ''
     },
     users: [
-        {
-            userid: 1,
-            username: 'Bob',
-            name: 'Bob Dylan',
-            email: 'email',
-            role: 'associate',
-            private: false
-        }
     ],
-    excerciseChartState: {
+    exerciseChartState: {
         workoutType: 'running',
-        excerciseData: [
+        exerciseData: [
             [Date.UTC(2010, 1, 1), 1],
             [Date.UTC(2011, 1, 2), 5],
             [Date.UTC(2012, 1, 3), 1],
@@ -71,5 +66,8 @@ export const initialState: IState = {
             [Date.UTC(2018, 1, 27), 7],
             [Date.UTC(2019, 1, 28), 15]
         ]
+    },
+    deleteModal: {
+        active: false
     }
 };

@@ -5,18 +5,18 @@ export const sessionReducer = (state = initialState.session, action: any) => {
     switch (action.type) {
         case ActionTypes.UPDATE_CREDS:
             return {
-                ...state,
-                credentials: { ...action.payload }
+                user: state.user,
+                credentials: action.payload
             };
 
         case ActionTypes.LOGIN:
             return {
-                ...state,
-                user: { ...action.payload }
+                credentials: state.credentials,
+                user: action.payload
             };
 
         case ActionTypes.LOGOUT:
-            return action.payload;
+            return { ...action.payload };
 
         default:
             return state;

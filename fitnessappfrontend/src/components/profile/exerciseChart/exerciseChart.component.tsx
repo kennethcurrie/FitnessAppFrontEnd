@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import './excerciseChart.component.scss';
 import $ from 'jquery';
 import * as Highcharts from 'highcharts';
 import * as Exporting from 'highcharts/modules/exporting';
 import * as ExportData from 'highcharts/modules/export-data';
-import { IExcerciseChartState, IState } from '../../../redux/interfaces';
-import { connect } from 'react-redux';
-import { excerciseChartActions } from '../../../redux/actions/excerciseChart.action';
+import { IUser } from '../../../redux/interfaces';
 import { appClient } from '../../../axios/app.client';
 import { store } from '../../../redux/Store';
 import { async } from 'q';
@@ -25,47 +22,56 @@ The profile gives an overview of ...
   -show a graph displaying ratios of types of excersise, with lables
 
 */
-interface IExcerciseChartProps{
-  excerciseChartState: IExcerciseChartState;
-  updateExcerciseChartProps: (newState: IExcerciseChartState) => void
+interface IExerciseChartProps {
+  viewed: IUser;
+}
+
+interface IExerciseChartState {
+  workoutType: string;
+  exerciseData: number[][];
 }
 
 
-class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any> {
+export class ExerciseChartComponent extends React.Component<IExerciseChartProps, IExerciseChartState> {
 
-  
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      workoutType: 'Running',
+      exerciseData: [[0, 0], [1, 0]]
+    };
+  }
 
   componentDidMount() {
-    const storeState = store.getState();
-    console.log('store.state');
-    console.log(storeState);
-    this.fetchChartData(storeState.session.user.id, this.props.excerciseChartState.workoutType).then((value) => {
+    this.fetchChartData(this.props.viewed.id, this.state.workoutType).then((value) => {
       const hc = this.setUpChart(value);
       // push to end of stack so chart is done with its render before trying to reflow it
       hc.reflow();
     });
   }
-  
 
-  fetchChartData = async (userId: number, excerciseType: string): Promise<IExcerciseChartState> => {
-    let res = await appClient.get(`/history/user/${userId}/exercise/${excerciseType}`);
-    let result = {workoutType: 'none', excerciseData: [[0, 1], [9999999999999, 1]]}
+
+  fetchChartData = async (userId: number, exerciseType: string): Promise<IExerciseChartState> => {
+    const res = await appClient.get(`/history/user/${userId}/exercise/${exerciseType}`);
+    let result = { workoutType: 'none', exerciseData: [[0, 1], [9999999999999, 1]] };
+
     console.log(res.data);
-    if(res.data){
-      const workoutType = excerciseType;
-      const excerciseData = (res.data as any[]).map((element) => {
+    if (res.data) {
+      const workoutType = exerciseType;
+      const exerciseData = (res.data as any[]).map((element) => {
         return [element.occourred, element.units];
       });
-      result = {workoutType: workoutType, excerciseData: excerciseData};
+      result = {workoutType: workoutType, exerciseData: exerciseData};
     }
     return result ;
   }
 
   setUpChart = ( workoutHistory: any): Highcharts.Chart => {
 
-    workoutHistory.excerciseData = (workoutHistory.excerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]});
-    console.log('workoutHistory');
-    console.log(workoutHistory);
+    workoutHistory.exerciseData = (workoutHistory.exerciseData as number[][]).sort((a, b) => {return +a[0] - +b[0]; });
+    // console.log('workoutHistory');
+    // console.log(workoutHistory);
 
     const textStyle = {
       style: {
@@ -139,7 +145,7 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
       series: [{
         type: 'area',
         name: workoutHistory.workoutType + ' score',
-        data: workoutHistory.excerciseData as any
+        data: workoutHistory.exerciseData as any
       }]
     });
   }
@@ -147,19 +153,16 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
 
 
   render() {
-    let workoutHistory = this.props.excerciseChartState;
-    
-    const storeState = store.getState();
+    const workoutHistory = this.state;
+    const workoutIconButtons: any[] = [];
 
-    let workoutIconButtons: any[] = []
     for (const key in workoutInfo) {
       if (workoutInfo.hasOwnProperty(key)) {
-        const icon = workoutInfo[key];      
+        const icon = workoutInfo[key];
 
-        if((key.toLowerCase() === workoutHistory.workoutType.toLowerCase()))
-        {
-          console.log('key.toLowerCase()')
-          console.log(key.toLowerCase())
+        if ((key.toLowerCase() === workoutHistory.workoutType.toLowerCase())) {
+          // console.log('key.toLowerCase()');
+          // console.log(key.toLowerCase());
         }
         // console.log('workoutHistory.workoutType.toLowerCase()')
         // console.log(workoutHistory.workoutType.toLowerCase())
@@ -168,23 +171,27 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
         // console.log("(key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : ''")
         // console.log((key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '')
 
-        const btnClasses: string = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase())?'selected' : '';
-        workoutIconButtons.push(<button onClick={ ()=>{
-          this.props.updateExcerciseChartProps({...this.props.excerciseChartState, workoutType: key.toLowerCase()}),
-          setTimeout(()=>{ 
-            this.fetchChartData(storeState.session.user.id, this.props.excerciseChartState.workoutType).then((value) => {
-            const hc = this.setUpChart(value);
-            // push to end of stack so chart is done with its render before trying to reflow it
-            hc.reflow();
+        const btnClasses: string = (key.toLowerCase() === workoutHistory.workoutType.toLowerCase()) ? 'selected' : '';
+        const btnFunc = () => {
+          this.setState({...this.state, workoutType: key.toLowerCase()},
+          () => {
+            this.fetchChartData(this.props.viewed.id, this.state.workoutType).then((value) => {
+              const hc = this.setUpChart(value);
+              // push to end of stack so chart is done with its render before trying to reflow it
+              setTimeout(() => {
+                hc.reflow();
+              });
+            });
           });
-          })}} className={'btn ' + btnClasses}><img src={icon} /></button>);
+        };
+        workoutIconButtons.push(<button onClick={btnFunc} className={'btn ' + btnClasses}><img src={icon} /></button>);
       }
     }
     const workoutTypeSelector = <div id='workout-type-container'><div id='workout-type-selector'>{workoutIconButtons}</div></div>;
     return(
       <>
         <div id='history-full'>
-          <div id='history-label'><strong>MY PROGRESS</strong></div>
+          <div id='history-label' className='center'><strong>MY PROGRESS</strong></div>
           {workoutTypeSelector}
           <div id='history-holder'>
             <div id='history-graph'></div>
@@ -195,20 +202,6 @@ class ExcerciseChartComponent extends React.Component<IExcerciseChartProps, any>
   }
 
 }
-
-
-
-const mapStateToProps = (state: IState) => {
-  return {
-    excerciseChartState: state.excerciseChartState
-  };
-};
-
-const mapDispatchToProps = { 
-  updateExcerciseChartProps: excerciseChartActions.updateExcerciseChartProps
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExcerciseChartComponent);
 
 
 

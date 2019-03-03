@@ -13,18 +13,23 @@ export interface IUser {
     name: string;
     password?: string;
     email: string;
-}
-
-export interface IUserData extends IUser {
-    userid: number;
+    id: number;
     role: string;
     private: boolean;
     pictureUrl?: string;
+    followedUsers?: IUser[];
 }
+
+// export interface IUser extends IUser {
+//     userid: number;
+//     role: string;
+//     private: boolean;
+//     pictureUrl?: string;
+// }
 
 export interface ISession {
     credentials: ICredentials;
-    user: IUserData;
+    user: IUser;
 }
 
 export interface IPoundRep {
@@ -36,7 +41,7 @@ export interface IWorkouts {
     running: number;
     biking: number;
     swimming: number;
-    curls: IPoundRep; 
+    curls: IPoundRep;
     benchPress: IPoundRep;
     deadLift: IPoundRep;
     pushUps: number;
@@ -45,9 +50,13 @@ export interface IWorkouts {
     squats: number;
 }
 
-export interface IExcerciseChartState {
+export interface IExerciseChartState {
   workoutType: string;
-  excerciseData: number[][];
+  exerciseData: number[][];
+}
+
+export interface IDeleteModal {
+    active: boolean;
 }
 
 export interface IState {
@@ -55,6 +64,7 @@ export interface IState {
     session: ISession;
     workoutFields: IWorkouts;
     signUpFields: IUser;
-    users: IUserData[];
-    excerciseChartState: IExcerciseChartState;
+    users: IUser[];
+    exerciseChartState: IExerciseChartState;
+    deleteModal: IDeleteModal;
 }

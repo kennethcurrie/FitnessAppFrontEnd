@@ -1,15 +1,14 @@
 import React from 'react';
 const logo = require('../../resources/fitness-icon.png');
-import './nav.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { IState, IApp, IUserData } from '../../redux/interfaces';
+import { IState, IApp, IUser } from '../../redux/interfaces';
 import { logout } from '../../redux/actions/session.action';
 
 
 interface INavComponentProps {
   app: IApp;
-  user: IUserData;
+  user: IUser;
   logout: (e: any) => void;
 }
 
@@ -34,7 +33,7 @@ class NavComponent extends React.Component<INavComponentProps, any> {
             userElement = (
                 <>
                     <li className='nav-item'>
-                        <p className='nav-link' id='usersFullName'>{user.name}</p>
+                        <p className='nav-link' id='usersFullName'>{(user ? user.name : '')}</p>
                     </li>
                     <li className='nav-item'>
                         <Link to='/' className='nav-link'>Home</Link>

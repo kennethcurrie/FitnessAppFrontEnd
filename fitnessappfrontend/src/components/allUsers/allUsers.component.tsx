@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './allUsers.scss';
-import { IUserData } from '../../redux/interfaces';
+import { IUser } from '../../redux/interfaces';
 import { IState } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import { getUsers } from '../../redux/actions/get-users.action';
 
 
 interface IProps {
-  users: IUserData[];
+  users: IUser[];
   getUsers: () => void;
 }
 
@@ -17,29 +16,37 @@ class AllUsersComponent extends Component<IProps, any> {
     super(props);
   }
 
-  render() {
+  componentDidMount() {
     this.props.getUsers();
+  }
+
+  render() {
     const { users } = this.props;
     return (
-      <div id='allUsers'>
-        <h1>All Users Component!</h1>
-        <table>
-          <tr>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-          {users.map(function(e, id) {
-            return (
-              <tr key={id}>
-                <td>
-                  <Link to={'admin/users/edit/' + e.username}>{e.username}</Link>
-                </td>
-                <td>{e.name}</td>
-                <td><a href={'mailto:' + e.email}>{e.email}</a></td>
-              </tr>
-            );
-          })}
+      <div id='allUsers' className='box one-column center'>
+        <h1>All Users</h1>
+        <table className='lined'>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(function (e, id) {
+              return (
+                <tr key={id}>
+                  <td>
+                    {/* <Link to={'admin/users/edit/' + e.username}>{e.username}</Link> */}
+                    <Link to={'/user/' + e.username}>{e.username}</Link>
+                  </td>
+                  <td>{e.name}</td>
+                  <td><a href={'mailto:' + e.email}>{e.email}</a></td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     );
