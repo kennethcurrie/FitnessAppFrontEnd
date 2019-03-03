@@ -1,7 +1,6 @@
 import { ActionTypes } from '../action-types';
 import { appClient } from '../../axios/app.client';
 import { logout } from './session.action';
-import { clearCredentialsCookie } from '../../resources/htmlCookie.util';
 
 
 export const open = () => {
@@ -20,11 +19,10 @@ export const close = () => {
 
 export const onConfirm = (username: String) => async (dispatch) => {
     try {
-        // const res = await appClient.delete(`users/username/${username}`);
-        // if (res.status >= 200 && res.status < 300) {
+        const res = await appClient.delete(`users/username/${username}`);
+        if (res.status >= 200 && res.status < 300) {
             dispatch(logout());
-        // }
-        dispatch(close());
+        }
     }
     catch (err) {
         console.log(err);

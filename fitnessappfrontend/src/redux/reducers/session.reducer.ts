@@ -16,7 +16,7 @@ export const sessionReducer = (state = initialState.session, action: any) => {
             };
 
         case ActionTypes.LOGOUT:
-            return action.payload;
+            return { ...action.payload };
 
         default:
             return state;

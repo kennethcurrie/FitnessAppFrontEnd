@@ -16,6 +16,7 @@ export class SubscribeComponent extends React.Component<ISubscribeProps, ISubscr
 
     constructor(props) {
         super(props);
+        if (!this.props.viewed || !this.props.viewer) return;
         let includedSub = false;
         if (
             this.props.viewer.followedUsers === undefined ||

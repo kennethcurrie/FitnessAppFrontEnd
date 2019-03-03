@@ -4,7 +4,6 @@ import { appClient } from '../../axios/app.client';
 export const getUsers = () => async (dispatch) => {
     try {
         const res = await appClient.get('users');
-        console.log(res.data);
 
         if (res.status >= 200 && res.status < 300) {
             const result = res.data.map(user => {
