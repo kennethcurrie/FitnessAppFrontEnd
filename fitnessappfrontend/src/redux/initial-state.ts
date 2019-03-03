@@ -66,5 +66,8 @@ export const initialState: IState = {
             [Date.UTC(2018, 1, 27), 7],
             [Date.UTC(2019, 1, 28), 15]
         ]
+    },
+    deleteModal: {
+        active: false
     }
 };

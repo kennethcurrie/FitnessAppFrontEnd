@@ -5,6 +5,7 @@ import { sessionReducer } from './session.reducer';
 import { signUpReducer } from './sign-up.reducer';
 import { allUsersReducer } from './all-user.reducer';
 import { exerciseChartReducer } from './exerciseChart.reducer';
+import { deleteModalReducer } from './delete-modal.reducer';
 
 export default combineReducers({
     app: appReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     workoutFields: submitWorkoutReducer,
     signUpFields: signUpReducer,
     users: allUsersReducer,
-    exerciseChartState: exerciseChartReducer
+    exerciseChartState: exerciseChartReducer,
+    deleteModal: deleteModalReducer
 });

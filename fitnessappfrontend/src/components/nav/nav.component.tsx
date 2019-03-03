@@ -33,7 +33,7 @@ class NavComponent extends React.Component<INavComponentProps, any> {
             userElement = (
                 <>
                     <li className='nav-item'>
-                        <p className='nav-link' id='usersFullName'>{user.name}</p>
+                        <p className='nav-link' id='usersFullName'>{(user ? user.name : '')}</p>
                     </li>
                     <li className='nav-item'>
                         <Link to='/' className='nav-link'>Home</Link>

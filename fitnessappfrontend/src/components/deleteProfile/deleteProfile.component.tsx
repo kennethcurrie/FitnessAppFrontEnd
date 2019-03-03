@@ -1,51 +1,75 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import { appClient } from '../../axios/app.client';
+import { IState, IUser } from '../../redux/interfaces';
+import * as actions from '../../redux/actions/delete-modal.actions';
+import { connect } from 'react-redux';
 
-export class DeleteProfileComponent extends React.Component<any, any> {
+interface IProps {
+  username: string;
+  active: boolean;
+  open: () => void;
+  onOpen?: () => void;
+  close: () => void;
+  onConfirm: (username: string) => void;
+}
+
+const style = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0)'
+  },
+  content: {
+    backgroundColor: 'black',
+    width: '500px',
+    height: '250px',
+    position: 'absolute',
+    left: '50%',
+    marginLeft: '-250px'
+  }
+};
+
+class DeleteProfileComponent extends Component<IProps, any> {
   constructor(props) {
     super(props);
-    this.state = {
-      modalIsOpen: false
-    };
-
-    this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
-  openModal() {
-    this.setState({modalIsOpen: true});
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    // this.subtitle.style.color = '#f00';
-  }
-
-  closeModal() {
-    this.setState({modalIsOpen: false});
-  }
-
-  deleteProfile = (id: number) => async (e: any) => {
-    console.log('Deleted User');
-  };
 
   render() {
+    const { username, active, open, close, onConfirm } = this.props;
     return (
       <div id='delete'>
-        <button onClick={this.openModal}>Delete Account</button>
+        <button onClick={e => { e.preventDefault(); open(); }}>Delete</button>
         <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          contentLabel='Example Modal'
+          ariaHideApp={false}
+          style={style}
+          isOpen={active}
+          onRequestClose={close}
         >
-          <h2 className='warning'>Warning</h2>
-          <p>Are you sure?</p>
+          <h2 style={{ textAlign: 'center', color: 'red' }} className='warning'>Warning</h2>
+          <p style={{ textAlign: 'center' }}>Are you sure you want to delete your Profile?</p>
+          <p style={{ textAlign: 'center' }}>THIS CANNOT BE UNDONE</p>
           <p>&nbsp;</p>
-          <button onClick={this.closeModal}>Take Me Back</button><button onClick={this.closeModal}>Delete Profile</button>
+          <button onClick={e => {
+            close();
+          }}>NO</button>
+          <button onClick={e => {
+            e.preventDefault(); onConfirm(username);
+          }}>YES</button>
         </Modal>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: IState) => {
+  return {
+    active: state.deleteModal.active,
+    username: state.session.user.username
+  };
+};
+
+const mapDispatchToProps = {
+  open: actions.open,
+  close: actions.close,
+  onConfirm: actions.onConfirm
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteProfileComponent);

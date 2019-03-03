@@ -3,6 +3,7 @@ import { IState, IApp, IUser } from '../../redux/interfaces';
 import { connect } from 'react-redux';
 import * as actions from '../../redux/actions/sign-up.action';
 import { updateUser } from '../../redux/actions/edit-profile.actions';
+import DeleteProfileComponent from '../deleteProfile/deleteProfile.component';
 
 interface IEditProfileProps {
   user: IUser;
@@ -44,15 +45,12 @@ class EditProfileComponent extends Component<IEditProfileProps, any> {
             <label htmlFor='is-private'>Private Profile</label><br />
           </div>
 
-          <div style={{ width: '200px', margin: '0 auto' }}>
-            <button onClick={e => {
-              e.preventDefault();
-              this.props.updateUser(this.props.fields);
-            }}>Save</button>
-            <button onClick={e => {
-              console.log('Deleting Profile');
-            }}>Delete</button>
-          </div>
+          <button onClick={e => {
+            e.preventDefault();
+            this.props.updateUser(this.props.fields);
+          }}>Save</button>
+
+          <DeleteProfileComponent />
         </form>
       </>
     );
