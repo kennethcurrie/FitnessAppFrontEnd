@@ -55,6 +55,10 @@ export interface IExerciseChartState {
   exerciseData: number[][];
 }
 
+export interface IDeleteModal {
+    active: boolean;
+}
+
 export interface IState {
     app: IApp;
     session: ISession;
@@ -62,4 +66,5 @@ export interface IState {
     signUpFields: IUser;
     users: IUser[];
     exerciseChartState: IExerciseChartState;
+    deleteModal: IDeleteModal;
 }

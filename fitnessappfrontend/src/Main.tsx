@@ -5,7 +5,7 @@ import SplashPageComponent from './components/splashPage/splashPage.component';
 import AllUsersComponent from './components/allUsers/allUsers.component';
 import { EditUserComponent } from './components/editUser/editUser.component';
 import EditProfileComponent from './components/editProfile/editProfile.component';
-import { DeleteProfileComponent } from './components/deleteProfile/deleteProfile.component';
+import DeleteProfileComponent from './components/deleteProfile/deleteProfile.component';
 import { RankProfilesComponent } from './components/rankProfiles/rankProfiles.component';
 import SubmitExerciseComponent from './components/submitExercise/submitExercise.component';
 import { connect } from 'react-redux';
